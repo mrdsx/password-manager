@@ -1,5 +1,5 @@
 import useGlobal from "../../store/index";
-import { Item } from "../Item/Item";
+import { VaultItem } from "../VaultItem/VaultItem";
 import viteIcon from "../../app/assets/vite.svg";
 import "./item-list.modules.css";
 
@@ -11,13 +11,14 @@ export function ItemList() {
     <div className="items">
       <div className="item-list">
         <ul>
-          {Object.keys(vault).map((key) => {
-            return (
-              <li key={key}>
-                <Item
+          {Object.keys(vault).map((itemId) => {
+            if (itemId !== "0") return (
+              <li key={itemId}>
+                <VaultItem
                   icon={viteIcon} 
-                  serviceName={vault[key].serviceName}
-                  login={vault[key].login}
+                  serviceName={vault[itemId].serviceName}
+                  login={vault[itemId].login}
+                  itemId={itemId}
                 />
               </li>
             );
@@ -26,16 +27,7 @@ export function ItemList() {
       </div>
 
       <div className="add-item-btn">
-        <button 
-          onClick={() => {
-            globalActions.addItemToVault({
-              serviceName: "GitLab",
-              login: "rx",
-              password: "13456789",
-              website: "https://youtube.com"
-            })
-          }}
-        >+</button>
+        <button>+</button>
       </div>
     </div>
   );

@@ -20,3 +20,7 @@ html, body {
 ul {
   list-style: none;
 }
+
+button, input[type="button"] {
+  cursor: pointer;
+}

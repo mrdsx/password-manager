@@ -10,8 +10,15 @@ interface LoginItem {
 
 type Items = Record<string, LoginItem>;
 
-const initialState: Record<string, Items> = {
+const initialState: Record<string, number | Items> = {
+  curItemId: 0,
   vault: {
+    0: {
+      serviceName: "",
+      login: "",
+      password: "",
+      website: ""
+    },
     1: {
       serviceName: "Vite",
       login: "oho123",
@@ -45,6 +52,10 @@ const actions = {
       [lastId+1]: newItem
     };
     store.setState({ vault: updatedItems });
+  },
+  setCurItemId: (store: any, itemId: string) => {
+    const newCurItemId = itemId;
+    store.setState({ curItemId: newCurItemId });
   }
 }
 

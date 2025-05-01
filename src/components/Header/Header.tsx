@@ -14,7 +14,7 @@ export function Header() {
         </svg>
         <input type="text" id="search-field" />
       </div>
-      <input type="button" value="Sign out" id="sign-out" />
+      <input type="button" defaultValue="Sign out" id="sign-out" />
     </header>
   );
 }

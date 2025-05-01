@@ -2,14 +2,16 @@
   display: flex;
   flex-direction: column;
   width: 25%;
-  height: 90vh;
   background: var(--item-list-background);
   border-right: 1px solid black;
 }
 .item-list {
   flex: 1;
-  overflow-y: auto;
   min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #6E788A transparent;
+  scrollbar-width: 10px;
 }
 
 .add-item-btn {
