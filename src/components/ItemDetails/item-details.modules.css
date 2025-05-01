@@ -1,0 +1,4 @@
+.item-details {
+  flex-grow: 1;
+  background: var(--item-details-background);
+}

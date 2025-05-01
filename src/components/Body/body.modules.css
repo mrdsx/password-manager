@@ -1,0 +1,6 @@
+main {
+  --spacing: 1.5rem;
+  --item-list-background: #26263e;
+  --item-details-background: #1e1d2f;
+  display: flex;
+}

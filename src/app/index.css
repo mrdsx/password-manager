@@ -1,0 +1,22 @@
+*, *::before, *::after {
+  --background: #302f4e;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: "Arial", sans-serif;
+}
+
+html, body {
+  height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
