@@ -27,7 +27,11 @@ export function ItemList() {
       </div>
 
       <div className="add-item-btn">
-        <button>+</button>
+        <button
+          onClick={() => {
+            globalActions.setIsAddingItem(true);
+          }}
+        >+</button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Sidebar } from "../Sidebar/Sidebar";
 import { ItemList } from "../ItemList/ItemList";
-import { ItemDetails } from "../ItemDetails/ItemDetails";
+import { ItemInfo } from "../ItemInfo/ItemInfo";
 import "./body.modules.css";
 
 export function Body() {
@@ -8,7 +8,7 @@ export function Body() {
     <main>
       <Sidebar />
       <ItemList />
-      <ItemDetails />
+      <ItemInfo />
     </main>
   );
 }

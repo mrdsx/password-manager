@@ -8,10 +8,17 @@ interface LoginItem {
   website: string
 }
 
-type Items = Record<string, LoginItem>;
+type VaultItems = Record<number, LoginItem>;
 
-const initialState: Record<string, number | Items> = {
+interface InitialState {
+  curItemId: number;
+  isAddingItem: boolean;
+  vault: VaultItems;
+}
+
+const initialState: InitialState = {
   curItemId: 0,
+  isAddingItem: false,
   vault: {
     0: {
       serviceName: "",
@@ -41,21 +48,25 @@ const initialState: Record<string, number | Items> = {
 }
 
 const actions = {
-  addItemToVault: (store: any, newItem: LoginItem) => {
-    const vaultItems = store.state.vault;
-
-    const keys: string[] = Object.keys(vaultItems);
-    const lastId: number = Number(keys[keys.length - 1]);
-
-    const updatedItems = {
-      ...vaultItems,
-      [lastId+1]: newItem
-    };
-    store.setState({ vault: updatedItems });
-  },
   setCurItemId: (store: any, itemId: string) => {
     const newCurItemId = itemId;
     store.setState({ curItemId: newCurItemId });
+  },
+  setIsAddingItem: (store: any, isAdding: boolean) => {
+    const nextIsAdding = isAdding;
+    store.setState({ isAddingItem: nextIsAdding })
+  },
+  addItemToVault: (store: any, newItem: LoginItem) => {
+    const { vault } = store.state;
+
+    const keys: string[] = Object.keys(vault);
+    const lastId: number = Number(keys[keys.length - 1]);
+
+    const updatedItems = {
+      ...vault,
+      [lastId+1]: newItem
+    };
+    store.setState({ vault: updatedItems });
   }
 }
 

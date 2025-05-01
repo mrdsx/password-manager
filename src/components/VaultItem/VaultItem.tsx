@@ -16,6 +16,7 @@ export function VaultItem({ icon, serviceName, login, itemId }: VaultItemProps )
       className="item"
       onClick={() => {
         globalActions.setCurItemId(itemId);
+        globalActions.setIsAddingItem(false);
       }}
     >
       <img src={icon} alt="" width="32px" />
