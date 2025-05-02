@@ -3,13 +3,15 @@ import "./vault-item.modules.css";
 
 interface VaultItemProps {
   icon: string;
-  serviceName: string;
+  name: string;
   login: string;
   itemId: string
 }
 
-export function VaultItem({ icon, serviceName, login, itemId }: VaultItemProps ) {
+export function VaultItem(props: VaultItemProps ) {
   const [ globalState, globalActions ] = useGlobal();
+
+  const { icon, name, login, itemId } = props;
 
   return (
     <div 
@@ -19,9 +21,9 @@ export function VaultItem({ icon, serviceName, login, itemId }: VaultItemProps )
         globalActions.setIsAddingItem(false);
       }}
     >
-      <img src={icon} alt="" width="32px" />
+      <img src={icon} alt="" width="24px" />
       <div className="item-info">
-        <div className="service-name">{serviceName}</div>
+        <div className="service-name">{name}</div>
         <span className="login">{login}</span>
       </div>
     </div>

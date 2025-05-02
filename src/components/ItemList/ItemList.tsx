@@ -16,7 +16,7 @@ export function ItemList() {
               <li key={itemId}>
                 <VaultItem
                   icon={viteIcon} 
-                  serviceName={vault[itemId].serviceName}
+                  name={vault[itemId].name}
                   login={vault[itemId].login}
                   itemId={itemId}
                 />

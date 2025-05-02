@@ -1,4 +1,4 @@
-import reactIcon from "../../app/assets/react.svg";
+import reactIcon from "../../../app/assets/react.svg";
 import "./header.modules.css";
 
 export function Header() {

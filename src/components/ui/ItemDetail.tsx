@@ -1,13 +1,26 @@
+import { ChangeEventHandler } from "react";
 import { CopyBtn } from "./CopyBtn";
 
 interface ItemDetailProps {
   labelContent: string;
-  value: string;
-  readOnly: boolean;
+  value?: string;
+  defaultValue?: string;
+  readOnly?: boolean;
   type?: string;
+  hasCopyBtn?: boolean;
+  onChangeFn?: Function;
 }
 
-export function ItemDetail({ labelContent, value, readOnly, type = "text" }: ItemDetailProps) {
+export function ItemDetail(props: ItemDetailProps) {
+  const {
+    labelContent,
+    value,
+    defaultValue,
+    readOnly = false,
+    type = "text",
+    hasCopyBtn = true
+  } = props;
+  
   const id = labelContent.toLowerCase();
   return (
     <div className="detail">
@@ -16,12 +29,16 @@ export function ItemDetail({ labelContent, value, readOnly, type = "text" }: Ite
         <input type={type} id={id}
           // @ts-ignore
           value={value}
+          defaultValue={defaultValue}
           readOnly={readOnly}
+          onChange={props.onChangeFn as ChangeEventHandler}
           />
       </div>
-      <div className="detail-actions">
-        <CopyBtn copyText={value} />
-      </div>
+      {hasCopyBtn &&
+        <div className="detail-actions">
+          <CopyBtn copyText={value as string} />
+        </div>
+      }
     </div>
   )
 }

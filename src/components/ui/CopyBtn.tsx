@@ -9,7 +9,9 @@ export function CopyBtn({ copyText }: { copyText: string }) {
   return (
     <button
       onClick={() => {
-        navigator.clipboard.writeText(copyText);
+        if (copyText) {
+          navigator.clipboard.writeText(copyText);
+        }
       }}
       style={copyBtnStyle}
     >
