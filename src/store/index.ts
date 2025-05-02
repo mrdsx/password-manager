@@ -11,7 +11,7 @@ interface LoginItem {
 type VaultItems = Record<number, LoginItem>;
 
 interface InitialState {
-  curItemId: number;
+  curItemId: string;
   isEditingItem: boolean;
   isAddingItem: boolean;
   vault: VaultItems;
@@ -19,33 +19,15 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  curItemId: 0,
+  curItemId: "0",
   isEditingItem: false,
   isAddingItem: false,
   vault: {
-    0: {
+    "0": {
       name: "",
       login: "",
       password: "",
       website: ""
-    },
-    1: {
-      name: "Vite",
-      login: "oho123",
-      password: "12345678",
-      website: "https://vite.dev"
-    },
-    2: {
-      name: "GitHub",
-      login: "mrdsx",
-      password: "12345678",
-      website: "https://github.com"
-    },
-    3: {
-      name: "Google",
-      login: "andre0.castlegames@gmail.com",
-      password: "12345678",
-      website: "https://google.com"
     }
   },
   newLoginParams: {}
@@ -62,7 +44,7 @@ const actions = {
     store.setState({ isEditingItem: nextIsEditing })
   },
 
-  addItemToVault: (store: any, newItem: LoginItem) => {
+  addItem: (store: any, newItem: LoginItem) => {
     const { vault } = store.state;
 
     const keys: string[] = Object.keys(vault);
@@ -75,14 +57,26 @@ const actions = {
     store.setState({ vault: nextItems });
   },
 
+  removeItem: (store: any, itemId: number) => {
+    const { vault } = store.state;
+
+    const nextId = "0";
+    delete vault[itemId];
+    store.setState({ curItemId: nextId });
+  },
+
   setNewLoginParam: (store: any, param: string, value: string) => {
     const { newLoginParams } = store.state;
 
     const nextParams = {
       ...newLoginParams,
-      [param]: value
+      [param.toLowerCase()]: value
     };
     store.setState({ newLoginParams: nextParams })
+  },
+
+  clearNewLoginParams: (store: any) => {
+    store.setState({ newLoginParams: {} })
   },
 
   setIsAddingItem: (store: any, value: boolean) => {

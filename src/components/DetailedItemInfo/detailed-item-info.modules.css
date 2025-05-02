@@ -43,36 +43,3 @@
 .detail-actions button {
   background: transparent;
 }
-
-.item-actions {
-  display: flex;
-  width: 100%;
-  background: var(--background);
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.side {
-  padding: .5rem;
-  flex-grow: 1;
-}
-
-.side button {
-  padding: .5rem;
-  background: transparent;
-  backdrop-filter: brightness(90%);
-  border: 1px solid #000;
-  outline: none;
-  height: 30px;
-  width: 70px;
-}
-.side button:hover {
-  backdrop-filter: brightness(120%);
-}
-
-#right-side {
-  display: flex;
-  justify-content: end;
-}

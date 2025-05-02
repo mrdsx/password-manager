@@ -6,7 +6,15 @@ export function SaveBtn() {
   
   return (
     <button id="save" onClick={()=> {
-      globalActions.setIsEditingItem(false);
+      handleBtnClick(globalState, globalActions)
     }}>Save</button>
   );
+}
+
+function handleBtnClick(state: any, actions: any): void {
+  actions.setIsEditingItem(false);
+  if (state.isAddingItem) {
+    actions.addItem(state.newLoginParams);
+    actions.clearNewLoginParams();
+  }
 }

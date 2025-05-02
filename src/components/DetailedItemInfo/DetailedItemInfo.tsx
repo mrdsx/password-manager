@@ -13,7 +13,7 @@ export function DetailedItemInfo() {
   const { isEditingItem, curItemId, vault } = globalState;
   const { name, login, password, website } = vault[curItemId];
 
-  const validCurItemId = curItemId !== 0;
+  const validCurItemId = curItemId !== "0";
 
   return (
     <>

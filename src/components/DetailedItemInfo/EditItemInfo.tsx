@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import useGlobal from "../../store";
 import { ItemDetail } from "../UI/ItemDetail";
 
@@ -16,9 +16,9 @@ interface changeParamFnProps {
 export function EditItemInfo({ fields }: EditItemInfoProps) {
   const [ globalState, globalActions ] = useGlobal();
 
-  useEffect(() => {
-    console.log(globalState.newLoginParams);
-  }, [globalState.newLoginParams]);
+  // useEffect(() => {
+  //   console.log(globalState.newLoginParams);
+  // }, [globalState.newLoginParams]);
 
   return (
     <>
