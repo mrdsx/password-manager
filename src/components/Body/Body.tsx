@@ -1,5 +1,5 @@
 import { Sidebar } from "../Navigation/Sidebar/Sidebar";
-import { ItemList } from "../ItemList/ItemList";
+import { ScrollableItems } from "../Navigation/ScrollableItems/ScrollableItems";
 import { DetailedItemInfo } from "../DetailedItemInfo/DetailedItemInfo";
 import "./body.modules.css";
 
@@ -7,7 +7,7 @@ export function Body() {
   return (
     <main>
       <Sidebar />
-      <ItemList />
+      <ScrollableItems />
       <DetailedItemInfo />
     </main>
   );

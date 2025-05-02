@@ -40,5 +40,5 @@ export function ItemDetail(props: ItemDetailProps) {
         </div>
       }
     </div>
-  )
+  );
 }

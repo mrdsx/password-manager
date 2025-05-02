@@ -1,24 +1,16 @@
-// import { useEffect } from "react";
 import useGlobal from "../../store";
 import { ItemDetail } from "../UI/ItemDetail";
-
-interface EditItemInfoProps {
-  fields: string[];
-}
+import { ItemInfoProps } from "./DetailedItemInfo";
 
 interface changeParamFnProps {
   state: any;
   actions: any;
   param: string;
   value: string;
-};
+}
 
-export function EditItemInfo({ fields }: EditItemInfoProps) {
+export function EditItemInfo({ fields }: ItemInfoProps) {
   const [ globalState, globalActions ] = useGlobal();
-
-  // useEffect(() => {
-  //   console.log(globalState.newLoginParams);
-  // }, [globalState.newLoginParams]);
 
   return (
     <>
@@ -36,10 +28,10 @@ export function EditItemInfo({ fields }: EditItemInfoProps) {
                 actions: globalActions,
                 param: field,
                 value: (e.target as any).value
-              })
+              });
             }}
           />
-        )
+        );
       })}
     </>
   );

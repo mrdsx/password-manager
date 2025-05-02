@@ -7,7 +7,7 @@ export function DeleteBtn() {
     <button id="delete" onClick={() => {
       handleBtnClick(globalState, globalActions);
     }}>Delete</button>
-  )
+  );
 }
 
 function handleBtnClick(state: any, actions: any): void {

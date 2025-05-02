@@ -31,7 +31,7 @@ const initialState: InitialState = {
     }
   },
   newLoginParams: {}
-}
+};
 
 const actions = {
   setCurItemId: (store: any, itemId: string) => {
@@ -83,7 +83,7 @@ const actions = {
     const nextValue = value;
     store.setState({ isEditingItem: nextValue, isAddingItem: nextValue });
   }
-}
+};
 
 const useGlobal = GlobalHook(initialState, actions);
 

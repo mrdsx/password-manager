@@ -6,7 +6,7 @@ export function SaveBtn() {
   
   return (
     <button id="save" onClick={()=> {
-      handleBtnClick(globalState, globalActions)
+      handleBtnClick(globalState, globalActions);
     }}>Save</button>
   );
 }

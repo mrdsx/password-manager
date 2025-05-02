@@ -4,6 +4,10 @@ import { EditItemInfo } from "./EditItemInfo";
 import { ItemActions } from "../Navigation/ItemActions/ItemActions";
 import "./detailed-item-info.modules.css";
 
+export interface ItemInfoProps {
+  fields: string[];
+}
+
 const LOGIN_FIELDS = ["Name", "Login", "Password", "Website"];
 
 export function DetailedItemInfo() {

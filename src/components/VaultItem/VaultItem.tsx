@@ -28,4 +28,4 @@ export function VaultItem(props: VaultItemProps ) {
       </div>
     </div>
   );
-};
+}

@@ -1,9 +1,10 @@
-import useGlobal from "../../store/index";
-import { VaultItem } from "../VaultItem/VaultItem";
-import viteIcon from "../../app/assets/vite.svg";
-import "./item-list.modules.css";
+import useGlobal from "../../../store/index";
+import { VaultItem } from "../../VaultItem/VaultItem";
+import { AddItemBtn } from "../../UI/AddItemBtn";
+import viteIcon from "../../../app/assets/vite.svg";
+import "./scrollable-items.modules.css";
 
-export function ItemList() {
+export function ScrollableItems() {
   const [ globalState, globalActions ] = useGlobal();
   const { vault } = globalState;
 
@@ -27,11 +28,7 @@ export function ItemList() {
       </div>
 
       <div className="add-item-btn">
-        <button
-          onClick={() => {
-            globalActions.setIsAddingItem(true);
-          }}
-        >+</button>
+        <AddItemBtn />
       </div>
     </div>
   );

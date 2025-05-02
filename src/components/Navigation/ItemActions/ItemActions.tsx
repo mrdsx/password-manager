@@ -22,5 +22,5 @@ export function ItemActions() {
         {globalState.isEditingItem && !globalState.isAddingItem && <DeleteBtn />}
       </div>
     </div>
-  )
+  );
 }
