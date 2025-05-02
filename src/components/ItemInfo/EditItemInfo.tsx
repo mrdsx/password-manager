@@ -11,19 +11,24 @@ interface changeParamFnProps {
 
 export function EditItemInfo({ fields }: ItemInfoProps) {
   const [ globalState, globalActions ] = useGlobal();
+  const { vault, curItemId, isAddingItem } = globalState;
 
   return (
     <>
       {fields.map((field) => {
         const type = (field === "Password") ? "password" : "text";
+        const value = !isAddingItem ?
+        vault[curItemId][field.toLowerCase()] :
+        "";
 
         return (
           <ItemDetail
             labelContent={field}
             hasCopyBtn={false}
             type={type}
+            defaultValue={value}
             onChangeFn={(e: MouseEvent) => {
-              changeParam({
+              changeItemParam({
                 state: globalState,
                 actions: globalActions,
                 param: field,
@@ -37,10 +42,15 @@ export function EditItemInfo({ fields }: ItemInfoProps) {
   );
 }
 
-function changeParam(props: changeParamFnProps): void {
+function changeItemParam(props: changeParamFnProps): void {
   const { state, actions, param, value } = props;
+  const { isEditingItem, isAddingItem } = state;
 
-  if (state.isAddingItem) {
+  const editingExistingItem = (isEditingItem && !isAddingItem);
+
+  if (editingExistingItem) {
+    actions.setExistingLoginParam(param, value);
+  } else {
     actions.setNewLoginParam(param, value);
   }
 }

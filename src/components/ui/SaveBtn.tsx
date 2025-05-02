@@ -11,8 +11,16 @@ export function SaveBtn() {
 }
 
 function handleBtnClick(state: any, actions: any): void {
-  actions.setIsEditingItem(false);
-  if (state.isAddingItem) {
+  const isNameValid = typeof state.newLoginParams["name"] !== "undefined";
+
+  if (!state.isAddingItem && isNameValid) {
+    console.log("changed existing item");
+
+    actions.setIsEditingItem(false);
+  } else if (state.isAddingItem && isNameValid) {
+    console.log("changed new item");
+
+    actions.setIsAddingItem(false);
     actions.addItem(state.newLoginParams);
     actions.clearNewLoginParams();
   }

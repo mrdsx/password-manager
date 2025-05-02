@@ -28,6 +28,18 @@ const initialState: InitialState = {
       login: "",
       password: "",
       website: ""
+    },
+    "1": {
+      name: "Google",
+      login: "OHO123",
+      password: "571384",
+      website: "google.com"
+    },
+    "2": {
+      name: "YouTube",
+      login: "OHO123",
+      password: "571134133413384",
+      website: "youtube.com"
     }
   },
   newLoginParams: {}
@@ -37,11 +49,6 @@ const actions = {
   setCurItemId: (store: any, itemId: string) => {
     const nextCurItemId = itemId;
     store.setState({ curItemId: nextCurItemId });
-  },
-
-  setIsEditingItem: (store: any, isEditing: boolean) => {
-    const nextIsEditing = isEditing;
-    store.setState({ isEditingItem: nextIsEditing })
   },
 
   addItem: (store: any, newItem: LoginItem) => {
@@ -63,6 +70,21 @@ const actions = {
     const nextId = "0";
     delete vault[itemId];
     store.setState({ curItemId: nextId });
+  },
+
+  setIsEditingItem: (store: any, isEditing: boolean) => {
+    const nextIsEditing = isEditing;
+    store.setState({ isEditingItem: nextIsEditing })
+  },
+
+  setExistingLoginParam: (store: any, param: string, value: string) => {
+    const { vault, curItemId } = store.state;
+    const curItemParams = vault[curItemId];
+
+    const nextParams = {
+      ...curItemParams,
+      [param.toLowerCase()]: value
+    };
   },
 
   setNewLoginParam: (store: any, param: string, value: string) => {

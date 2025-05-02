@@ -1,33 +1,29 @@
+import useGlobal from "../../store";
 import { ItemDetail } from "../UI/ItemDetail";
 import { ItemInfoProps } from "./DetailedItemInfo";
 
 export function ViewItemInfo({ fields }: ItemInfoProps) {
-  const [ name, login, password, website ] = fields;
+  // @ts-ignore
+  const [ globalState, globalActions ] = useGlobal();
+  const { curItemId, vault } = globalState;
 
   return (
     <>
-      <ItemDetail 
-        labelContent="Name"
-        value={name}
-        readOnly={true}
-        hasCopyBtn={false}
-      />
-      <ItemDetail 
-        labelContent="Login"
-        value={login}
-        readOnly={true}
-      />
-      <ItemDetail 
-        labelContent="Password"
-        value={password}
-        readOnly={true}
-        type="password"
-      />
-      <ItemDetail 
-        labelContent="Website"
-        value={website}
-        readOnly={true}
-      />
+      {
+        fields.map(field => {
+          const type = (field === "Password") ? "password" : "text";
+          const val = vault[curItemId][field.toLowerCase()];
+
+          return (
+            <ItemDetail
+              labelContent={field}
+              type={type}
+              value={val || ""}
+              readOnly={true}
+            />
+          );
+        })
+      }
     </>
   );
 }
