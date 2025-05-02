@@ -1,6 +1,7 @@
 import useGlobal from "../../store/index";
 
 export function CancelBtn() {
+  // @ts-ignore
   const [ glolalState, globalActions ] = useGlobal();
 
   return (

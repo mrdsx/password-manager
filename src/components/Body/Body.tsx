@@ -1,6 +1,6 @@
 import { Sidebar } from "../Navigation/Sidebar/Sidebar";
 import { ScrollableItems } from "../Navigation/ScrollableItems/ScrollableItems";
-import { DetailedItemInfo } from "../DetailedItemInfo/DetailedItemInfo";
+import { DetailedItemInfo } from "../ItemInfo/DetailedItemInfo";
 import "./body.modules.css";
 
 export function Body() {

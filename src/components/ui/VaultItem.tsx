@@ -1,5 +1,4 @@
 import useGlobal from "../../store/index";
-import "./vault-item.modules.css";
 
 interface VaultItemProps {
   icon: string;
@@ -9,6 +8,7 @@ interface VaultItemProps {
 }
 
 export function VaultItem(props: VaultItemProps ) {
+  // @ts-ignore
   const [ globalState, globalActions ] = useGlobal();
 
   const { icon, name, login, itemId } = props;
