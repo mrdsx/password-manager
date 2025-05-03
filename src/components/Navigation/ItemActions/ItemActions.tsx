@@ -3,7 +3,7 @@ import { EditBtn } from "../../UI/EditBtn";
 import { SaveBtn } from "../../UI/SaveBtn";
 import { DeleteBtn } from "../../UI/DeleteBtn";
 import { CancelBtn } from "../../UI/CancelBtn";
-import "./item-actions.module.css";
+import "./item-actions.modules.css";
 
 export function ItemActions() {
   // @ts-ignore

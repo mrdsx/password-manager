@@ -1,0 +1,54 @@
+.items {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  background: var(--item-list-background);
+  border-right: 1px solid black;
+}
+.item-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #6E788A transparent;
+  scrollbar-width: 10px;
+}
+
+.add-item-btn {
+  flex: 0;
+  padding: .5rem;
+  background: var(--background);
+}
+.add-item-btn button {
+  background: transparent;
+  backdrop-filter: brightness(90%);
+  border: 1px solid #000;
+  outline: none;
+  width: 100%;
+  height: 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.add-item-btn button:hover {
+  backdrop-filter: brightness(120%);
+}
+
+.item {
+  display: flex;
+  padding: .5rem;
+  padding-left: 1rem;
+  gap: .5rem;
+  cursor: pointer;
+}
+.item:hover {
+  backdrop-filter: brightness(140%);
+}
+
+.item-info .service-name {
+  font-weight: bold;
+}
+
+.item-info .login {
+  filter: brightness(70%);
+  font-size: .8rem;
+}

@@ -1,5 +1,5 @@
 import reactIcon from "../../../app/assets/react.svg";
-import "./header.module.css";
+import "./header.modules.css";
 
 export function Header() {
   return (
