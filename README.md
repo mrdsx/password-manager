@@ -9,7 +9,7 @@ This is my Password Manager App. I'm currently developing it as the side project
 
  ## Tech Stack
  The tech stack I'm using for this project is:
-  - HTML
-  - CSS
-  - React
-  - TypeScript
+  <img src="https://github.com/simple-icons/simple-icons/blob/develop/icons/html5.svg" alt="HTML" width="32" height="32">
+  <img src="https://github.com/simple-icons/simple-icons/blob/develop/icons/css.svg" alt="CSS" width="32" height="32">
+  <img src="https://github.com/simple-icons/simple-icons/blob/develop/icons/react.svg" alt="React" width="32" height="32">
+  <img src="https://github.com/simple-icons/simple-icons/blob/develop/icons/typescript.svg" alt="TypeScript" width="32" height="32">
