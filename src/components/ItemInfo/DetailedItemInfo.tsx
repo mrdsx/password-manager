@@ -1,7 +1,7 @@
 import useGlobal from "../../store/index";
 import { EditItemInfo } from "./EditItemInfo";
 import { ItemActions } from "../Navigation/ItemActions/ItemActions";
-import "./detailed-item-info.modules.css";
+import "./detailed-item-info.module.css";
 import { ViewItemInfo } from "./ViewItemInfo";
 
 export interface ItemInfoProps {

@@ -10,7 +10,7 @@ interface LoginItem {
 
 type VaultItems = Record<number, LoginItem>;
 
-interface InitialState {
+interface State {
   curItemId: string;
   isEditingItem: boolean;
   isAddingItem: boolean;
@@ -18,7 +18,7 @@ interface InitialState {
   newLoginParams: Partial<LoginItem>;
 }
 
-const initialState: InitialState = {
+const state: State = {
   curItemId: "0",
   isEditingItem: false,
   isAddingItem: false,
@@ -74,18 +74,19 @@ const actions = {
 
   setIsEditingItem: (store: any, isEditing: boolean) => {
     const nextIsEditing = isEditing;
-    store.setState({ isEditingItem: nextIsEditing })
+    store.setState({ isEditingItem: nextIsEditing });
   },
 
-  setExistingLoginParam: (store: any, param: string, value: string) => {
-    const { vault, curItemId } = store.state;
-    const curItemParams = vault[curItemId];
+  // ! REMOVE
+  // !setExistingLoginParam: (store: any, param: string, value: string) => {
+  // !  const { vault, curItemId } = store.state;
+  // !  const curItemParams = vault[curItemId];
 
-    const nextParams = {
-      ...curItemParams,
-      [param.toLowerCase()]: value
-    };
-  },
+  // !  const nextParams = {
+  // !    ...curItemParams,
+  // !    [param.toLowerCase()]: value
+  // !  };
+  // !},
 
   setNewLoginParam: (store: any, param: string, value: string) => {
     const { newLoginParams } = store.state;
@@ -107,6 +108,6 @@ const actions = {
   }
 };
 
-const useGlobal = GlobalHook(initialState, actions);
+const useGlobal = GlobalHook(state, actions);
 
 export default useGlobal;

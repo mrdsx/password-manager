@@ -2,7 +2,7 @@ import useGlobal from "../../../store/index";
 import { VaultItem } from "../../UI/VaultItem";
 import { AddItemBtn } from "../../UI/AddItemBtn";
 import viteIcon from "../../../app/assets/vite.svg";
-import "./scrollable-items.modules.css";
+import "./scrollable-items.module.css";
 
 export function ScrollableItems() {
   // @ts-ignore
