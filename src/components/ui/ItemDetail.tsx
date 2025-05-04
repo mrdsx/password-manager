@@ -18,27 +18,30 @@ export function ItemDetail(props: ItemDetailProps) {
     defaultValue,
     readOnly = false,
     type = "text",
-    hasCopyBtn = true
+    hasCopyBtn = true,
+    onChangeFn,
   } = props;
-  
-  const id = labelContent.toLowerCase();
+
+  const id = labelContent;
   return (
     <div className="detail">
       <div className="field">
         <label htmlFor={id}>{labelContent}</label>
-        <input type={type} id={id}
+        <input
+          type={type}
+          id={id}
           // @ts-ignore
           value={value}
           defaultValue={defaultValue}
           readOnly={readOnly}
-          onChange={props.onChangeFn as ChangeEventHandler}
-          />
+          onChange={onChangeFn as ChangeEventHandler}
+        />
       </div>
-      {hasCopyBtn &&
+      {hasCopyBtn && (
         <div className="detail-actions">
           <CopyBtn copyText={value as string} />
         </div>
-      }
+      )}
     </div>
   );
 }

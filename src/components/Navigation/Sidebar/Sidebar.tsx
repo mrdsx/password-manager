@@ -14,7 +14,6 @@ export function Sidebar() {
         <button>Card</button>
         <button>Identity</button>
         <button>Secure note</button>
-        {/* <button>SHH key</button> */}
       </div>
       <div className="folders">
         <button className="dropdown-btn">Folders</button>

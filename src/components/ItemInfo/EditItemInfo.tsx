@@ -1,38 +1,32 @@
-import useGlobal from "../../store";
+import { useContext } from "react";
+import useGlobal, { State, Actions } from "../../utils/store";
 import { ItemDetail } from "../UI/ItemDetail";
-import { ItemInfoProps } from "./DetailedItemInfo";
-
-interface changeParamFnProps {
-  state: any;
-  actions: any;
-  param: string;
-  value: string;
-}
+import { ItemInfoProps, EditingItemInfoContext } from "./DetailedItemInfo";
 
 export function EditItemInfo({ fields }: ItemInfoProps) {
-  const [ globalState, globalActions ] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId, isAddingItem } = globalState;
+
+  const [item, setItemInfo] = useContext(EditingItemInfoContext);
 
   return (
     <>
       {fields.map((field) => {
-        const type = (field === "Password") ? "password" : "text";
-        const value = !isAddingItem ?
-        vault[curItemId][field.toLowerCase()] :
-        "";
+        const type = field === "password" && "password";
+
+        const key = field as keyof object;
+        const val = !isAddingItem ? vault[curItemId][key] : "";
 
         return (
           <ItemDetail
             labelContent={field}
             hasCopyBtn={false}
-            type={type}
-            defaultValue={value}
-            onChangeFn={(e: MouseEvent) => {
-              changeItemParam({
-                state: globalState,
-                actions: globalActions,
-                param: field,
-                value: (e.target as any).value
+            type={type || "text"}
+            defaultValue={val}
+            onChangeFn={(e: Event) => {
+              setItemInfo({
+                ...item,
+                [key]: (e.target as HTMLInputElement).value,
               });
             }}
           />
@@ -40,17 +34,4 @@ export function EditItemInfo({ fields }: ItemInfoProps) {
       })}
     </>
   );
-}
-
-function changeItemParam(props: changeParamFnProps): void {
-  const { state, actions, param, value } = props;
-  const { isEditingItem, isAddingItem } = state;
-
-  const editingExistingItem = (isEditingItem && !isAddingItem);
-
-  if (editingExistingItem) {
-    actions.setExistingLoginParam(param, value);
-  } else {
-    actions.setNewLoginParam(param, value);
-  }
 }

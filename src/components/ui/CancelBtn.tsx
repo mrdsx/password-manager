@@ -1,12 +1,16 @@
-import useGlobal from "../../store/index";
+import useGlobal, { Actions, State } from "../../utils/store";
 
 export function CancelBtn() {
   // @ts-ignore
-  const [ glolalState, globalActions ] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobal();
+
+  function handleBtnClick(): void {
+    globalActions.setIsEditingItem(false);
+  }
 
   return (
-    <button id="cancel" onClick={() => {
-      globalActions.setIsEditingItem(false);
-    }}>Cancel</button>
+    <button id="cancel" onClick={handleBtnClick}>
+      Cancel
+    </button>
   );
 }

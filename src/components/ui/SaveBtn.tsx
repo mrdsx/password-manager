@@ -1,27 +1,36 @@
-import useGlobal from "../../store";
+import { useContext } from "react";
+import useGlobal, { State, Actions } from "../../utils/store";
+import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
+import { areObjectsEqual } from "../../utils/checkEquality";
 
 export function SaveBtn() {
-  const [ globalState, globalActions ] = useGlobal();
-  
-  return (
-    <button id="save" onClick={()=> {
-      handleBtnClick(globalState, globalActions);
-    }}>Save</button>
-  );
-}
+  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const { vault, curItemId, isAddingItem } = globalState;
+  const { addItem, editItem, setIsAddingItem, setIsEditingItem } =
+    globalActions;
 
-function handleBtnClick(state: any, actions: any): void {
-  const isNameValid = typeof state.newLoginParams["name"] !== "undefined";
+  // @ts-ignore
+  const [item, setItemInfo] = useContext(EditingItemInfoContext);
 
-  if (!state.isAddingItem && isNameValid) {
-    console.log("changed existing item");
+  function handleBtnClick(): void {
+    const isNameValid = item !== undefined && item.name.trim() !== "";
 
-    actions.setIsEditingItem(false);
-  } else if (state.isAddingItem && isNameValid) {
-    console.log("changed new item");
-
-    actions.setIsAddingItem(false);
-    actions.addItem(state.newLoginParams);
-    actions.clearNewLoginParams();
+    if (
+      !isAddingItem &&
+      !areObjectsEqual(item, vault[curItemId]) &&
+      isNameValid
+    ) {
+      editItem(item, curItemId);
+      setIsEditingItem(false);
+    } else if (isAddingItem && isNameValid) {
+      addItem(item);
+      setIsAddingItem(false);
+    }
   }
+
+  return (
+    <button id="save" onClick={handleBtnClick}>
+      Save
+    </button>
+  );
 }

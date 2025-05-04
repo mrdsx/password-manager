@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   --background: #302f4e;
   margin: 0;
   padding: 0;
@@ -7,7 +9,8 @@
   font-family: "Arial", sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100vh;
 }
 
@@ -21,6 +24,7 @@ ul {
   list-style: none;
 }
 
-button, input[type="button"] {
+button,
+input[type="button"] {
   cursor: pointer;
 }
