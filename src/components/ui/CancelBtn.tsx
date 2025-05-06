@@ -1,4 +1,4 @@
-import useGlobal, { Actions, State } from "../../utils/store";
+import useGlobal, { Actions, State } from "../../store/store";
 
 export function CancelBtn() {
   // @ts-ignore

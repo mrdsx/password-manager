@@ -1,9 +1,10 @@
 header {
   --font-size: 1.1rem;
   --border-radius: 1rem;
-  --spacing: .6rem;
+  --spacing: 0.6rem;
   padding: var(--spacing);
   display: flex;
+  align-items: center;
   background: var(--background);
   border-bottom: 1px solid black;
   font-size: var(--font-size);
@@ -38,13 +39,13 @@ header {
 }
 
 #sign-out {
-  padding: .4rem;
+  padding: 0.5rem;
   border: 2px solid red;
   border-radius: var(--border-radius);
   background: transparent;
   outline: none;
   color: red;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 

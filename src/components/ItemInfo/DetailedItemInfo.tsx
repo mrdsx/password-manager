@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-import useGlobal, { State, Actions, LoginItem } from "../../utils/store";
+import useGlobal, { State, Actions, LoginItem } from "../../store/store";
 import { EditItemInfo } from "./EditItemInfo";
 import { ViewItemInfo } from "./ViewItemInfo";
 import { ItemActions } from "../Navigation/ItemActions/ItemActions";
@@ -12,6 +12,7 @@ export interface ItemInfoProps {
 export const EditingItemInfoContext = createContext(null as any);
 
 export function DetailedItemInfo() {
+  // @ts-ignore
   const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId, isEditingItem } = globalState;
 
@@ -19,21 +20,21 @@ export function DetailedItemInfo() {
     ...vault[curItemId],
   });
 
-  const fields = Object.keys(vault[curItemId]);
-  const validCurItemId = curItemId !== "0";
+  const fields: string[] = Object.keys(vault[curItemId]);
+  const isValidCurItemId: boolean = curItemId !== "0";
 
   return (
     <EditingItemInfoContext.Provider value={[item, setItemInfo]}>
       <div className="item-details">
-        <div className="detail-fields">
-          {validCurItemId && !isEditingItem ? (
+        <ul className="detail-fields">
+          {isValidCurItemId && !isEditingItem ? (
             <ViewItemInfo fields={fields} />
           ) : (
             isEditingItem && <EditItemInfo fields={fields} />
           )}
-        </div>
+        </ul>
 
-        {(validCurItemId || isEditingItem) && <ItemActions />}
+        {(isValidCurItemId || isEditingItem) && <ItemActions />}
       </div>
     </EditingItemInfoContext.Provider>
   );

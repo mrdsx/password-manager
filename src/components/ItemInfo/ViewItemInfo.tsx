@@ -1,24 +1,27 @@
-import useGlobal from "../../utils/store";
+import useGlobal, { Actions, State } from "../../store/store";
 import { ItemDetail } from "../UI/ItemDetail";
 import { ItemInfoProps } from "./DetailedItemInfo";
 
 export function ViewItemInfo({ fields }: ItemInfoProps) {
-  const [globalState, globalActions] = useGlobal();
+  // @ts-ignore
+  const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { curItemId, vault } = globalState;
 
   return (
     <>
-      {fields.map((field) => {
-        const type = field === "password" && "password";
-        const val = vault[curItemId][field.toLowerCase()];
+      {fields.map((field, i) => {
+        const type = field === "password" ? "password" : "text";
+        const value = vault[curItemId][field as keyof object];
 
         return (
-          <ItemDetail
-            labelContent={field}
-            type={type || "text"}
-            value={val || ""}
-            readOnly={true}
-          />
+          <li key={i}>
+            <ItemDetail
+              fieldName={field}
+              value={value}
+              readOnly={true}
+              type={type}
+            />
+          </li>
         );
       })}
     </>

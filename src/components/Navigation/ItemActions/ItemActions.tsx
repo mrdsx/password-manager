@@ -1,4 +1,4 @@
-import useGlobal from "../../../utils/store";
+import useGlobal from "../../../store/store";
 import { EditBtn } from "../../UI/EditBtn";
 import { SaveBtn } from "../../UI/SaveBtn";
 import { DeleteBtn } from "../../UI/DeleteBtn";

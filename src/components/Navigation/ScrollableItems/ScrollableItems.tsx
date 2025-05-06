@@ -1,5 +1,5 @@
-import useGlobal from "../../../utils/store";
-import { VaultItem } from "../../UI/VaultItem";
+import useGlobal from "../../../store/store";
+import { VaultItem } from "../../UI/VaultItem/VaultItem";
 import { AddItemBtn } from "../../UI/AddItemBtn";
 import viteIcon from "../../../app/assets/vite.svg";
 import "./scrollable-items.modules.css";

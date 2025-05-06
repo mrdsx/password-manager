@@ -1,0 +1,20 @@
+.item {
+  padding: 0.5rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.item:hover {
+  backdrop-filter: brightness(140%);
+}
+
+.item-info .service-name {
+  font-weight: bold;
+}
+
+.item-info .login {
+  filter: brightness(70%);
+  font-size: 0.8rem;
+}

@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import useGlobal, { State, Actions } from "../../utils/store";
+import useGlobal, { State, Actions } from "../../store/store";
 import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
-import { areObjectsEqual } from "../../utils/checkEquality";
+import { areObjectsEqual } from "../../utils/objectMethods";
 
 export function SaveBtn() {
   const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId, isAddingItem } = globalState;
-  const { addItem, editItem, setIsAddingItem, setIsEditingItem } =
+  const { addItem, editItemById, setIsAddingItem, setIsEditingItem } =
     globalActions;
 
   // @ts-ignore
@@ -15,15 +15,17 @@ export function SaveBtn() {
   function handleBtnClick(): void {
     const isNameValid = item !== undefined && item.name.trim() !== "";
 
-    if (
-      !isAddingItem &&
-      !areObjectsEqual(item, vault[curItemId]) &&
-      isNameValid
-    ) {
-      editItem(item, curItemId);
+    if (!isNameValid) return;
+
+    if (areObjectsEqual(item, vault[curItemId])) {
       setIsEditingItem(false);
-    } else if (isAddingItem && isNameValid) {
+    }
+
+    if (isAddingItem) {
       addItem(item);
+      setIsEditingItem(false);
+    } else {
+      editItemById(item, curItemId);
       setIsAddingItem(false);
     }
   }

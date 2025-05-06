@@ -1,4 +1,5 @@
-import useGlobal, { State, Actions } from "../../utils/store";
+import useGlobal, { State, Actions } from "../../../store/store";
+import "./vault-item.modules.css";
 
 interface VaultItemProps {
   icon: string;
@@ -24,7 +25,7 @@ export function VaultItem(props: VaultItemProps) {
       <img src={icon} alt="" width="24px" />
       <div className="item-info">
         <div className="service-name">{name}</div>
-        <span className="login">{login}</span>
+        {login && <span className="login">{login}</span>}
       </div>
     </div>
   );

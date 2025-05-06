@@ -20,7 +20,7 @@ export type State = {
 export type Actions = {
   setCurItemId(itemId: string): void;
   addItem(newItem: LoginItem): void;
-  editItem(newItem: LoginItem, itemId: string): void;
+  editItemById(newItem: LoginItem, itemId: string): void;
   removeItem(itemId: string): void;
   setIsEditingItem(isEditing: boolean): void;
   setIsAddingItem(isAdding: boolean): void;
@@ -49,6 +49,12 @@ const initialState: State = {
       password: "strong password",
       website: "youtube.com",
     },
+    "3": {
+      name: "GitHub",
+      login: "",
+      password: "very very strong password",
+      website: "github.com",
+    },
   },
 };
 
@@ -70,7 +76,7 @@ const addItem = (store: Store<State, Actions>, newItem: LoginItem): void => {
   store.setState({ vault: nextItems });
 };
 
-const editItem = (
+const editItemById = (
   store: Store<State, Actions>,
   newItem: LoginItem,
   itemId: string
@@ -87,9 +93,8 @@ const editItem = (
 const removeItem = (store: Store<State, Actions>, itemId: string): void => {
   const { vault }: State = store.state;
 
-  const nextId = "0";
   delete vault[itemId];
-  store.setState({ curItemId: nextId });
+  store.setState({ curItemId: "0" });
 };
 
 const setIsEditingItem = (
@@ -111,7 +116,7 @@ const setIsAddingItem = (
 const actions = {
   setCurItemId,
   addItem,
-  editItem,
+  editItemById,
   removeItem,
   setIsEditingItem,
   setIsAddingItem,

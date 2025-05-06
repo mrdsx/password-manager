@@ -1,4 +1,4 @@
-import useGlobal, { State, Actions } from "../../utils/store";
+import useGlobal, { State, Actions } from "../../store/store";
 
 export function DeleteBtn() {
   const [globalState, globalActions]: [State, Actions] = useGlobal();

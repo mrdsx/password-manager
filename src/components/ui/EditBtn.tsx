@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import useGlobal, { State, Actions } from "../../utils/store";
+import useGlobal, { State, Actions } from "../../store/store";
 import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
 
 export function EditBtn() {
