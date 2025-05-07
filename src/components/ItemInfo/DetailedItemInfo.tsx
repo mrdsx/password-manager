@@ -16,15 +16,15 @@ export function DetailedItemInfo() {
   const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId, isEditingItem } = globalState;
 
-  const [item, setItemInfo] = useState<LoginItem>({
+  const [item, setItem] = useState<LoginItem>({
     ...vault[curItemId],
   });
 
-  const fields: string[] = Object.keys(vault[curItemId]);
+  const fields: string[] = Object.keys(vault[curItemId].details);
   const isValidCurItemId: boolean = curItemId !== "0";
 
   return (
-    <EditingItemInfoContext.Provider value={[item, setItemInfo]}>
+    <EditingItemInfoContext.Provider value={[item, setItem]}>
       <div className="item-details">
         <ul className="detail-fields">
           {isValidCurItemId && !isEditingItem ? (

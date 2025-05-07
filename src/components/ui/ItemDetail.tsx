@@ -20,16 +20,25 @@ export function ItemDetail(props: ItemDetailProps) {
     type = "text",
     hasCopyBtn = true,
     onChangeFn,
-  }: ItemDetailProps = props;
+  } = props;
 
   const val: string =
     type === "password" && readOnly && value.length > 0 ? PASS_MASK : value;
-
   const [inputVal, setInputVal] = useState<string>(val);
 
   useEffect(() => {
     setInputVal(val);
   }, [val]);
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+    if (onChangeFn) onChangeFn(e);
+    setInputVal(e.target.value);
+  }
+
+  function handleKeyDown(e: KeyboardEvent): void {
+    if (!readOnly && e.key === "Enter") {
+    }
+  }
 
   return (
     <div className="detail">
@@ -38,13 +47,11 @@ export function ItemDetail(props: ItemDetailProps) {
         <input
           type={type}
           id={fieldName}
-          // @ts-ignore
           value={inputVal}
           readOnly={readOnly}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            if (onChangeFn) onChangeFn(e);
-            setInputVal(e.target.value);
-          }}
+          onChange={handleChange}
+          // @ts-ignore
+          onKeyDown={handleKeyDown}
         />
       </div>
 

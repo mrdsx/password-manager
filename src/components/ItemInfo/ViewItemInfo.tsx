@@ -11,18 +11,20 @@ export function ViewItemInfo({ fields }: ItemInfoProps) {
     <>
       {fields.map((field, i) => {
         const type = field === "password" ? "password" : "text";
-        const value = vault[curItemId][field as keyof object];
+        const value = vault[curItemId].details[field as keyof object];
 
-        return (
-          <li key={i}>
-            <ItemDetail
-              fieldName={field}
-              value={value}
-              readOnly={true}
-              type={type}
-            />
-          </li>
-        );
+        if (field !== "id") {
+          return (
+            <li key={i}>
+              <ItemDetail
+                fieldName={field}
+                value={value}
+                readOnly={true}
+                type={type}
+              />
+            </li>
+          );
+        }
       })}
     </>
   );

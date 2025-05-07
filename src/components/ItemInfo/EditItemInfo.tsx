@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useEffect } from "react";
-import useGlobal, { State, Actions } from "../../store/store";
+import useGlobal, { State, Actions, LoginItem } from "../../store/store";
 import { setObjectValuesEmpty } from "../../utils/objectMethods";
 import { ItemDetail } from "../UI/ItemDetail";
 import { ItemInfoProps, EditingItemInfoContext } from "./DetailedItemInfo";
@@ -9,12 +9,14 @@ export function EditItemInfo({ fields }: ItemInfoProps) {
   const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId, isAddingItem } = globalState;
 
-  const [item, setItemInfo] = useContext(EditingItemInfoContext);
+  const [item, setItem]: [LoginItem, Function] = useContext(
+    EditingItemInfoContext
+  );
 
   useEffect(() => {
     if (isAddingItem) {
-      const nextItem = setObjectValuesEmpty(item);
-      setItemInfo(nextItem);
+      const nextItemDetails = setObjectValuesEmpty(item.details);
+      setItem({ details: { ...nextItemDetails } });
     }
   }, [isAddingItem]);
 
@@ -22,7 +24,7 @@ export function EditItemInfo({ fields }: ItemInfoProps) {
     <>
       {fields.map((field, i) => {
         const type = field === "password" ? "password" : "text";
-        const value = vault[curItemId][field as keyof object];
+        const value = vault[curItemId].details[field as keyof object];
 
         return (
           <li key={i}>
@@ -33,9 +35,11 @@ export function EditItemInfo({ fields }: ItemInfoProps) {
               type={type}
               hasCopyBtn={false}
               onChangeFn={(e: ChangeEvent<HTMLInputElement>) => {
-                setItemInfo({
-                  ...item,
-                  [field]: e.target.value,
+                setItem({
+                  details: {
+                    ...item.details,
+                    [field]: e.target.value,
+                  },
                 });
               }}
             />

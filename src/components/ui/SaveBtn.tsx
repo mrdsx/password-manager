@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import useGlobal, { State, Actions } from "../../store/store";
+import useGlobal, { State, Actions, LoginItem } from "../../store/store";
 import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
 import { areObjectsEqual } from "../../utils/objectMethods";
 
@@ -10,10 +10,12 @@ export function SaveBtn() {
     globalActions;
 
   // @ts-ignore
-  const [item, setItemInfo] = useContext(EditingItemInfoContext);
+  const [item, setItemInfo]: [LoginItem, Function] = useContext(
+    EditingItemInfoContext
+  );
 
   function handleBtnClick(): void {
-    const isNameValid = item !== undefined && item.name.trim() !== "";
+    const isNameValid = item !== undefined && item.details.name.trim() !== "";
 
     if (!isNameValid) return;
 

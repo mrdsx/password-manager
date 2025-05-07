@@ -2,10 +2,12 @@
 import GlobalHook, { Store } from "use-global-hook";
 
 export interface LoginItem {
-  name: string;
-  login: string;
-  password: string;
-  website: string;
+  details: {
+    name: string;
+    login: string;
+    password: string;
+    website: string;
+  };
 }
 
 type VaultItems = Record<string, LoginItem>;
@@ -32,28 +34,36 @@ const initialState: State = {
   isAddingItem: false,
   vault: {
     "0": {
-      name: "",
-      login: "",
-      password: "",
-      website: "",
+      details: {
+        name: "",
+        login: "",
+        password: "",
+        website: "",
+      },
     },
     "1": {
-      name: "Google",
-      login: "OHO123",
-      password: "password",
-      website: "google.com",
+      details: {
+        name: "Google",
+        login: "OHO123",
+        password: "password",
+        website: "google.com",
+      },
     },
     "2": {
-      name: "YouTube",
-      login: "OHO123",
-      password: "strong password",
-      website: "youtube.com",
+      details: {
+        name: "YouTube",
+        login: "OHO123",
+        password: "very very strong password",
+        website: "youtube.com",
+      },
     },
     "3": {
-      name: "GitHub",
-      login: "",
-      password: "very very strong password",
-      website: "github.com",
+      details: {
+        name: "HH.ru",
+        login: "OHO123",
+        password: "very very strong password",
+        website: "hh.ru",
+      },
     },
   },
 };
@@ -71,7 +81,7 @@ const addItem = (store: Store<State, Actions>, newItem: LoginItem): void => {
 
   const nextItems = {
     ...vault,
-    [lastId + 1]: newItem,
+    [lastId + 1]: { ...newItem },
   };
   store.setState({ vault: nextItems });
 };
@@ -85,7 +95,7 @@ const editItemById = (
 
   const nextItems = {
     ...vault,
-    [itemId]: newItem,
+    [itemId]: { ...newItem },
   };
   store.setState({ vault: nextItems });
 };
