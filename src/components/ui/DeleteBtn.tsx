@@ -2,12 +2,16 @@ import useGlobal, { State, Actions } from "../../store/store";
 
 export function DeleteBtn() {
   const [globalState, globalActions]: [State, Actions] = useGlobal();
-  const { curItemId } = globalState;
-  const { removeItem, setIsEditingItem } = globalActions;
+  const { vault, curItemId } = globalState;
+  const { removeItem, moveItemToTrash, setIsEditingItem } = globalActions;
 
   function handleBtnClick(): void {
     setIsEditingItem(false);
-    removeItem(curItemId);
+    if (vault[curItemId].inTrash) {
+      removeItem(curItemId);
+    } else {
+      moveItemToTrash(curItemId);
+    }
   }
 
   return (

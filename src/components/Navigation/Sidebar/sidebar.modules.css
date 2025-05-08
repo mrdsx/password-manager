@@ -18,12 +18,14 @@
 }
 
 .sidebar .dropdown-btn {
-  font-size: 110%;
-  filter: opacity(40%);
+  font-size: 1.1rem;
+  filter: opacity(60%);
 }
 
-.categories, .types, .folders {
+.categories,
+.types,
+.folders {
   display: flex;
   flex-direction: column;
-  gap: .8rem;
+  gap: 0.6rem;
 }

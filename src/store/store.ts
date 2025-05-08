@@ -1,8 +1,12 @@
 // @ts-ignore
 import GlobalHook, { Store } from "use-global-hook";
 
+type itemType = "login" | "card" | "id" | "secure note";
+
 export interface LoginItem {
-  type?: string;
+  type: itemType;
+  favorite: boolean;
+  inTrash: boolean;
   details: {
     name: string;
     login: string;
@@ -24,6 +28,7 @@ export type Actions = {
   setCurItemId(itemId: string): void;
   addItem(newItem: LoginItem): void;
   editItemById(newItem: LoginItem, itemId: string): void;
+  moveItemToTrash(itemId: string): void;
   removeItem(itemId: string): void;
   setIsEditingItem(isEditing: boolean): void;
   setIsAddingItem(isAdding: boolean): void;
@@ -35,6 +40,9 @@ const initialState: State = {
   isAddingItem: false,
   vault: {
     "0": {
+      type: "login",
+      favorite: false,
+      inTrash: false,
       details: {
         name: "",
         login: "",
@@ -43,6 +51,9 @@ const initialState: State = {
       },
     },
     "1": {
+      type: "login",
+      favorite: false,
+      inTrash: false,
       details: {
         name: "Google",
         login: "OHO123",
@@ -51,6 +62,9 @@ const initialState: State = {
       },
     },
     "2": {
+      type: "login",
+      favorite: true,
+      inTrash: false,
       details: {
         name: "YouTube",
         login: "OHO123",
@@ -59,12 +73,14 @@ const initialState: State = {
       },
     },
     "3": {
-      type: "login",
+      type: "secure note",
+      favorite: true,
+      inTrash: true,
       details: {
         name: "hh.ru",
         login: "OHO123",
         password: "very very strong password",
-        website: "linkedin.com",
+        website: "hh.ru",
       },
     },
   },
@@ -102,6 +118,23 @@ const editItemById = (
   store.setState({ vault: nextItems });
 };
 
+const moveItemToTrash = (
+  store: Store<State, Actions>,
+  itemId: string
+): void => {
+  const { vault }: State = store.state;
+
+  const nextVault = {
+    ...vault,
+    [itemId]: {
+      ...vault[itemId],
+      inTrash: true,
+    },
+  };
+
+  store.setState({ curItemId: "0", vault: nextVault });
+};
+
 const removeItem = (store: Store<State, Actions>, itemId: string): void => {
   const { vault }: State = store.state;
 
@@ -129,6 +162,7 @@ const actions = {
   setCurItemId,
   addItem,
   editItemById,
+  moveItemToTrash,
   removeItem,
   setIsEditingItem,
   setIsAddingItem,

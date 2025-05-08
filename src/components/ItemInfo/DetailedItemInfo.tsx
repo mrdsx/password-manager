@@ -26,13 +26,7 @@ export function DetailedItemInfo() {
   const isValidCurItemId: boolean = curItemId !== "0";
 
   return (
-    <EditingItemInfoContext.Provider
-      value={{
-        item: item,
-        setItem: setItem,
-        saveBtnRef: saveBtnRef,
-      }}
-    >
+    <EditingItemInfoContext.Provider value={{ item, setItem, saveBtnRef }}>
       <div className="item-details">
         <ul className="detail-fields">
           {isValidCurItemId && !isEditingItem ? (

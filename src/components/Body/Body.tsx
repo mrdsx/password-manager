@@ -1,14 +1,6 @@
-import { Sidebar } from "../Navigation/Sidebar/Sidebar";
-import { ScrollableItems } from "../Navigation/ScrollableItems/ScrollableItems";
-import { DetailedItemInfo } from "../ItemInfo/DetailedItemInfo";
+import { ReactNode } from "react";
 import "./body.modules.css";
 
-export function Body() {
-  return (
-    <main>
-      <Sidebar />
-      <ScrollableItems />
-      <DetailedItemInfo />
-    </main>
-  );
+export function Body({ children }: { children: ReactNode }) {
+  return <main>{children}</main>;
 }
