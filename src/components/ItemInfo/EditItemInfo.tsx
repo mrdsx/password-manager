@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useEffect } from "react";
-import useGlobal, { State, Actions, LoginItem } from "../../store/store";
+import useGlobal, { State, Actions } from "../../store/store";
 import { setObjectValuesEmpty } from "../../utils/objectMethods";
 import { ItemDetail } from "../UI/ItemDetail";
 import { ItemInfoProps, EditingItemInfoContext } from "./DetailedItemInfo";
@@ -9,9 +9,7 @@ export function EditItemInfo({ fields }: ItemInfoProps) {
   const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId, isAddingItem } = globalState;
 
-  const [item, setItem]: [LoginItem, Function] = useContext(
-    EditingItemInfoContext
-  );
+  const { item, setItem } = useContext(EditingItemInfoContext);
 
   useEffect(() => {
     if (isAddingItem) {

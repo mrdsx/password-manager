@@ -7,12 +7,11 @@ export function EditBtn() {
   const { vault, curItemId } = globalState;
   const { setIsEditingItem } = globalActions;
 
-  // @ts-ignore
-  const [item, setItemInfo] = useContext(EditingItemInfoContext);
+  const { setItem } = useContext(EditingItemInfoContext);
 
   function handleBtnClick(): void {
     setIsEditingItem(true);
-    setItemInfo({
+    setItem({
       ...vault[curItemId],
     });
   }

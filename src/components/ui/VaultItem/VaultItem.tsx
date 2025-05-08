@@ -10,15 +10,19 @@ interface VaultItemProps {
   itemId: string;
 }
 
+const HIGHLIGHTED_ITEM_CLASSNAME = "item--highlighted";
+
 export function VaultItem(props: VaultItemProps) {
-  // @ts-ignore
   const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const { curItemId } = globalState;
   const { setCurItemId, setIsAddingItem } = globalActions;
 
   const { vaultItem, itemId } = props;
   const { name, login, website } = vaultItem.details;
 
   const [faviconUrl, setFaviconUrl] = useState<string>();
+
+  const isHighlighted = curItemId === itemId ? HIGHLIGHTED_ITEM_CLASSNAME : "";
 
   useEffect(() => {
     getFavicon();
@@ -43,7 +47,7 @@ export function VaultItem(props: VaultItemProps) {
   }
 
   return (
-    <div className="item" onClick={handleBtnClick}>
+    <div className={`item ${isHighlighted}`} onClick={handleBtnClick}>
       <img src={faviconUrl} alt="" width="24px" />
       <div className="item-info">
         <div className="service-name">{name}</div>

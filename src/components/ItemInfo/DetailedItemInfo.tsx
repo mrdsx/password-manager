@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useRef } from "react";
 import useGlobal, { State, Actions, LoginItem } from "../../store/store";
 import { EditItemInfo } from "./EditItemInfo";
 import { ViewItemInfo } from "./ViewItemInfo";
@@ -20,11 +20,19 @@ export function DetailedItemInfo() {
     ...vault[curItemId],
   });
 
+  const saveBtnRef = useRef(null);
+
   const fields: string[] = Object.keys(vault[curItemId].details);
   const isValidCurItemId: boolean = curItemId !== "0";
 
   return (
-    <EditingItemInfoContext.Provider value={[item, setItem]}>
+    <EditingItemInfoContext.Provider
+      value={{
+        item: item,
+        setItem: setItem,
+        saveBtnRef: saveBtnRef,
+      }}
+    >
       <div className="item-details">
         <ul className="detail-fields">
           {isValidCurItemId && !isEditingItem ? (

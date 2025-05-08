@@ -1,5 +1,6 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import { CopyBtn } from "./CopyBtn";
+import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
 
 const PASS_MASK: string = "00000000";
 
@@ -26,6 +27,8 @@ export function ItemDetail(props: ItemDetailProps) {
     type === "password" && readOnly && value.length > 0 ? PASS_MASK : value;
   const [inputVal, setInputVal] = useState<string>(val);
 
+  const { saveBtnRef } = useContext(EditingItemInfoContext);
+
   useEffect(() => {
     setInputVal(val);
   }, [val]);
@@ -37,6 +40,7 @@ export function ItemDetail(props: ItemDetailProps) {
 
   function handleKeyDown(e: KeyboardEvent): void {
     if (!readOnly && e.key === "Enter") {
+      saveBtnRef.current.click();
     }
   }
 

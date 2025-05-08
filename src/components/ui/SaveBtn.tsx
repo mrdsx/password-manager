@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import useGlobal, { State, Actions, LoginItem } from "../../store/store";
+import useGlobal, { State, Actions } from "../../store/store";
 import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
 import { areObjectsEqual } from "../../utils/objectMethods";
 
@@ -9,12 +9,9 @@ export function SaveBtn() {
   const { addItem, editItemById, setIsAddingItem, setIsEditingItem } =
     globalActions;
 
-  // @ts-ignore
-  const [item, setItemInfo]: [LoginItem, Function] = useContext(
-    EditingItemInfoContext
-  );
+  const { item, saveBtnRef } = useContext(EditingItemInfoContext);
 
-  function handleBtnClick(): void {
+  function handleClick(): void {
     const isNameValid = item !== undefined && item.details.name.trim() !== "";
 
     if (!isNameValid) return;
@@ -33,7 +30,7 @@ export function SaveBtn() {
   }
 
   return (
-    <button id="save" onClick={handleBtnClick}>
+    <button id="save" onClick={handleClick} ref={saveBtnRef}>
       Save
     </button>
   );

@@ -2,6 +2,7 @@
 import GlobalHook, { Store } from "use-global-hook";
 
 export interface LoginItem {
+  type?: string;
   details: {
     name: string;
     login: string;
@@ -58,11 +59,12 @@ const initialState: State = {
       },
     },
     "3": {
+      type: "login",
       details: {
-        name: "HH.ru",
+        name: "hh.ru",
         login: "OHO123",
         password: "very very strong password",
-        website: "hh.ru",
+        website: "linkedin.com",
       },
     },
   },
