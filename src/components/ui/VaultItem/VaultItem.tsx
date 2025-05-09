@@ -41,18 +41,18 @@ export function VaultItem(props: VaultItemProps) {
     }
   }
 
-  function handleBtnClick(): void {
+  function handleClick(): void {
     setCurItemId(itemId);
     setIsAddingItem(false);
   }
 
   return (
-    <div className={`item ${isHighlighted}`} onClick={handleBtnClick}>
+    <button className={`item ${isHighlighted}`} onClick={handleClick}>
       <img src={faviconUrl} alt="" width="24px" />
       <div className="item-info">
         <div className="service-name">{name}</div>
         {name && <span className="login">{login}</span>}
       </div>
-    </div>
+    </button>
   );
 }

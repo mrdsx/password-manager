@@ -8,24 +8,7 @@
   border-right: 1px solid black;
 }
 
-.sidebar button {
-  width: max-content;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: var(--font-size);
-}
-
 .sidebar .dropdown-btn {
   font-size: 1.1rem;
   filter: opacity(60%);
-}
-
-.categories,
-.types,
-.folders {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
 }

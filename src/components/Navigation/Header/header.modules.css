@@ -30,7 +30,12 @@ header {
   backdrop-filter: brightness(150%);
 }
 
-.search-bar #search-field {
+.search-bar:hover,
+.search-bar:focus-within {
+  backdrop-filter: brightness(170%);
+}
+
+#search-field {
   flex-grow: 1;
   border: none;
   outline: none;
@@ -49,6 +54,7 @@ header {
   cursor: pointer;
 }
 
-#sign-out:hover {
+#sign-out:hover,
+#sign-out:focus-visible {
   backdrop-filter: brightness(150%);
 }

@@ -1,9 +1,10 @@
 .item {
-  padding: 0.5rem;
   padding-left: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  height: 3rem;
+  width: 100%;
   cursor: pointer;
   position: relative;
 }
@@ -17,7 +18,11 @@
   height: 100%;
   position: absolute;
   left: 0;
-  animation: 0.1s ease-in border-scaling;
+  animation: 0.1s ease-in border-expanding;
+}
+
+.item-info {
+  text-align: start;
 }
 
 .item-info .service-name {
@@ -29,7 +34,7 @@
   font-size: 0.7rem;
 }
 
-@keyframes border-scaling {
+@keyframes border-expanding {
   0% {
     height: 0;
   }

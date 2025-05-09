@@ -3,14 +3,14 @@ import { VaultItem } from "../../UI/VaultItem/VaultItem";
 import { AddItemBtn } from "../../UI/AddItemBtn";
 import "./scrollable-items.modules.css";
 import { useContext } from "react";
-import { TabContext, TabName } from "../../../app/App";
+import { TabContext, TabContextType } from "../../../app/App";
 
 export function ScrollableItems() {
   // @ts-ignore
   const [globalState, globalActions] = useGlobal();
   const { vault } = globalState;
 
-  const { curTab }: { curTab: TabName } = useContext(TabContext);
+  const { curTab } = useContext(TabContext) as TabContextType;
 
   function isItemPassing(itemId: string): boolean | void {
     const { favorite, inTrash, type }: LoginItem = vault[itemId];

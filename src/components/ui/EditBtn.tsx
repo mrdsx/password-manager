@@ -1,15 +1,18 @@
 import { useContext } from "react";
 import useGlobal, { State, Actions } from "../../store/store";
-import { EditingItemInfoContext } from "../ItemInfo/DetailedItemInfo";
+import {
+  EditingItemContext,
+  EditingItemContextType,
+} from "../ItemInfo/ItemInfo";
 
 export function EditBtn() {
   const [globalState, globalActions]: [State, Actions] = useGlobal();
   const { vault, curItemId } = globalState;
   const { setIsEditingItem } = globalActions;
 
-  const { setItem } = useContext(EditingItemInfoContext);
+  const { setItem } = useContext(EditingItemContext) as EditingItemContextType;
 
-  function handleBtnClick(): void {
+  function handleClick(): void {
     setIsEditingItem(true);
     setItem({
       ...vault[curItemId],
@@ -17,7 +20,7 @@ export function EditBtn() {
   }
 
   return (
-    <button id="edit" onClick={handleBtnClick}>
+    <button id="edit" onClick={handleClick}>
       Edit
     </button>
   );

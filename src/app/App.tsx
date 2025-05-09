@@ -3,7 +3,7 @@ import { Header } from "../components/Navigation/Header/Header";
 import { Body } from "../components/Body/Body";
 import { Sidebar } from "../components/Navigation/Sidebar/Sidebar";
 import { ScrollableItems } from "../components/Navigation/ScrollableItems/ScrollableItems";
-import { DetailedItemInfo } from "../components/ItemInfo/DetailedItemInfo";
+import { ItemInfo } from "../components/ItemInfo/ItemInfo";
 
 export type TabName =
   | "All items"
@@ -14,7 +14,12 @@ export type TabName =
   | "Identity"
   | "Secure note";
 
-export const TabContext = createContext(null as any);
+export interface TabContextType {
+  curTab: TabName;
+  setCurTab: (tab: TabName) => void;
+}
+
+export const TabContext = createContext<TabContextType | null>(null);
 
 export default function App() {
   const [curTab, setCurTab] = useState<TabName>("All items");
@@ -27,7 +32,7 @@ export default function App() {
           <Sidebar />
           <ScrollableItems />
         </TabContext.Provider>
-        <DetailedItemInfo />
+        <ItemInfo />
       </Body>
     </>
   );

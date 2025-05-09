@@ -1,6 +1,6 @@
 import useGlobal, { Actions, State } from "../../store/store";
-import { ItemDetail } from "../UI/ItemDetail";
-import { ItemInfoProps } from "./DetailedItemInfo";
+import { ItemDetail } from "../UI/ItemDetail/ItemDetail";
+import { ItemInfoProps } from "./ItemInfo";
 
 export function ViewItemInfo({ fields }: ItemInfoProps) {
   // @ts-ignore
@@ -9,20 +9,19 @@ export function ViewItemInfo({ fields }: ItemInfoProps) {
 
   return (
     <>
-      {fields.map((field, i) => {
+      {fields.map((field, index) => {
         const type = field === "password" ? "password" : "text";
         const value = vault[curItemId].details[field as keyof object];
 
         if (field !== "id") {
           return (
-            <li key={i}>
-              <ItemDetail
-                fieldName={field}
-                value={value}
-                readOnly={true}
-                type={type}
-              />
-            </li>
+            <ItemDetail
+              fieldName={field}
+              value={value}
+              readOnly={true}
+              type={type}
+              key={index}
+            />
           );
         }
       })}

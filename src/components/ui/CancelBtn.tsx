@@ -4,12 +4,12 @@ export function CancelBtn() {
   // @ts-ignore
   const [globalState, globalActions]: [State, Actions] = useGlobal();
 
-  function handleBtnClick(): void {
+  function handleClick(): void {
     globalActions.setIsEditingItem(false);
   }
 
   return (
-    <button id="cancel" onClick={handleBtnClick}>
+    <button id="cancel" onClick={handleClick}>
       Cancel
     </button>
   );

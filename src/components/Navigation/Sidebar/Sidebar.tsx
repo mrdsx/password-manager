@@ -1,4 +1,4 @@
-import { TabBtn } from "../../UI/TabBtn";
+import { TabBtn } from "../../UI/TabBtn/TabBtn";
 import { Tabs } from "../Tabs/Tabs";
 import "./sidebar.modules.css";
 
@@ -7,18 +7,18 @@ export function Sidebar() {
     <div className="sidebar">
       <div className="categories">
         <Tabs>
-          <TabBtn tab={"All items"} />
-          <TabBtn tab={"Favorite"} />
-          <TabBtn tab={"Trash"} />
+          <TabBtn tab="All items" />
+          <TabBtn tab="Favorite" />
+          <TabBtn tab="Trash" />
         </Tabs>
       </div>
       <div className="types">
         <button className="dropdown-btn">Types</button>
         <Tabs>
-          <TabBtn tab={"Login"} />
-          <TabBtn tab={"Card"} />
-          <TabBtn tab={"Identity"} />
-          <TabBtn tab={"Secure note"} />
+          <TabBtn tab="Login" />
+          <TabBtn tab="Card" />
+          <TabBtn tab="Identity" />
+          <TabBtn tab="Secure note" />
         </Tabs>
       </div>
       <div className="folders">

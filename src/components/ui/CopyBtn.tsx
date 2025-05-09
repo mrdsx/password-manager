@@ -1,17 +1,17 @@
 export function CopyBtn({ copyText }: { copyText: string }) {
-  const SVG_SIZE = "20";
+  const SVG_SIZE: string = "20";
   const copyBtnStyle: Record<string, string> = {
     background: "transparent",
     border: "none",
     outline: "none",
   };
 
-  function handleBtnClick(): void {
+  function handleClick(): void {
     if (copyText) navigator.clipboard.writeText(copyText);
   }
 
   return (
-    <button onClick={handleBtnClick} style={copyBtnStyle}>
+    <button onClick={handleClick} style={copyBtnStyle}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={SVG_SIZE}
