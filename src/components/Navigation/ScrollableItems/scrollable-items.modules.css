@@ -5,30 +5,3 @@
   background: var(--item-list-background);
   border-right: 1px solid black;
 }
-.item-list {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-color: #6e788a transparent;
-  scrollbar-width: 10px;
-}
-
-.add-item-btn {
-  flex: 0;
-  padding: 0.5rem;
-  background: var(--background);
-}
-.add-item-btn button {
-  background: transparent;
-  backdrop-filter: brightness(90%);
-  border: 1px solid #000;
-  outline: none;
-  width: 100%;
-  height: 30px;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-.add-item-btn button:hover {
-  backdrop-filter: brightness(120%);
-}

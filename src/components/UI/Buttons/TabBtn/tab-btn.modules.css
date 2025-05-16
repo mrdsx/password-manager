@@ -1,0 +1,16 @@
+button {
+  width: max-content;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--font-size);
+}
+
+.tab:focus-visible {
+  outline: 2px solid #515194;
+}
+
+.tab.active {
+  font-weight: bold;
+  color: #6f9de6;
+}

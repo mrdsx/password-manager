@@ -1,0 +1,8 @@
+.item-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #6e788a transparent;
+  scrollbar-width: 10px;
+}
