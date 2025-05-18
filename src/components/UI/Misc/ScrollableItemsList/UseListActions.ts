@@ -4,11 +4,15 @@ import {
   SearchContext,
   SearchContextType,
 } from "../../../../providers/SearchProvider";
-import useGlobal, { State, Actions } from "../../../../store/store";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 
-export function UseListActions() {
+interface ListActions {
+  getIsItemPassing(itemId: string): boolean;
+}
+
+export function UseListActions(): ListActions {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault } = globalState;
 
   const { curTab } = useContext(TabContext) as TabContextType;

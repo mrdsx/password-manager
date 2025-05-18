@@ -1,4 +1,4 @@
-import useGlobal from "../../../../store/store";
+import useGlobalStore from "../../../../store/globalStore";
 import { ViewFields } from "./ViewFields";
 import { EditFields } from "./EditFields";
 
@@ -6,9 +6,9 @@ interface FieldsProps {
   isViewingItem: boolean;
 }
 
-export function Fields(props: FieldsProps) {
+export function Fields(props: FieldsProps): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions] = useGlobal();
+  const [globalState, globalActions] = useGlobalStore();
   const { vault, curItemId, isEditingItem } = globalState;
 
   const { isViewingItem } = props;

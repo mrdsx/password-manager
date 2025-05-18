@@ -2,7 +2,7 @@ interface TimeInfoProps {
   isViewingItem: boolean;
 }
 
-export function TimeInfo(props: TimeInfoProps) {
+export function TimeInfo(props: TimeInfoProps): React.ReactElement {
   return (
     <div className="time-info">
       {props.isViewingItem && (

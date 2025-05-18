@@ -1,0 +1,33 @@
+.modal {
+  border-radius: 0.4rem;
+  background: var(--background);
+  filter: brightness(110%);
+}
+
+.modal-body {
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.modal-field {
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 250px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+}
+.modal-field:hover,
+.modal-field:focus-within {
+  backdrop-filter: brightness(120%);
+}
+
+.modal-actions {
+  padding: var(--padding);
+  display: flex;
+  gap: 0.5rem;
+}

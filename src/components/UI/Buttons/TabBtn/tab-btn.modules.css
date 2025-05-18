@@ -1,16 +1,41 @@
-button {
-  width: max-content;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: var(--font-size);
+.tab {
+  --active-color: #6f9de6;
+  display: flex;
+  width: 100%;
+}
+
+.tab-left-side {
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tab-left-side span {
+  width: 12vw;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tab-left-side:hover span,
+.tab-left-side:hover svg {
+  color: var(--active-color);
+  fill: var(--active-color);
 }
 
 .tab:focus-visible {
   outline: 2px solid #515194;
 }
 
-.tab.active {
+.tab.active span,
+.tab.active svg {
   font-weight: bold;
-  color: #6f9de6;
+  color: var(--active-color);
+  fill: var(--active-color);
+}
+
+.edit-folder-btn {
+  display: flex;
+  justify-content: end;
 }

@@ -3,36 +3,40 @@ import {
   createContext,
   useState,
   useRef,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-  RefObject,
 } from "react";
-import useGlobal, { LoginItem, State, Actions } from "../store/store";
+import useGlobalStore, {
+  LoginItem,
+  State,
+  Actions,
+} from "../store/globalStore";
 
-export type EditingItemContextType = {
-  item: LoginItem | Partial<LoginItem>;
-  setItem: Dispatch<SetStateAction<LoginItem | Partial<LoginItem>>>;
-  saveBtnRef: RefObject<HTMLButtonElement | null>;
-};
+export interface EditingItemContextType {
+  item: LoginItem;
+  setItem(item: LoginItem): void;
+  saveItemBtnRef: React.RefObject<HTMLButtonElement | null>;
+}
 
 export const EditingItemContext = createContext<EditingItemContextType | null>(
   null
 );
 
-export function EditingItemProvider({ children }: { children: ReactNode }) {
+export function EditingItemProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId } = globalState;
 
-  const [item, setItem] = useState<LoginItem | Partial<LoginItem>>({
+  const [item, setItem] = useState<LoginItem>({
     ...vault[curItemId],
   });
 
-  const saveBtnRef = useRef<HTMLButtonElement>(null);
+  const saveItemBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <EditingItemContext.Provider value={{ item, setItem, saveBtnRef }}>
+    <EditingItemContext.Provider value={{ item, setItem, saveItemBtnRef }}>
       {children}
     </EditingItemContext.Provider>
   );

@@ -1,11 +1,11 @@
-import useGlobal, { State, Actions } from "../../../../store/store";
-import "./item-actions.modules.css";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import { LeftSide } from "./Sides/LeftSide";
 import { RightSide } from "./Sides/RightSide";
+import "./item-actions.modules.css";
 
-export function ItemActions() {
+export function ItemActions(): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { isEditingItem, isAddingItem } = globalState;
 
   const editingExistingItem = isEditingItem && !isAddingItem;

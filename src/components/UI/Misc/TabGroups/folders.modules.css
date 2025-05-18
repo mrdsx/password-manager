@@ -1,0 +1,11 @@
+.folder-actions {
+  display: flex;
+}
+
+.add-folder-btn {
+  font-size: 1.5rem;
+  filter: opacity(70%);
+}
+.add-folder-btn:hover {
+  filter: opacity(100%);
+}

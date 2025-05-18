@@ -1,5 +1,4 @@
-import { ReactElement } from "react";
-import useGlobal, { State, Actions } from "../../../../store/store";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import { EditingItemProvider } from "../../../../providers/EditingItemProvider";
 import { ItemActions } from "../ItemActions/ItemActions";
 import { Fields } from "../Fields/Fields";
@@ -10,9 +9,9 @@ export interface ItemInfoProps {
   fields: string[];
 }
 
-export function ItemDetails(): ReactElement {
+export function ItemInfo(): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { curItemId, isEditingItem } = globalState;
 
   const isValidCurItemId: boolean = curItemId !== "0";

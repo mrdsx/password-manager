@@ -1,16 +1,18 @@
-import { createContext, useState, ReactNode } from "react";
-
-export type TabNameType = "All items" | "Favorite" | "Trash";
+import { createContext, useState } from "react";
 
 export interface TabContextType {
-  curTab: TabNameType;
-  setCurTab(tab: TabNameType): void;
+  curTab: string;
+  setCurTab(tab: string): void;
 }
 
 export const TabContext = createContext<TabContextType | null>(null);
 
-export function TabProvider({ children }: { children: ReactNode }) {
-  const [curTab, setCurTab] = useState<TabNameType>("All items");
+export function TabProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
+  const [curTab, setCurTab] = useState<string>("All items");
 
   return (
     <TabContext.Provider value={{ curTab, setCurTab }}>

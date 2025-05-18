@@ -1,22 +1,22 @@
-import useGlobal from "../../../../../store/store";
-import { DeleteBtn } from "../../../Buttons/DeleteBtn";
-import { RestoreBtn } from "../../../Buttons/RestoreBtn";
+import useGlobalStore from "../../../../../store/globalStore";
+import { DeleteItemBtn } from "../../../Buttons/DeleteItemBtn";
+import { RestoreItemBtn } from "../../../Buttons/RestoreItemBtn";
 
 interface RightSideProps {
   editingExistingItem: boolean;
 }
 
-export function RightSide(props: RightSideProps) {
+export function RightSide(props: RightSideProps): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions] = useGlobal();
+  const [globalState, globalActions] = useGlobalStore();
   const { vault, curItemId } = globalState;
 
   return (
     <div id="right" className="side">
       {props.editingExistingItem && (
         <>
-          {vault[curItemId].inTrash && <RestoreBtn />}
-          <DeleteBtn />
+          {vault[curItemId].inTrash && <RestoreItemBtn />}
+          <DeleteItemBtn />
         </>
       )}
     </div>

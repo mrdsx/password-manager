@@ -1,0 +1,14 @@
+.modal-field label {
+  filter: brightness(80%);
+}
+.modal-actions button {
+  border: 1px solid black;
+  padding: 0.3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  backdrop-filter: brightness(90%);
+}
+.modal-actions button:hover,
+.modal-actions button:focus-visible {
+  backdrop-filter: brightness(120%);
+}

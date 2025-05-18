@@ -1,13 +1,12 @@
 // @ts-ignore
 import faviconFetch from "favicon-fetch";
-import { useEffect } from "react";
-import useGlobal, {
+import useGlobalStore, {
   State,
   Actions,
   LoginItemDetails,
-} from "../../../../store/store";
-import "./vault-item-btn.modules.css";
+} from "../../../../store/globalStore";
 import { UseVaultItemActions } from "./UseVaultItemActions";
+import "./vault-item-btn.modules.css";
 
 interface VaultItemProps {
   itemDetails: LoginItemDetails;
@@ -17,8 +16,8 @@ interface VaultItemProps {
 const HIGHLIGHTED_ITEM_CLASSNAME: string = "item--highlighted";
 const ICON_SIZE: number = 24;
 
-export function VaultItemBtn(props: VaultItemProps) {
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+export function VaultItemBtn(props: VaultItemProps): React.ReactElement {
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { setCurItemId, setIsAddingItem } = globalActions;
 
   const { name, login, website } = props.itemDetails;
@@ -26,15 +25,7 @@ export function VaultItemBtn(props: VaultItemProps) {
   const itemClassname: string =
     globalState.curItemId === props.itemId ? HIGHLIGHTED_ITEM_CLASSNAME : "";
 
-  const { faviconURL, getFaviconURL } = UseVaultItemActions();
-
-  useEffect(() => {
-    getFaviconURL(website);
-  }, []);
-
-  useEffect(() => {
-    getFaviconURL(website);
-  }, [website]);
+  const { faviconURL } = UseVaultItemActions({ website });
 
   function handleClick(): void {
     setCurItemId(props.itemId);

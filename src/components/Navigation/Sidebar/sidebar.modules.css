@@ -8,7 +8,12 @@
   border-right: 1px solid black;
 }
 
-.sidebar .dropdown-btn {
+.dropdown-btn {
+  margin-right: auto;
   font-size: 1.1rem;
-  filter: opacity(60%);
+  filter: opacity(70%);
+  text-align: start;
+}
+.dropdown-btn:hover {
+  filter: opacity(100%);
 }

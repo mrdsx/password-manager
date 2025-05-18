@@ -1,7 +1,7 @@
-import useGlobal, { State, Actions } from "../../../store/store";
+import useGlobalStore, { State, Actions } from "../../../store/globalStore";
 
-export function RestoreBtn() {
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+export function RestoreItemBtn(): React.ReactElement {
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId } = globalState;
   const { editItemById, setIsEditingItem } = globalActions;
 

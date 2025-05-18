@@ -26,5 +26,10 @@ ul {
 
 button,
 input[type="button"] {
+  width: max-content;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--font-size);
   cursor: pointer;
 }

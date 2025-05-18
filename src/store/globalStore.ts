@@ -142,6 +142,6 @@ const actions = {
   setIsAddingItem,
 };
 
-const useGlobal = GlobalHook(initialState, actions);
+const useGlobalStore = GlobalHook(initialState, actions);
 
-export default useGlobal;
+export default useGlobalStore;

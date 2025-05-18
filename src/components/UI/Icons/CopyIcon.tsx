@@ -1,4 +1,4 @@
-export function CopyIcon({ width }: { width: number }) {
+export function CopyIcon({ width }: { width: number }): React.ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

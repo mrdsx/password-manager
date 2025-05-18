@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState } from "react";
 
 export interface SearchContextType {
   query: string;
@@ -7,7 +7,11 @@ export interface SearchContextType {
 
 export const SearchContext = createContext<SearchContextType | null>(null);
 
-export function SearchProvider({ children }: { children: ReactNode }) {
+export function SearchProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
   const [query, setQuery] = useState<string>("");
 
   return (

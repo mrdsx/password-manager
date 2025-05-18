@@ -1,4 +1,4 @@
-export function SearchIcon({ width }: { width: number }) {
+export function SearchIcon({ width }: { width: number }): React.ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

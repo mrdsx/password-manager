@@ -4,11 +4,12 @@ import {
   EditingItemContextType,
 } from "../../../../providers/EditingItemProvider";
 import { useItemActions } from "./useItemActions";
+import { SaveBtn } from "../SaveBtn";
 
-export function SaveBtn() {
+export function SaveItemBtn(): React.ReactElement {
   const { itemHasChanges, isNameValid, addOrEditItem } = useItemActions();
 
-  const { item, saveBtnRef } = useContext(
+  const { item, saveItemBtnRef } = useContext(
     EditingItemContext
   ) as EditingItemContextType;
 
@@ -22,9 +23,5 @@ export function SaveBtn() {
     if (actionAllowed) addOrEditItem();
   }
 
-  return (
-    <button id="save" onClick={handleClick} ref={saveBtnRef}>
-      Save
-    </button>
-  );
+  return <SaveBtn onClick={handleClick} ref={saveItemBtnRef} />;
 }

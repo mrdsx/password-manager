@@ -1,9 +1,9 @@
 # Password Manager
 
-This is my Password Manager App. I'm currently developing it as the side project. The key features of this app are:
+This is my Password Manager App. I'm currently developing it as the side project. The features are:
 
 - creating/editing/deleting logins
-- search among passwords by login
+- search passwords by login
 - creating/editing/deleting folders (SOON)
 
 ## Tech Stack

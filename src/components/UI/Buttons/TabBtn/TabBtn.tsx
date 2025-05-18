@@ -1,29 +1,40 @@
 import { useContext } from "react";
+import { UseTabBtnActions } from "./UseTabBtnActions";
 import {
-  TabNameType,
-  TabContext,
-  TabContextType,
-} from "../../../../providers/TabProvider";
+  FolderModalContext,
+  FolderModalContextType,
+} from "../../../../providers/FolderProvider";
+import { EditFolderBtn } from "../EditFolderBtn";
 import "./tab-btn.modules.css";
 
 interface TabBtnProps {
-  tab: TabNameType;
+  tab: string;
+  folderId?: number;
 }
 
-export function TabBtn(props: TabBtnProps) {
-  const { curTab, setCurTab } = useContext(TabContext) as TabContextType;
-  const { tab } = props;
+export function TabBtn(props: TabBtnProps): React.ReactElement {
+  const { tab, folderId } = props;
 
-  const tabClassName = curTab === tab ? "active" : "";
+  const { folders } = useContext(FolderModalContext) as FolderModalContextType;
+
+  const { getIcon, getClassnameIfActive, handleClick } = UseTabBtnActions({
+    tab,
+    folderId,
+  });
+
+  const isActive = getClassnameIfActive();
+  const icon = getIcon();
 
   return (
-    <button
-      onClick={() => {
-        setCurTab(tab);
-      }}
-      className={`tab ${tabClassName}`}
-    >
-      {tab}
-    </button>
+    <div className={`tab ${isActive}`}>
+      <button className="tab-left-side" onClick={handleClick}>
+        {icon}
+        <span>{tab}</span>
+      </button>
+
+      {folders.includes(tab) &&
+        typeof folderId === "number" &&
+        folderId > 0 && <EditFolderBtn />}
+    </div>
   );
 }

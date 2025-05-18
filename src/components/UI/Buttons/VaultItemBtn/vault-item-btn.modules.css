@@ -9,6 +9,7 @@
   position: relative;
 }
 .item:hover,
+.item:focus-visible,
 .item--highlighted {
   backdrop-filter: brightness(140%);
 }
@@ -31,7 +32,7 @@
 
 .item-info .login {
   filter: brightness(70%);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 @keyframes border-expanding {

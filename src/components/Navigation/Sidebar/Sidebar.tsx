@@ -1,20 +1,27 @@
+// force-semicolon: ignore-all
 import { TabBtn } from "../../UI/Buttons/TabBtn/TabBtn";
 import { Tabs } from "../Tabs/Tabs";
+import { Folders } from "../../UI/Misc/TabGroups/Folders";
 import "./sidebar.modules.css";
 
-export function Sidebar() {
+export enum defaultTabs {
+  allItems = "All items",
+  favorite = "Favorite",
+  trash = "Trash",
+}
+
+export function Sidebar(): React.ReactElement {
   return (
     <div className="sidebar">
       <div className="categories">
         <Tabs>
-          <TabBtn tab="All items" />
-          <TabBtn tab="Favorite" />
-          <TabBtn tab="Trash" />
+          <TabBtn tab={defaultTabs.allItems} />
+          <TabBtn tab={defaultTabs.favorite} />
+          <TabBtn tab={defaultTabs.trash} />
         </Tabs>
       </div>
       <div className="folders">
-        <button className="dropdown-btn">Folders</button>
-        <button>No folder</button>
+        <Folders />
       </div>
     </div>
   );

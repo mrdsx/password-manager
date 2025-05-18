@@ -1,13 +1,12 @@
-import { ChangeEvent } from "react";
-import useGlobal, { State, Actions } from "../../../../store/store";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
+import { UseFieldsActions } from "./UseFieldsActions";
 import { capitalizeFirstLetter } from "../../../../utils/stringMethods";
 import { ItemDetail } from "./../ItemDetail/ItemDetail";
 import { ItemInfoProps } from "./../ItemInfo/ItemInfo";
-import { UseFieldsActions } from "./UseFieldsActions";
 
-export function EditFields({ fields }: ItemInfoProps) {
+export function EditFields({ fields }: ItemInfoProps): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId } = globalState;
 
   const { item, handleFieldChange, handleCheckboxChange } = UseFieldsActions();
@@ -23,7 +22,7 @@ export function EditFields({ fields }: ItemInfoProps) {
             fieldName={capitalizeFirstLetter(field)}
             value={value}
             type={type}
-            onFieldChangeFn={(e: ChangeEvent<HTMLInputElement>) => {
+            onFieldChangeFn={(e: React.ChangeEvent<HTMLInputElement>) => {
               handleFieldChange(e, field);
             }}
             key={index}
@@ -36,7 +35,7 @@ export function EditFields({ fields }: ItemInfoProps) {
         readOnly={true}
         hasCheckbox={true}
         checkboxChecked={item.favorite}
-        onCheckboxChangeFn={(e: ChangeEvent<HTMLInputElement>) => {
+        onCheckboxChangeFn={(e: React.ChangeEvent<HTMLInputElement>) => {
           handleCheckboxChange(e);
         }}
       />

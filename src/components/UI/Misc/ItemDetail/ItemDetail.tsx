@@ -14,7 +14,7 @@ export interface ItemDetailProps {
   onCheckboxChangeFn?: Function;
 }
 
-export function ItemDetail(props: ItemDetailProps) {
+export function ItemDetail(props: ItemDetailProps): React.ReactElement {
   const {
     fieldName = "",
     value,
@@ -23,25 +23,15 @@ export function ItemDetail(props: ItemDetailProps) {
     hasCopyBtn = false,
     hasCheckbox = false,
     checkboxChecked = false,
-    onFieldChangeFn,
-    onCheckboxChangeFn,
   } = props;
 
-  const necessaryProps = {
-    fieldName,
-    type,
-    readOnly,
-    value,
-    onFieldChangeFn,
-    onCheckboxChangeFn,
-  };
   const {
     inputVal,
     inputId,
     handleFieldChange,
     handleKeyDown,
     handleCheckboxChange,
-  } = UseDetailActions({ ...necessaryProps });
+  } = UseDetailActions({ ...props });
 
   return (
     <div className="detail">

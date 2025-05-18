@@ -1,6 +1,6 @@
-import reactIcon from "../../../app/assets/react.svg";
+import reactIcon from "../../../assets/react.svg";
 
-export function AppIcon({ width }: { width: number }) {
+export function AppIcon({ width }: { width: number }): React.ReactElement {
   return (
     <div className="logo">
       <img src={reactIcon} alt="" width={width} />

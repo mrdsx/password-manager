@@ -1,11 +1,11 @@
-import useGlobal, { State, Actions } from "../../../../store/store";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import { VaultItemBtn } from "../../Buttons/VaultItemBtn/VaultItemBtn";
-import "./scrollable-items-list.modules.css";
 import { UseListActions } from "./UseListActions";
+import "./scrollable-items-list.modules.css";
 
-export function ScrollableItemsList() {
+export function ScrollableItemsList(): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault } = globalState;
 
   const { getIsItemPassing } = UseListActions();

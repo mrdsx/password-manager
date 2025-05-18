@@ -1,5 +1,9 @@
 import { useContext } from "react";
-import useGlobal, { State, Actions, LoginItem } from "../../../../store/store";
+import useGlobalStore, {
+  State,
+  Actions,
+  LoginItem,
+} from "../../../../store/globalStore";
 import { areObjectsEqual } from "../../../../utils/objectMethods";
 import {
   EditingItemContext,
@@ -13,7 +17,7 @@ interface ItemActions {
 }
 
 export function useItemActions(): ItemActions {
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId, isAddingItem } = globalState;
   const { addItem, editItemById, setIsAddingItem, setIsEditingItem } =
     globalActions;

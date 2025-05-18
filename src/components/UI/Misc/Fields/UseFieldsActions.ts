@@ -1,14 +1,24 @@
 import { useContext, ChangeEvent, useEffect } from "react";
-import useGlobal, { Actions, State, LoginItem } from "../../../../store/store";
+import useGlobalStore, {
+  Actions,
+  State,
+  LoginItem,
+} from "../../../../store/globalStore";
 import {
   EditingItemContext,
   EditingItemContextType,
 } from "../../../../providers/EditingItemProvider";
 import { setObjectValuesEmpty } from "../../../../utils/objectMethods";
 
-export function UseFieldsActions() {
+interface FieldsActions {
+  item: Partial<LoginItem>;
+  handleFieldChange(e: ChangeEvent<HTMLInputElement>, field: string): void;
+  handleCheckboxChange(e: ChangeEvent<HTMLInputElement>): void;
+}
+
+export function UseFieldsActions(): FieldsActions {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, isAddingItem } = globalState;
 
   const { item, setItem } = useContext(

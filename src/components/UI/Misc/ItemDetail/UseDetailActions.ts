@@ -5,9 +5,17 @@ import {
   EditingItemContextType,
 } from "../../../../providers/EditingItemProvider";
 
+interface DetailActions {
+  inputVal: string;
+  inputId: string;
+  handleFieldChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleKeyDown(e: KeyboardEvent): void;
+  handleCheckboxChange(e: ChangeEvent<HTMLInputElement>): void;
+}
+
 const PASS_MASK: string = "00000000";
 
-export function UseDetailActions(props: ItemDetailProps) {
+export function UseDetailActions(props: ItemDetailProps): DetailActions {
   const {
     fieldName,
     type,
@@ -21,7 +29,7 @@ export function UseDetailActions(props: ItemDetailProps) {
     type === "password" && readOnly && value.length > 0 ? PASS_MASK : value;
   const [inputVal, setInputVal] = useState<string>(val);
 
-  const { saveBtnRef } = useContext(
+  const { saveItemBtnRef } = useContext(
     EditingItemContext
   ) as EditingItemContextType;
 
@@ -40,7 +48,7 @@ export function UseDetailActions(props: ItemDetailProps) {
     if (readOnly) return;
 
     if (e.key === "Enter") {
-      saveBtnRef.current?.click();
+      saveItemBtnRef.current?.click();
     }
   }
 

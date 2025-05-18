@@ -1,18 +1,21 @@
 // @ts-ignore
 import faviconFetch from "favicon-fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   validateDomain,
   validateURL,
 } from "../../../../utils/validationMethods";
-import emptyIcon from "../../../../app/assets/web.svg";
+import emptyIcon from "../../../../assets/web.svg";
+
+interface ActionProps {
+  website: string;
+}
 
 interface VaultItemActions {
   faviconURL: string;
-  getFaviconURL(website: string): Promise<void>;
 }
 
-export function UseVaultItemActions(): VaultItemActions {
+export function UseVaultItemActions(props: ActionProps): VaultItemActions {
   const [faviconURL, setFaviconURL] = useState<string>(emptyIcon);
 
   async function getFaviconURL(website: string): Promise<void> {
@@ -26,5 +29,13 @@ export function UseVaultItemActions(): VaultItemActions {
     setFaviconURL(faviconURL);
   }
 
-  return { faviconURL, getFaviconURL };
+  useEffect(() => {
+    getFaviconURL(props.website);
+  }, []);
+
+  useEffect(() => {
+    getFaviconURL(props.website);
+  }, [props.website]);
+
+  return { faviconURL };
 }

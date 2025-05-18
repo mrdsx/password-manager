@@ -1,11 +1,10 @@
-import useGlobal, { State, Actions } from "../../../store/store";
+interface CancelBtnProps {
+  onClick(): void;
+}
 
-export function CancelBtn() {
-  // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
-
+export function CancelBtn(props: CancelBtnProps): React.ReactElement {
   function handleClick(): void {
-    globalActions.setIsEditingItem(false);
+    props.onClick();
   }
 
   return (

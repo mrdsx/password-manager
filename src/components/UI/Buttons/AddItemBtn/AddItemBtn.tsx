@@ -1,9 +1,9 @@
-import useGlobal, { State, Actions } from "../../../../store/store";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import "./add-item-btn.modules.css";
 
-export function AddItemBtn() {
+export function AddItemBtn(): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions]: [State, Actions] = useGlobal();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { setCurItemId, setIsAddingItem } = globalActions;
 
   function handleClick(): void {
