@@ -1,9 +1,6 @@
 import { useContext } from "react";
-import { TabContext, TabContextType } from "../../../../providers/TabProvider";
-import {
-  SearchContext,
-  SearchContextType,
-} from "../../../../providers/SearchProvider";
+import { TabContext } from "../../../../providers/TabProvider";
+import { SearchContext } from "../../../../providers/SearchProvider";
 import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 
 interface ListActions {
@@ -15,8 +12,8 @@ export function UseListActions(): ListActions {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault } = globalState;
 
-  const { curTab } = useContext(TabContext) as TabContextType;
-  const { query } = useContext(SearchContext) as SearchContextType;
+  const { curTab } = useContext(TabContext);
+  const { query } = useContext(SearchContext);
 
   function getIsInSearchQuery(itemId: string): boolean {
     const { details } = vault[itemId];

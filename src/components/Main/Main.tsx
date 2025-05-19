@@ -1,8 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import {
-  FolderModalContext,
-  FolderModalContextType,
-} from "../../providers/FolderProvider";
+import { AddFolderModalContext } from "../../providers/AddFolderModalProvider";
+import { EditFolderModalContext } from "../../providers/EditFolderModalProvider";
 import "./main.modules.css";
 
 export function Main({
@@ -10,19 +8,18 @@ export function Main({
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  const { isFolderModalOpen } = useContext(
-    FolderModalContext
-  ) as FolderModalContextType;
+  const { isAddFolderModalOpen } = useContext(AddFolderModalContext);
+  const { isEditFolderModalOpen } = useContext(EditFolderModalContext);
 
   const [filterVal, setFilterVal] = useState<number>(100);
 
   useEffect(() => {
-    if (isFolderModalOpen) {
+    if (isAddFolderModalOpen || isEditFolderModalOpen) {
       setFilterVal(60);
     } else {
       setFilterVal(100);
     }
-  }, [isFolderModalOpen]);
+  }, [isAddFolderModalOpen, isEditFolderModalOpen]);
 
   return (
     <main style={{ filter: `brightness(${filterVal}%)` }}>{children}</main>

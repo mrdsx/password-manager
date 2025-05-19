@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { UseTabBtnActions } from "./UseTabBtnActions";
 import {
-  FolderModalContext,
-  FolderModalContextType,
+  FolderContext,
+  DEFAULT_FOLDER_TAB_ID,
+  NOT_FOLDER_TAB_ID,
 } from "../../../../providers/FolderProvider";
 import { EditFolderBtn } from "../EditFolderBtn";
 import "./tab-btn.modules.css";
@@ -13,9 +14,9 @@ interface TabBtnProps {
 }
 
 export function TabBtn(props: TabBtnProps): React.ReactElement {
-  const { tab, folderId } = props;
+  const { tab, folderId = NOT_FOLDER_TAB_ID } = props;
 
-  const { folders } = useContext(FolderModalContext) as FolderModalContextType;
+  const { folders } = useContext(FolderContext);
 
   const { getIcon, getClassnameIfActive, handleClick } = UseTabBtnActions({
     tab,
@@ -34,7 +35,9 @@ export function TabBtn(props: TabBtnProps): React.ReactElement {
 
       {folders.includes(tab) &&
         typeof folderId === "number" &&
-        folderId > 0 && <EditFolderBtn />}
+        folderId !== DEFAULT_FOLDER_TAB_ID && (
+          <EditFolderBtn folderId={folderId} />
+        )}
     </div>
   );
 }

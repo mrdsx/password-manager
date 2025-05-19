@@ -1,15 +1,14 @@
-import { useContext, ReactNode } from "react";
+import { useContext } from "react";
 import {
-  FolderModalContext,
-  FolderModalContextType,
-  notFolderTabId,
+  FolderContext,
+  NOT_FOLDER_TAB_ID,
 } from "../../../../providers/FolderProvider";
 import { defaultTabs } from "../../../Navigation/Sidebar/Sidebar";
 import { GridIcon } from "../../Icons/GridIcon";
 import { StarIcon } from "../../Icons/StarIcon";
 import { TrashIcon } from "../../Icons/TrashIcon";
 import { FolderIcon } from "../../Icons/FolderIcon";
-import { TabContext, TabContextType } from "../../../../providers/TabProvider";
+import { TabContext } from "../../../../providers/TabProvider";
 
 interface ActionProps {
   tab: string;
@@ -17,7 +16,7 @@ interface ActionProps {
 }
 
 interface TabBtnActions {
-  getIcon(): ReactNode | undefined;
+  getIcon(): React.ReactElement | undefined;
   getClassnameIfActive(): "active" | "";
   handleClick(): void;
 }
@@ -25,38 +24,39 @@ interface TabBtnActions {
 const ICON_SIZE: number = 16;
 
 export function UseTabBtnActions(props: ActionProps): TabBtnActions {
-  const { tab, folderId = notFolderTabId } = props;
+  const { tab: tabName, folderId = NOT_FOLDER_TAB_ID } = props;
 
-  const { folders, curFolderId, setCurFolderId } = useContext(
-    FolderModalContext
-  ) as FolderModalContextType;
-  const { curTab, setCurTab } = useContext(TabContext) as TabContextType;
+  const { folders, curFolderId, setCurFolderId } = useContext(FolderContext);
+  const { curTab, setCurTab } = useContext(TabContext);
 
-  //? enum keys
   const { allItems, favorite, trash } = defaultTabs;
 
-  const isTabFolder = typeof folderId === "number" && folderId > notFolderTabId;
+  const isTabFolder =
+    typeof folderId === "number" && folderId !== NOT_FOLDER_TAB_ID;
 
-  function getIcon() {
-    if (tab === allItems) return <GridIcon width={ICON_SIZE} />;
-    else if (tab === favorite) return <StarIcon width={ICON_SIZE} />;
-    else if (tab === trash) return <TrashIcon width={ICON_SIZE} />;
-    else if (folders.includes(tab)) return <FolderIcon width={ICON_SIZE} />;
+  function getIcon(): React.ReactElement | undefined {
+    if (folders.includes(tabName) && folderId !== NOT_FOLDER_TAB_ID)
+      return <FolderIcon width={ICON_SIZE} />;
+    else if (tabName === allItems) return <GridIcon width={ICON_SIZE} />;
+    else if (tabName === favorite) return <StarIcon width={ICON_SIZE} />;
+    else if (tabName === trash) return <TrashIcon width={ICON_SIZE} />;
   }
 
-  function getClassnameIfActive() {
+  function getClassnameIfActive(): "active" | "" {
     if (isTabFolder) {
       return curFolderId === folderId ? "active" : "";
     }
-    return curTab === tab ? "active" : "";
+    return curTab === tabName && curFolderId === NOT_FOLDER_TAB_ID
+      ? "active"
+      : "";
   }
 
-  function handleClick() {
-    setCurTab(tab);
+  function handleClick(): void {
+    setCurTab(tabName);
     if (isTabFolder) {
       setCurFolderId(folderId);
     } else {
-      setCurFolderId(notFolderTabId);
+      setCurFolderId(NOT_FOLDER_TAB_ID);
     }
   }
 

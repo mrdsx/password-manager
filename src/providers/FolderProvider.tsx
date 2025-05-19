@@ -1,32 +1,41 @@
 import { createContext, useState } from "react";
+import { AddFolderModalProvider } from "./AddFolderModalProvider";
+import { EditFolderModalProvider } from "./EditFolderModalProvider";
 
-export interface FolderModalContextType {
-  isFolderModalOpen: boolean;
-  setIsFolderModalOpen(isOpen: boolean): void;
+interface IFolderContext {
   folders: string[];
   setFolders(folders: string[]): void;
   curFolderId: number;
   setCurFolderId(folderId: number): void;
 }
 
-export const FolderModalContext = createContext<FolderModalContextType | null>(
-  null
-);
+const initialValue: IFolderContext = {
+  folders: [],
+  setFolders() {},
+  curFolderId: 0,
+  setCurFolderId() {},
+};
 
-export const notFolderTabId: number = -1;
+export const FolderContext = createContext<IFolderContext>(initialValue);
+
+//! MUST BE NEGATIVE
+export const NOT_FOLDER_TAB_ID: -1 = -1;
+//! MUST BE ZERO
+export const DEFAULT_FOLDER_TAB_ID: 0 = 0;
 
 export function FolderProvider({
   children,
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  const [isFolderModalOpen, setIsFolderModalOpen] = useState<boolean>(false);
-  const [folders, setFolders] = useState<string[]>(["No folder"]);
-  const [curFolderId, setCurFolderId] = useState<number>(notFolderTabId);
+  const [folders, setFolders] = useState<string[]>([
+    "No folder",
+    "Folder 1",
+    "Folder 2",
+  ]);
+  const [curFolderId, setCurFolderId] = useState<number>(NOT_FOLDER_TAB_ID);
 
-  const value = {
-    isFolderModalOpen,
-    setIsFolderModalOpen,
+  const folderValue = {
     folders,
     setFolders,
     curFolderId,
@@ -34,8 +43,12 @@ export function FolderProvider({
   };
 
   return (
-    <FolderModalContext.Provider value={value}>
-      {children}
-    </FolderModalContext.Provider>
+    <FolderContext.Provider value={folderValue}>
+      <EditFolderModalProvider>
+        <AddFolderModalProvider>{children}</AddFolderModalProvider>
+      </EditFolderModalProvider>
+    </FolderContext.Provider>
   );
 }
+
+// TODO: wrap modal providers in one wrapper

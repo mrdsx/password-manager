@@ -1,16 +1,13 @@
 import { useContext, useState } from "react";
 import { AddFolderBtn } from "../../Buttons/AddFolderBtn";
 import { Tabs } from "../../../Navigation/Tabs/Tabs";
-import {
-  FolderModalContext,
-  FolderModalContextType,
-} from "../../../../providers/FolderProvider";
+import { FolderContext } from "../../../../providers/FolderProvider";
 import { TabBtn } from "../../Buttons/TabBtn/TabBtn";
 import { ToggleFoldersBtn } from "../../Buttons/ToggleFoldersBtn";
 import "./folders.modules.css";
 
 export function Folders(): React.ReactElement {
-  const { folders } = useContext(FolderModalContext) as FolderModalContextType;
+  const { folders } = useContext(FolderContext);
 
   const [areFoldersOpen, setAreFoldersOpen] = useState<boolean>(true);
 

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import useGlobalStore, { State, Actions } from "../../../store/globalStore";
 import {
   EditingItemContext,
-  EditingItemContextType,
+  IEditingItemContext,
 } from "../../../providers/EditingItemProvider";
 
 export function EditItemBtn(): React.ReactElement {
@@ -10,7 +10,7 @@ export function EditItemBtn(): React.ReactElement {
   const { vault, curItemId } = globalState;
   const { setIsEditingItem } = globalActions;
 
-  const { setItem } = useContext(EditingItemContext) as EditingItemContextType;
+  const { setItem } = useContext(EditingItemContext) as IEditingItemContext;
 
   function handleClick(): void {
     setIsEditingItem(true);

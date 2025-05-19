@@ -1,8 +1,8 @@
 // prettier-ignore
 import {
-  createContext,
   useState,
   useRef,
+  createContext,
 } from "react";
 import useGlobalStore, {
   LoginItem,
@@ -10,15 +10,20 @@ import useGlobalStore, {
   Actions,
 } from "../store/globalStore";
 
-export interface EditingItemContextType {
-  item: LoginItem;
+interface IEditingItemContext {
+  item: LoginItem | null;
   setItem(item: LoginItem): void;
-  saveItemBtnRef: React.RefObject<HTMLButtonElement | null>;
+  saveItemBtnRef: React.RefObject<HTMLButtonElement | null> | undefined;
 }
 
-export const EditingItemContext = createContext<EditingItemContextType | null>(
-  null
-);
+const initialValue: IEditingItemContext = {
+  item: null,
+  setItem() {},
+  saveItemBtnRef: undefined,
+};
+
+export const EditingItemContext =
+  createContext<IEditingItemContext>(initialValue);
 
 export function EditingItemProvider({
   children,

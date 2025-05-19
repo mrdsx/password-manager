@@ -1,9 +1,6 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { ItemDetailProps } from "./ItemDetail";
-import {
-  EditingItemContext,
-  EditingItemContextType,
-} from "../../../../providers/EditingItemProvider";
+import { EditingItemContext } from "../../../../providers/EditingItemProvider";
 
 interface DetailActions {
   inputVal: string;
@@ -29,9 +26,7 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     type === "password" && readOnly && value.length > 0 ? PASS_MASK : value;
   const [inputVal, setInputVal] = useState<string>(val);
 
-  const { saveItemBtnRef } = useContext(
-    EditingItemContext
-  ) as EditingItemContextType;
+  const { saveItemBtnRef } = useContext(EditingItemContext);
 
   const inputId = fieldName?.toLowerCase() || "input";
 
@@ -48,7 +43,7 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     if (readOnly) return;
 
     if (e.key === "Enter") {
-      saveItemBtnRef.current?.click();
+      saveItemBtnRef?.current?.click();
     }
   }
 

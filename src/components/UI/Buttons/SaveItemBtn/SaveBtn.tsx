@@ -1,17 +1,12 @@
 import { useContext, useEffect } from "react";
-import {
-  EditingItemContext,
-  EditingItemContextType,
-} from "../../../../providers/EditingItemProvider";
+import { EditingItemContext } from "../../../../providers/EditingItemProvider";
 import { useItemActions } from "./useItemActions";
 import { SaveBtn } from "../SaveBtn";
 
 export function SaveItemBtn(): React.ReactElement {
   const { itemHasChanges, isNameValid, addOrEditItem } = useItemActions();
 
-  const { item, saveItemBtnRef } = useContext(
-    EditingItemContext
-  ) as EditingItemContextType;
+  const { item, saveItemBtnRef } = useContext(EditingItemContext);
 
   // useEffect(() => {
   //   console.log(item);

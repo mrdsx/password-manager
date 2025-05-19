@@ -5,13 +5,10 @@ import useGlobalStore, {
   LoginItem,
 } from "../../../../store/globalStore";
 import { areObjectsEqual } from "../../../../utils/objectMethods";
-import {
-  EditingItemContext,
-  EditingItemContextType,
-} from "../../../../providers/EditingItemProvider";
+import { EditingItemContext } from "../../../../providers/EditingItemProvider";
 
 interface ItemActions {
-  itemHasChanges(): boolean;
+  itemHasChanges(): boolean | undefined;
   isNameValid(): boolean;
   addOrEditItem(): void;
 }
@@ -22,11 +19,11 @@ export function useItemActions(): ItemActions {
   const { addItem, editItemById, setIsAddingItem, setIsEditingItem } =
     globalActions;
 
-  const { item, setItem } = useContext(
-    EditingItemContext
-  ) as EditingItemContextType;
+  const { item, setItem } = useContext(EditingItemContext);
 
-  function itemHasChanges(): boolean {
+  function itemHasChanges(): boolean | undefined {
+    if (item === null) throw new Error("Item is null");
+
     if (!areObjectsEqual(item, vault[curItemId])) {
       return true;
     }
@@ -35,10 +32,12 @@ export function useItemActions(): ItemActions {
   }
 
   function isNameValid(): boolean {
-    return item !== undefined && item.details?.name.trim() !== "";
+    return item !== undefined && item?.details?.name.trim() !== "";
   }
 
   function addOrEditItem(): void {
+    if (item === null) throw new Error("Item is null");
+
     if (isAddingItem) {
       setItem({ ...item, createdAt: new Date(), updatedAt: new Date() });
       addItem(item as LoginItem);

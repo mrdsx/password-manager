@@ -4,14 +4,11 @@ import useGlobalStore, {
   State,
   LoginItem,
 } from "../../../../store/globalStore";
-import {
-  EditingItemContext,
-  EditingItemContextType,
-} from "../../../../providers/EditingItemProvider";
+import { EditingItemContext } from "../../../../providers/EditingItemProvider";
 import { setObjectValuesEmpty } from "../../../../utils/objectMethods";
 
 interface FieldsActions {
-  item: Partial<LoginItem>;
+  item: null | LoginItem;
   handleFieldChange(e: ChangeEvent<HTMLInputElement>, field: string): void;
   handleCheckboxChange(e: ChangeEvent<HTMLInputElement>): void;
 }
@@ -21,16 +18,14 @@ export function UseFieldsActions(): FieldsActions {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, isAddingItem } = globalState;
 
-  const { item, setItem } = useContext(
-    EditingItemContext
-  ) as EditingItemContextType;
+  const { item, setItem } = useContext(EditingItemContext);
 
   useEffect(() => {
     if (isAddingItem) setEmptyItem();
   }, [isAddingItem]);
 
   function setEmptyItem(): void {
-    if (!item.details) return;
+    if (!item?.details) return;
 
     const nextItemDetails = setObjectValuesEmpty(item.details);
     setItem({
@@ -46,7 +41,7 @@ export function UseFieldsActions(): FieldsActions {
     setItem({
       ...item,
       details: {
-        ...item.details,
+        ...item?.details,
         [field]: e.target.value,
       },
     } as LoginItem);
@@ -56,7 +51,7 @@ export function UseFieldsActions(): FieldsActions {
     setItem({
       ...item,
       favorite: e.target.checked,
-    });
+    } as LoginItem);
   }
 
   return { item, handleFieldChange, handleCheckboxChange };

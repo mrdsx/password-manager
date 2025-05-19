@@ -1,19 +1,14 @@
 import { useContext } from "react";
-import {
-  FolderModalContext,
-  FolderModalContextType,
-} from "../../../providers/FolderProvider";
+import { AddFolderModalContext } from "../../../providers/AddFolderModalProvider";
 
 export function AddFolderBtn(): React.ReactElement {
-  const { setIsFolderModalOpen } = useContext(
-    FolderModalContext
-  ) as FolderModalContextType;
+  const { setIsAddFolderModalOpen } = useContext(AddFolderModalContext);
 
   return (
     <button
       className="add-folder-btn"
       onClick={() => {
-        setIsFolderModalOpen(true);
+        setIsAddFolderModalOpen(true);
       }}
     >
       +

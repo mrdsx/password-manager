@@ -1,4 +1,4 @@
-import { Modals } from "../components/Modals/Modals";
+import { ModalsWrapper } from "../components/ModalsWrapper/ModalsWrapper";
 import { Header } from "../components/Navigation/Header/Header";
 import { Main } from "../components/Main/Main";
 import { Sidebar } from "../components/Navigation/Sidebar/Sidebar";
@@ -12,7 +12,7 @@ export default function App(): React.ReactElement {
   return (
     <>
       <FolderProvider>
-        <Modals />
+        <ModalsWrapper />
 
         <SearchProvider>
           <Header />

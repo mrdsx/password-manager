@@ -38,4 +38,9 @@
 .edit-folder-btn {
   display: flex;
   justify-content: end;
+  filter: opacity(60%);
+}
+
+.edit-folder-btn:hover {
+  filter: opacity(100%);
 }

@@ -1,11 +1,16 @@
 import { createContext, useState } from "react";
 
-export interface TabContextType {
+interface ITabContext {
   curTab: string;
   setCurTab(tab: string): void;
 }
 
-export const TabContext = createContext<TabContextType | null>(null);
+const initialValue: ITabContext = {
+  curTab: "All items",
+  setCurTab() {},
+};
+
+export const TabContext = createContext<ITabContext>(initialValue);
 
 export function TabProvider({
   children,
