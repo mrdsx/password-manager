@@ -2,9 +2,9 @@ import useGlobalStore, {
   Actions,
   State,
 } from "../../../../../store/globalStore";
-import { SaveItemBtn } from "../../../Buttons/SaveItemBtn/SaveBtn";
+import { SaveItemBtn } from "../../../Buttons/ItemActionsBtnFolder/SaveItemBtn/SaveItemBtn";
 import { CancelBtn } from "../../../Buttons/CancelBtn";
-import { EditItemBtn } from "../../../Buttons/EditItemBtn";
+import { EditItemBtn } from "../../../Buttons/ItemActionsBtnFolder/EditItemBtn";
 
 interface LeftSideProps {
   isEditingItem: boolean;

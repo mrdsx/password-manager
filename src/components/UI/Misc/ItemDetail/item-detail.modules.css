@@ -10,29 +10,41 @@
   background: #3d3c64;
 }
 
-.field {
+.detail-field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
 }
 
-.field label {
+.detail-field label {
   font-size: 0.9rem;
   filter: opacity(60%);
 }
 
-.field input {
+.detail-field input {
   border: none;
   outline: none;
   background: transparent;
   font-size: var(--font-size);
 }
 
-.actions {
+.detail-field select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--font-size);
+  cursor: pointer;
+}
+
+.detail-field select option {
+  color: black;
+}
+
+.detail-actions {
   display: flex;
   align-items: center;
 }
-.actions button {
+.detail-actions button {
   background: transparent;
 }

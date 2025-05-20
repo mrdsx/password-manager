@@ -1,13 +1,13 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ItemDetailProps } from "./ItemDetail";
 import { EditingItemContext } from "../../../../providers/EditingItemProvider";
 
 interface DetailActions {
   inputVal: string;
   inputId: string;
-  handleFieldChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleFieldChange(e: React.ChangeEvent<HTMLInputElement>): void;
   handleKeyDown(e: KeyboardEvent): void;
-  handleCheckboxChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
 const PASS_MASK: string = "00000000";
@@ -34,7 +34,7 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     setInputVal(val);
   }, [val]);
 
-  function handleFieldChange(e: ChangeEvent<HTMLInputElement>): void {
+  function handleFieldChange(e: React.ChangeEvent<HTMLInputElement>): void {
     if (onFieldChangeFn) onFieldChangeFn(e);
     setInputVal(e.target.value);
   }
@@ -47,7 +47,7 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     }
   }
 
-  function handleCheckboxChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (onCheckboxChangeFn) onCheckboxChangeFn(e);
   }
 

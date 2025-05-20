@@ -2,6 +2,7 @@
 *::before,
 *::after {
   --background: #302f4e;
+  --accent-color: #6f9df1;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

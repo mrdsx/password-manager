@@ -1,4 +1,4 @@
-import useGlobalStore, { State, Actions } from "../../../store/globalStore";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 
 export function RestoreItemBtn(): React.ReactElement {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();

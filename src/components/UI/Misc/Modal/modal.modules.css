@@ -13,6 +13,10 @@
   border-bottom: 1px solid black;
 }
 
+.modal-body .heading {
+  opacity: 80%;
+}
+
 .modal-field {
   padding: 0.4rem;
   display: flex;

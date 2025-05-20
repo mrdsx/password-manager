@@ -1,4 +1,4 @@
-import { AddItemBtn } from "../../UI/Buttons/AddItemBtn/AddItemBtn";
+import { AddItemBtn } from "../../UI/Buttons/ItemActionsBtnFolder/AddItemBtn/AddItemBtn";
 import { ScrollableItemsList } from "../../UI/Misc/ScrollableItemsList/ScrollableItemsList";
 import "./scrollable-items.modules.css";
 

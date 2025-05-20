@@ -1,6 +1,6 @@
 import useGlobalStore from "../../../../../store/globalStore";
-import { DeleteItemBtn } from "../../../Buttons/DeleteItemBtn";
-import { RestoreItemBtn } from "../../../Buttons/RestoreItemBtn";
+import { DeleteItemBtn } from "../../../Buttons/ItemActionsBtnFolder/DeleteItemBtn";
+import { RestoreItemBtn } from "../../../Buttons/ItemActionsBtnFolder/RestoreItemBtn";
 
 interface RightSideProps {
   editingExistingItem: boolean;

@@ -5,7 +5,7 @@ import {
   DEFAULT_FOLDER_TAB_ID,
   NOT_FOLDER_TAB_ID,
 } from "../../../../providers/FolderProvider";
-import { EditFolderBtn } from "../EditFolderBtn";
+import { EditFolderBtn } from "../FoldersActionsBtnFolder/EditFolderBtn";
 import "./tab-btn.modules.css";
 
 interface TabBtnProps {

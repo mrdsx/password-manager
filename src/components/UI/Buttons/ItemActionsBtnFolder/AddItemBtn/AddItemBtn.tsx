@@ -1,4 +1,7 @@
-import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
+import useGlobalStore, {
+  State,
+  Actions,
+} from "../../../../../store/globalStore";
 import "./add-item-btn.modules.css";
 
 export function AddItemBtn(): React.ReactElement {

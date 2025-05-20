@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { PencilIcon } from "../Icons/PencilIcon";
-import { EditFolderModalContext } from "../../../providers/EditFolderModalProvider";
-import { FolderContext } from "../../../providers/FolderProvider";
+import { PencilIcon } from "../../Icons/PencilIcon";
+import { EditFolderModalContext } from "../../../../providers/EditFolderModalProvider";
+import { FolderContext } from "../../../../providers/FolderProvider";
 
 const ICON_SIZE: number = 16;
 

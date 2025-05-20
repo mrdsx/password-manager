@@ -29,6 +29,5 @@ export default function App(): React.ReactElement {
   );
 }
 
-// TODO: add feature: add/edit/delete folders
 // TODO: setting creation and update time
 // TODO: add other types of secure items

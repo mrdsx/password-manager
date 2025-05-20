@@ -12,3 +12,7 @@
 .modal-actions button:focus-visible {
   backdrop-filter: brightness(120%);
 }
+
+#delete-folder {
+  margin-left: auto;
+}

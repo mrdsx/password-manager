@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
-import { EditingItemContext } from "../../../../providers/EditingItemProvider";
+import { EditingItemContext } from "../../../../../providers/EditingItemProvider";
 import { useItemActions } from "./useItemActions";
-import { SaveBtn } from "../SaveBtn";
+import { SaveBtn } from "../../SaveBtn/SaveBtn";
 
 export function SaveItemBtn(): React.ReactElement {
   const { itemHasChanges, isNameValid, addOrEditItem } = useItemActions();

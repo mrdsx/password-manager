@@ -3,9 +3,9 @@ import useGlobalStore, {
   State,
   Actions,
   LoginItem,
-} from "../../../../store/globalStore";
-import { areObjectsEqual } from "../../../../utils/objectMethods";
-import { EditingItemContext } from "../../../../providers/EditingItemProvider";
+} from "../../../../../store/globalStore";
+import { areObjectsEqual } from "../../../../../utils/objectMethods";
+import { EditingItemContext } from "../../../../../providers/EditingItemProvider";
 
 interface ItemActions {
   itemHasChanges(): boolean | undefined;

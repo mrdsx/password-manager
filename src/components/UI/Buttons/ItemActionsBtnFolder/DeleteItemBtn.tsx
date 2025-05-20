@@ -1,4 +1,5 @@
-import useGlobalStore, { State, Actions } from "../../../store/globalStore";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
+import { DeleteBtn } from "../DeleteBtn";
 
 export function DeleteItemBtn(): React.ReactElement {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
@@ -21,9 +22,5 @@ export function DeleteItemBtn(): React.ReactElement {
     }
   }
 
-  return (
-    <button id="delete" onClick={handleClick}>
-      Delete
-    </button>
-  );
+  return <DeleteBtn id="delete-item" onClick={handleClick} />;
 }

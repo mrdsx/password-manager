@@ -1,5 +1,5 @@
 .tab {
-  --active-color: #6f9de6;
+  --active-color: var(--accent-color);
   display: flex;
   width: 100%;
 }

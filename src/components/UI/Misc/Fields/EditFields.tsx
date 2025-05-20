@@ -31,14 +31,17 @@ export function EditFields({ fields }: ItemInfoProps): React.ReactElement {
       })}
       <br />
       <ItemDetail
+        defaultInputId="favorite-checkbox"
         value="Favorite"
         readOnly={true}
         hasCheckbox={true}
-        checkboxChecked={item.favorite}
+        checkboxChecked={item?.favorite}
         onCheckboxChangeFn={(e: React.ChangeEvent<HTMLInputElement>) => {
           handleCheckboxChange(e);
         }}
       />
+      <br />
+      <ItemDetail defaultInputId="folder-select" value="Folder" type="select" />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { UseModalActions } from "./UseModalActions";
-import { SaveBtn } from "../../Buttons/SaveBtn";
+import { SaveBtn } from "../../Buttons/SaveBtn/SaveBtn";
 import { CancelBtn } from "../../Buttons/CancelBtn";
 import { Modal } from "../../Misc/Modal/Modal";
 import { ModalBody } from "../../Misc/Modal/ModalBody";
@@ -22,9 +22,9 @@ export function AddFolderModal(): React.ReactElement {
   return (
     <Modal>
       <ModalBody>
-        <h2>Add folder</h2>
+        <span className="heading">ADD FOLDER</span>
         <ModalField inputRef={inputRef}>
-          <label htmlFor="folder-name">Add folder</label>
+          <label htmlFor="folder-name">Name</label>
           <input
             type="text"
             id="folder-name"
