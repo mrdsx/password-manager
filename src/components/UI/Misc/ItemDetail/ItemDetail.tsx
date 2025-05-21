@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import { FolderContext } from "../../../../providers/FolderProvider";
-import { UseDetailActions } from "./UseDetailActions";
-import { CopyBtn } from "../../Buttons/CopyBtn";
-import "./item-detail.modules.css";
+import { ChangeEventHandler } from "react";
 import { DetailActions } from "./components/DetailActions";
+import { DetailField } from "./components/DetailField";
+import "./item-detail.modules.css";
 
 export interface ItemDetailProps {
   defaultInputId?: string;
@@ -14,13 +12,12 @@ export interface ItemDetailProps {
   hasCopyBtn?: boolean;
   hasCheckbox?: boolean;
   checkboxChecked?: boolean;
-  onFieldChangeFn?: Function;
-  onCheckboxChangeFn?: Function;
+  onFieldChangeFn?: ChangeEventHandler<HTMLInputElement>;
+  onCheckboxChangeFn?: ChangeEventHandler<HTMLInputElement>;
+  onSelectChangeFn?: ChangeEventHandler<HTMLSelectElement>;
 }
 
 export function ItemDetail(props: ItemDetailProps): React.ReactElement {
-  const { folders } = useContext(FolderContext);
-
   const {
     defaultInputId,
     fieldName = "",
@@ -30,50 +27,30 @@ export function ItemDetail(props: ItemDetailProps): React.ReactElement {
     hasCopyBtn = false,
     hasCheckbox = false,
     checkboxChecked = false,
+    onFieldChangeFn,
+    onCheckboxChangeFn,
+    onSelectChangeFn,
   } = props;
-
-  const {
-    inputVal,
-    inputId,
-    handleFieldChange,
-    handleKeyDown,
-    handleCheckboxChange,
-  } = UseDetailActions({ ...props });
 
   return (
     <div className="detail">
-      <div className="detail-field">
-        {fieldName && (
-          <label htmlFor={defaultInputId || inputId}>{fieldName}</label>
-        )}
-        {type === "select" ? (
-          <select id="folders">
-            {folders.map((folder, index) => {
-              return <option key={index}>{folder}</option>;
-            })}
-          </select>
-        ) : (
-          <input
-            type={type}
-            id={defaultInputId || inputId}
-            value={inputVal}
-            readOnly={readOnly}
-            onChange={handleFieldChange}
-            // @ts-ignore
-            onKeyDown={handleKeyDown}
-          />
-        )}
-      </div>
+      <DetailField
+        value={value}
+        defaultInputId={defaultInputId}
+        fieldName={fieldName}
+        readOnly={readOnly}
+        type={type}
+        onFieldChangeFn={onFieldChangeFn}
+        onSelectChangeFn={onSelectChangeFn}
+      />
 
       <DetailActions
         value={value}
         hasCopyBtn={hasCopyBtn}
         hasCheckbox={hasCheckbox}
         checkboxChecked={checkboxChecked}
-        onCheckboxChangeFn={handleCheckboxChange}
+        onCheckboxChangeFn={onCheckboxChangeFn}
       />
     </div>
   );
 }
-
-// TODO: extract .detail-field to new component

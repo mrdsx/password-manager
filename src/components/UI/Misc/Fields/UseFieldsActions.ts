@@ -11,6 +11,7 @@ interface FieldsActions {
   item: null | LoginItem;
   handleFieldChange(e: ChangeEvent<HTMLInputElement>, field: string): void;
   handleCheckboxChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleSelectChange(e: ChangeEvent<HTMLSelectElement>): void;
 }
 
 export function UseFieldsActions(): FieldsActions {
@@ -54,5 +55,12 @@ export function UseFieldsActions(): FieldsActions {
     } as LoginItem);
   }
 
-  return { item, handleFieldChange, handleCheckboxChange };
+  function handleSelectChange(e: ChangeEvent<HTMLSelectElement>): void {
+    setItem({
+      ...item,
+      folder: e.target.value,
+    } as LoginItem);
+  }
+
+  return { item, handleFieldChange, handleCheckboxChange, handleSelectChange };
 }

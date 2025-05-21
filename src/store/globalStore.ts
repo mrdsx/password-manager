@@ -13,6 +13,7 @@ export interface LoginItem {
   inTrash: boolean;
   createdAt: Date;
   updatedAt: Date;
+  folder: string;
   details: LoginItemDetails;
 }
 
@@ -44,6 +45,7 @@ const initialState: State = {
       inTrash: false,
       createdAt: new Date(),
       updatedAt: new Date(),
+      folder: "No folder",
       details: {
         name: "",
         login: "",
@@ -56,6 +58,7 @@ const initialState: State = {
       inTrash: false,
       createdAt: new Date(),
       updatedAt: new Date(),
+      folder: "No folder",
       details: {
         name: "Google",
         login: "OHO123",
@@ -68,6 +71,7 @@ const initialState: State = {
       inTrash: false,
       createdAt: new Date(),
       updatedAt: new Date(),
+      folder: "No folder",
       details: {
         name: "YouTube",
         login: "oho123",

@@ -1,14 +1,8 @@
 import { CopyBtn } from "../../../Buttons/CopyBtn";
+import { ItemDetailProps } from "../ItemDetail";
+import { UseDetailActions } from "../UseDetailActions";
 
-interface DetailActionsProps {
-  value: string;
-  hasCopyBtn?: boolean;
-  hasCheckbox?: boolean;
-  checkboxChecked?: boolean;
-  onCheckboxChangeFn?(e: React.ChangeEvent<HTMLInputElement>): void;
-}
-
-export function DetailActions(props: DetailActionsProps): React.ReactElement {
+export function DetailActions(props: ItemDetailProps): React.ReactElement {
   const {
     value,
     hasCopyBtn,
@@ -17,13 +11,15 @@ export function DetailActions(props: DetailActionsProps): React.ReactElement {
     onCheckboxChangeFn,
   } = props;
 
+  const { handleCheckboxChange } = UseDetailActions({ ...props });
+
   return (
     <div className="detail-actions">
       {hasCopyBtn && <CopyBtn copyText={value} />}
       {hasCheckbox && onCheckboxChangeFn && (
         <input
           type="checkbox"
-          onChange={onCheckboxChangeFn}
+          onChange={handleCheckboxChange}
           defaultChecked={checkboxChecked}
         />
       )}

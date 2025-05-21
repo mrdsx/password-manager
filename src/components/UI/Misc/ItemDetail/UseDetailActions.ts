@@ -8,6 +8,7 @@ interface DetailActions {
   handleFieldChange(e: React.ChangeEvent<HTMLInputElement>): void;
   handleKeyDown(e: KeyboardEvent): void;
   handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>): void;
+  handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void;
 }
 
 const PASS_MASK: string = "00000000";
@@ -20,6 +21,7 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     value,
     onFieldChangeFn,
     onCheckboxChangeFn,
+    onSelectChangeFn,
   } = props;
 
   const val: string =
@@ -47,8 +49,12 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     }
   }
 
-  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>): void {
     if (onCheckboxChangeFn) onCheckboxChangeFn(e);
+  }
+
+  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
+    if (onSelectChangeFn) onSelectChangeFn(e);
   }
 
   return {
@@ -57,5 +63,6 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     handleFieldChange,
     handleKeyDown,
     handleCheckboxChange,
+    handleSelectChange,
   };
 }
