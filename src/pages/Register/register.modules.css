@@ -1,0 +1,67 @@
+.register-form {
+  padding-top: var(--spacing);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 25vw;
+}
+
+.register__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.register__password-input {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  outline: 0.5px solid grey;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.register__password-input:hover {
+  outline: 0.5px solid var(--accent-color);
+}
+
+.register__password-input:focus-within {
+  outline: 2px solid var(--accent-color);
+}
+
+.register__password-input::placeholder {
+  font-size: 0.9rem;
+}
+
+.register__submit-btn {
+  background: var(--accent-color);
+  backdrop-filter: brightness(0.6);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.register__submit-btn:hover,
+.register__submit-btn:focus-visible {
+  filter: brightness(1.1);
+}
+
+.register__error {
+  color: red;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}

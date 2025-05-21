@@ -2,7 +2,6 @@ import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import { EditingItemProvider } from "../../../../providers/EditingItemProvider";
 import { ItemActions } from "../ItemActions/ItemActions";
 import { Fields } from "../Fields/Fields";
-import { TimeInfo } from "../TimeInfo";
 import "./item-info.modules.css";
 
 export interface ItemInfoProps {
@@ -22,7 +21,6 @@ export function ItemInfo(): React.ReactElement {
     <EditingItemProvider>
       <div className="item-details">
         <Fields isViewingItem={isViewingItem} />
-        <TimeInfo isViewingItem={isViewingItem} />
 
         {(isValidCurItemId || isEditingItem) && <ItemActions />}
       </div>

@@ -11,8 +11,6 @@ export interface LoginItemDetails {
 export interface LoginItem {
   favorite: boolean;
   inTrash: boolean;
-  createdAt: Date;
-  updatedAt: Date;
   folder: string;
   details: LoginItemDetails;
 }
@@ -43,8 +41,6 @@ const initialState: State = {
     "0": {
       favorite: false,
       inTrash: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
       folder: "No folder",
       details: {
         name: "",
@@ -56,8 +52,6 @@ const initialState: State = {
     "1": {
       favorite: false,
       inTrash: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
       folder: "No folder",
       details: {
         name: "Google",
@@ -69,8 +63,6 @@ const initialState: State = {
     "2": {
       favorite: false,
       inTrash: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
       folder: "No folder",
       details: {
         name: "YouTube",

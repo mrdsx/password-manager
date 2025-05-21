@@ -2,7 +2,7 @@
 *::before,
 *::after {
   --background: #302f4e;
-  --accent-color: #6f9df1;
+  --accent-color: #6393ee;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,14 +11,16 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100vh;
+  background: var(--background);
 }
 
 #root {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  position: relative;
 }
 
 ul {

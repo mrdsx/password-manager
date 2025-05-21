@@ -1,33 +1,15 @@
-import { ModalsWrapper } from "../components/ModalsWrapper/ModalsWrapper";
-import { Header } from "../components/Navigation/Header/Header";
-import { Main } from "../components/Main/Main";
-import { Sidebar } from "../components/Navigation/Sidebar/Sidebar";
-import { ScrollableItems } from "../components/Navigation/ScrollableItems/ScrollableItems";
-import { ItemInfo } from "../components/UI/Misc/ItemInfo/ItemInfo";
-import { TabProvider } from "../providers/TabProvider";
-import { SearchProvider } from "../providers/SearchProvider";
-import { FolderProvider } from "../providers/FolderProvider";
+import { useContext } from "react";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login/Login";
+import { Register } from "../pages/Register/Register";
+import { LoginContext } from "../providers/LoginProvider";
 
-export default function App(): React.ReactElement {
-  return (
-    <>
-      <FolderProvider>
-        <ModalsWrapper />
+export default function App(): React.ReactElement | undefined {
+  const { isLoggedIn, isRegistered } = useContext(LoginContext);
 
-        <SearchProvider>
-          <Header />
-          <Main>
-            <TabProvider>
-              <Sidebar />
-              <ScrollableItems />
-            </TabProvider>
-            <ItemInfo />
-          </Main>
-        </SearchProvider>
-      </FolderProvider>
-    </>
-  );
+  if (!isRegistered) return <Register />;
+  else {
+    if (isLoggedIn) return <Home />;
+    if (!isLoggedIn) return <Login />;
+  }
 }
-
-// TODO: setting creation and update time
-// TODO: add other types of secure items
