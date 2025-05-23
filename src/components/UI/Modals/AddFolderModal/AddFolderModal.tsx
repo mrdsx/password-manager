@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { AddFolderModalContext } from "../../../../providers/AddFolderModalProvider";
 import { UseModalActions } from "./UseModalActions";
 import { SaveBtn } from "../../Buttons/SaveBtn/SaveBtn";
 import { CancelBtn } from "../../Buttons/CancelBtn";
@@ -9,8 +10,14 @@ import { ModalActions } from "../../Misc/Modal/ModalActions";
 import "./add-folder-modal.modules.css";
 
 export function AddFolderModal(): React.ReactElement {
+  const { isAddFolderModalOpen } = useContext(AddFolderModalContext);
+
   const inputRef = useRef<HTMLInputElement | null>(null);
   const saveBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  const modalClassName = isAddFolderModalOpen
+    ? "add-folder-modal active"
+    : "add-folder-modal";
 
   const {
     handleInputChange,
@@ -20,7 +27,7 @@ export function AddFolderModal(): React.ReactElement {
   } = UseModalActions({ saveBtnRef });
 
   return (
-    <Modal>
+    <Modal extraClassName={modalClassName}>
       <ModalBody>
         <span className="heading">ADD FOLDER</span>
         <ModalField inputRef={inputRef}>

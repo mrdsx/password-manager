@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
-import { AddFolderModalProvider } from "./AddFolderModalProvider";
-import { EditFolderModalProvider } from "./EditFolderModalProvider";
+import { FolderModalsProvider } from "./FolderModalsProvider";
 
 interface IFolderContext {
   folders: string[];
@@ -28,11 +27,7 @@ export function FolderProvider({
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  const [folders, setFolders] = useState<string[]>([
-    "No folder",
-    "Folder 1",
-    "Folder 2",
-  ]);
+  const [folders, setFolders] = useState<string[]>(["No folder"]);
   const [curFolderId, setCurFolderId] = useState<number>(NOT_FOLDER_TAB_ID);
 
   const folderValue = {
@@ -44,9 +39,7 @@ export function FolderProvider({
 
   return (
     <FolderContext.Provider value={folderValue}>
-      <EditFolderModalProvider>
-        <AddFolderModalProvider>{children}</AddFolderModalProvider>
-      </EditFolderModalProvider>
+      <FolderModalsProvider>{children}</FolderModalsProvider>
     </FolderContext.Provider>
   );
 }

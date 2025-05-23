@@ -6,6 +6,6 @@
   font-size: 1.5rem;
   filter: opacity(70%);
 }
-.add-folder-btn:hover {
+.add-folder:hover {
   filter: opacity(100%);
 }

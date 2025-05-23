@@ -1,0 +1,12 @@
+.lock-vault-btn {
+  padding: 0.5rem;
+  color: red;
+  border: 1px solid red !important;
+  border-radius: var(--border-radius);
+  font-size: 1rem !important;
+}
+
+.lock-vault-btn:hover,
+.lock-vault-btn:focus-visible {
+  backdrop-filter: brightness(150%);
+}

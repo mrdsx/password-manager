@@ -8,8 +8,6 @@ export default function App(): React.ReactElement | undefined {
   const { isLoggedIn, isRegistered } = useContext(LoginContext);
 
   if (!isRegistered) return <Register />;
-  else {
-    if (isLoggedIn) return <Home />;
-    if (!isLoggedIn) return <Login />;
-  }
+  if (!isLoggedIn) return <Login />;
+  return <Home />;
 }

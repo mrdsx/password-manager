@@ -59,3 +59,9 @@
 .login__submit-btn:focus-visible {
   filter: brightness(1.1);
 }
+
+.login__error {
+  color: red;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}

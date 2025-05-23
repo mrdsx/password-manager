@@ -1,9 +1,12 @@
 import "./modal.modules.css";
 
-export function Modal({
-  children,
-}: {
+interface ModalProps {
   children: React.ReactNode;
-}): React.ReactElement {
-  return <div className="modal">{children}</div>;
+  extraClassName: string;
+}
+
+export function Modal(props: ModalProps): React.ReactElement {
+  const { children, extraClassName } = props;
+
+  return <div className={`modal ${extraClassName}`}>{children}</div>;
 }

@@ -49,28 +49,28 @@ const initialState: State = {
         website: "",
       },
     },
-    "1": {
-      favorite: false,
-      inTrash: false,
-      folder: "No folder",
-      details: {
-        name: "Google",
-        login: "OHO123",
-        password: "strong",
-        website: "google.com",
-      },
-    },
-    "2": {
-      favorite: false,
-      inTrash: false,
-      folder: "No folder",
-      details: {
-        name: "YouTube",
-        login: "oho123",
-        password: "very very strong",
-        website: "youtube.com",
-      },
-    },
+    // "1": {
+    //   favorite: false,
+    //   inTrash: false,
+    //   folder: "No folder",
+    //   details: {
+    //     name: "Google",
+    //     login: "OHO123",
+    //     password: "strong",
+    //     website: "google.com",
+    //   },
+    // },
+    // "2": {
+    //   favorite: false,
+    //   inTrash: false,
+    //   folder: "No folder",
+    //   details: {
+    //     name: "YouTube",
+    //     login: "oho123",
+    //     password: "very very strong",
+    //     website: "youtube.com",
+    //   },
+    // },
   },
 };
 

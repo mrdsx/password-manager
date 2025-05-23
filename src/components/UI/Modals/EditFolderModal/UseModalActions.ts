@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import useGlobalStore, { Actions, State } from "../../../../store/globalStore";
 import { FolderContext } from "../../../../providers/FolderProvider";
 import { EditFolderModalContext } from "../../../../providers/EditFolderModalProvider";
 
@@ -7,6 +8,11 @@ interface ModalProps {
 }
 
 export function UseModalActions(props: ModalProps) {
+  // @ts-ignore
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
+  const { vault } = globalState;
+  const { editItemById } = globalActions;
+
   const { folders, setFolders, curFolderId } = useContext(FolderContext);
   const { setIsEditFolderModalOpen } = useContext(EditFolderModalContext);
 
@@ -15,10 +21,24 @@ export function UseModalActions(props: ModalProps) {
   const [newFolderName, setNewFolderName] = useState<string>(defaultFolderName);
 
   function modifyFolderNameIfHasChanges(): void {
-    if (defaultFolderName !== newFolderName) {
+    if (newFolderName !== defaultFolderName) {
       const nextFolders = [...folders];
       nextFolders[curFolderId] = newFolderName;
       setFolders(nextFolders);
+    }
+  }
+
+  function filterAndModifyItemsCurFolder(): void {
+    for (let itemId in vault) {
+      if (vault[itemId].folder === folders[curFolderId]) {
+        const item = vault[itemId];
+
+        const nextItem = {
+          ...item,
+          folder: newFolderName,
+        };
+        editItemById(nextItem, itemId);
+      }
     }
   }
 
@@ -31,8 +51,11 @@ export function UseModalActions(props: ModalProps) {
   }
 
   function handleSaveBtnClick(): void {
+    if (newFolderName.trim().length <= 0) return;
+
     setIsEditFolderModalOpen(false);
     modifyFolderNameIfHasChanges();
+    filterAndModifyItemsCurFolder();
   }
 
   function handleCancelBtnClick(): void {

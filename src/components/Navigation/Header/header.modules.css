@@ -2,13 +2,15 @@ header {
   --font-size: 1.1rem;
   --border-radius: 1rem;
   --spacing: 0.6rem;
-  padding: var(--spacing);
+  --padding-x: 1rem;
+  padding: var(--spacing) var(--padding-x);
   display: flex;
   align-items: center;
   background: var(--background);
   border-bottom: 1px solid black;
   font-size: var(--font-size);
   height: 100%;
+  position: relative;
 }
 
 .logo {
@@ -16,20 +18,4 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing);
-}
-
-#sign-out {
-  padding: 0.5rem;
-  border: 2px solid red;
-  border-radius: var(--border-radius);
-  background: transparent;
-  outline: none;
-  color: red;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-#sign-out:hover,
-#sign-out:focus-visible {
-  backdrop-filter: brightness(150%);
 }

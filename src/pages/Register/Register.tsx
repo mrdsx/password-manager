@@ -7,7 +7,7 @@ import "./register.modules.css";
 export function Register(): React.ReactElement {
   const { setIsRegistered } = useContext(LoginContext);
 
-  const [errorSpan, setErrorSpan] = useState<string>("");
+  const [errorSpanText, setErrorSpanText] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,18 +18,22 @@ export function Register(): React.ReactElement {
       const hashedPassword = await hashString(password);
       localStorage.setItem("password", hashedPassword);
 
-      setErrorSpan("");
+      setErrorSpanText("");
       setIsRegistered(true);
       localStorage.setItem("isRegistered", "true");
     } else {
-      setErrorSpan("Password must be at least 8 characters long");
+      setErrorSpanText("Password must be at least 8 characters long");
     }
   }
 
   return (
     <div className="register-form">
       <span className="register__title">Create your vault</span>
-      <form className="register__form" onSubmit={handleSubmit}>
+      <form
+        className="register__form"
+        name="register-form"
+        onSubmit={handleSubmit}
+      >
         <input
           className="register__password-input"
           type="password"
@@ -39,7 +43,7 @@ export function Register(): React.ReactElement {
           <span className="submit-btn__span">Register</span>
         </button>
       </form>
-      <span className="register__error">{errorSpan}</span>
+      <span className="register__error">{errorSpanText}</span>
     </div>
   );
 }

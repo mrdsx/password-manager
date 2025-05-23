@@ -1,7 +1,12 @@
 .modal {
+  --modal-border: 1.5px solid rgba(128, 128, 128, 0.5);
   border-radius: 0.4rem;
   background: var(--background);
   filter: brightness(110%);
+  border: var(--modal-border);
+}
+.modal.active {
+  animation: 0.2s ease-out 0s 1 slideIn;
 }
 
 .modal-body {
@@ -10,7 +15,7 @@
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: var(--modal-border);
 }
 
 .modal-body .heading {
@@ -34,4 +39,15 @@
   padding: var(--padding);
   display: flex;
   gap: 0.5rem;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
