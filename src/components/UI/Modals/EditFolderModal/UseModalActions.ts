@@ -17,7 +17,6 @@ export function UseModalActions(props: ModalProps) {
   const { setIsEditFolderModalOpen } = useContext(EditFolderModalContext);
 
   const defaultFolderName = folders[curFolderId];
-
   const [newFolderName, setNewFolderName] = useState<string>(defaultFolderName);
 
   function modifyFolderNameIfHasChanges(): void {
@@ -28,13 +27,11 @@ export function UseModalActions(props: ModalProps) {
     }
   }
 
-  function filterAndModifyItemsCurFolder(): void {
+  function filterAndModifyItemsFolder(): void {
     for (let itemId in vault) {
       if (vault[itemId].folder === folders[curFolderId]) {
-        const item = vault[itemId];
-
         const nextItem = {
-          ...item,
+          ...vault[itemId],
           folder: newFolderName,
         };
         editItemById(nextItem, itemId);
@@ -55,7 +52,7 @@ export function UseModalActions(props: ModalProps) {
 
     setIsEditFolderModalOpen(false);
     modifyFolderNameIfHasChanges();
-    filterAndModifyItemsCurFolder();
+    filterAndModifyItemsFolder();
   }
 
   function handleCancelBtnClick(): void {

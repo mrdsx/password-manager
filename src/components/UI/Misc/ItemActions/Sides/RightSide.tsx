@@ -1,4 +1,7 @@
-import useGlobalStore from "../../../../../store/globalStore";
+import useGlobalStore, {
+  State,
+  Actions,
+} from "../../../../../store/globalStore";
 import { DeleteItemBtn } from "../../../Buttons/ItemActionsBtnFolder/DeleteItemBtn";
 import { RestoreItemBtn } from "../../../Buttons/ItemActionsBtnFolder/RestoreItemBtn";
 
@@ -8,7 +11,7 @@ interface RightSideProps {
 
 export function RightSide(props: RightSideProps): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions] = useGlobalStore();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId } = globalState;
 
   return (

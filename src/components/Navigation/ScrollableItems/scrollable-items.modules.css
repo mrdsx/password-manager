@@ -4,4 +4,5 @@
   width: 25%;
   background: var(--item-list-background);
   border-right: 1px solid black;
+  z-index: 1;
 }

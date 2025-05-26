@@ -12,7 +12,7 @@ export interface LoginItem {
   favorite: boolean;
   inTrash: boolean;
   folder: string;
-  details: LoginItemDetails;
+  details: LoginItemDetails | string;
 }
 
 export type Vault = Record<string, LoginItem>;
@@ -31,55 +31,34 @@ export interface Actions {
   removeItem(itemId: string): void;
   setIsEditingItem(isEditing: boolean): void;
   setIsAddingItem(isAdding: boolean): void;
+  deleteVault(): void;
 }
 
+const initialVault = {
+  "0": {
+    favorite: false,
+    inTrash: false,
+    folder: "No folder",
+    details: { name: "", login: "", password: "", website: "" },
+  },
+};
+
+// TODO: add item with id 0 if it doesn't exist
 const initialState: State = {
   curItemId: "0",
   isEditingItem: false,
   isAddingItem: false,
   vault: {
-    "0": {
-      favorite: false,
-      inTrash: false,
-      folder: "No folder",
-      details: {
-        name: "",
-        login: "",
-        password: "",
-        website: "",
-      },
-    },
-    // "1": {
-    //   favorite: false,
-    //   inTrash: false,
-    //   folder: "No folder",
-    //   details: {
-    //     name: "Google",
-    //     login: "OHO123",
-    //     password: "strong",
-    //     website: "google.com",
-    //   },
-    // },
-    // "2": {
-    //   favorite: false,
-    //   inTrash: false,
-    //   folder: "No folder",
-    //   details: {
-    //     name: "YouTube",
-    //     login: "oho123",
-    //     password: "very very strong",
-    //     website: "youtube.com",
-    //   },
-    // },
+    ...(JSON.parse(localStorage.getItem("vault") as string) || initialVault),
   },
 };
 
-const setCurItemId = (store: Store<State, Actions>, itemId: string): void => {
+function setCurItemId(store: Store<State, Actions>, itemId: string): void {
   const nextValue = itemId;
   store.setState({ curItemId: nextValue });
-};
+}
 
-const addItem = (store: Store<State, Actions>, newItem: LoginItem): void => {
+function addItem(store: Store<State, Actions>, newItem: LoginItem): void {
   const { vault }: State = store.state;
 
   const keys: string[] = Object.keys(vault);
@@ -90,44 +69,64 @@ const addItem = (store: Store<State, Actions>, newItem: LoginItem): void => {
     [lastId + 1]: { ...newItem },
   };
   store.setState({ vault: nextVault });
-};
+  localStorage.setItem("vault", JSON.stringify(nextVault));
+}
 
-const editItemById = (
+function editItemById(
   store: Store<State, Actions>,
   newItem: LoginItem,
   itemId: string
-): void => {
+): void {
   const { vault }: State = store.state;
 
-  const nextItems = {
+  const nextVault = {
     ...vault,
     [itemId]: { ...newItem },
   };
-  store.setState({ vault: nextItems });
-};
+  store.setState({ vault: nextVault });
+  localStorage.setItem("vault", JSON.stringify(nextVault));
+}
 
-const removeItem = (store: Store<State, Actions>, itemId: string): void => {
+function removeItem(store: Store<State, Actions>, itemId: string): void {
   const { vault }: State = store.state;
 
-  delete vault[itemId];
-  store.setState({ curItemId: "0" });
-};
+  const nextVault = {
+    ...vault,
+  };
+  delete nextVault[itemId];
+  store.setState({ curItemId: "0", vault: nextVault });
+  localStorage.setItem("vault", JSON.stringify(nextVault));
+}
 
-const setIsEditingItem = (
+function setIsEditingItem(
   store: Store<State, Actions>,
   isEditing: boolean
-): void => {
+): void {
   const nextValue = isEditing;
   store.setState({ isEditingItem: nextValue });
-};
+}
 
-const setIsAddingItem = (
+function setIsAddingItem(
   store: Store<State, Actions>,
   isAdding: boolean
-): void => {
+): void {
   const nextValue = isAdding;
   store.setState({ isEditingItem: nextValue, isAddingItem: nextValue });
-};
+}
+
+function deleteVault(store: Store<State, Actions>): void {
+  const nextVault = {
+    0: {
+      favorite: false,
+      inTrash: false,
+      folder: "No folder",
+      details: { name: "", login: "", password: "", website: "" },
+    },
+  };
+
+  store.setState({ vault: nextVault });
+  localStorage.setItem("vault", JSON.stringify(nextVault));
+}
 
 const actions = {
   setCurItemId,
@@ -136,8 +135,9 @@ const actions = {
   removeItem,
   setIsEditingItem,
   setIsAddingItem,
+  deleteVault,
 };
 
-const useGlobalStore = GlobalHook(initialState, actions);
+const useGlobalStore = GlobalHook<State, Actions>(initialState, actions);
 
 export default useGlobalStore;

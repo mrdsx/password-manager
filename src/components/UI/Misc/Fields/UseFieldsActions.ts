@@ -5,7 +5,10 @@ import useGlobalStore, {
   LoginItem,
 } from "../../../../store/globalStore";
 import { EditingItemContext } from "../../../../providers/EditingItemProvider";
-import { setObjectValuesEmpty } from "../../../../utils/objectMethods";
+import {
+  decryptObjectIfEncrypted,
+  setObjectValuesEmpty,
+} from "../../../../utils/objectMethods";
 
 interface FieldsActions {
   item: null | LoginItem;
@@ -28,38 +31,45 @@ export function UseFieldsActions(): FieldsActions {
   function setEmptyItem(): void {
     if (!item?.details) return;
 
-    const nextItemDetails = setObjectValuesEmpty(item.details);
+    const decryptedItemDetails = decryptObjectIfEncrypted(item.details);
+
+    const nextItemDetails = setObjectValuesEmpty({
+      ...decryptedItemDetails,
+    });
     setItem({
       ...vault["0"],
       details: { ...nextItemDetails },
-    } as LoginItem);
+    });
   }
 
   function handleFieldChange(
     e: ChangeEvent<HTMLInputElement>,
     field: string
   ): void {
+    const decryptedItemDetails = decryptObjectIfEncrypted(
+      (item as LoginItem).details
+    );
     setItem({
-      ...item,
+      ...(item as LoginItem),
       details: {
-        ...item?.details,
+        ...decryptedItemDetails,
         [field]: e.target.value,
       },
-    } as LoginItem);
+    });
   }
 
   function handleCheckboxChange(e: ChangeEvent<HTMLInputElement>): void {
     setItem({
-      ...item,
+      ...(item as LoginItem),
       favorite: e.target.checked,
-    } as LoginItem);
+    });
   }
 
   function handleSelectChange(e: ChangeEvent<HTMLSelectElement>): void {
     setItem({
-      ...item,
+      ...(item as LoginItem),
       folder: e.target.value,
-    } as LoginItem);
+    });
   }
 
   return { item, handleFieldChange, handleCheckboxChange, handleSelectChange };

@@ -20,7 +20,6 @@ export function Register(): React.ReactElement {
 
       setErrorSpanText("");
       setIsRegistered(true);
-      localStorage.setItem("isRegistered", "true");
     } else {
       setErrorSpanText("Password must be at least 8 characters long");
     }

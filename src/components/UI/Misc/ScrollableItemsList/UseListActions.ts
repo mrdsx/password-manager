@@ -6,6 +6,7 @@ import {
   FolderContext,
   NOT_FOLDER_TAB_ID,
 } from "../../../../providers/FolderProvider";
+import { decryptObjectIfEncrypted } from "../../../../utils/objectMethods";
 
 interface ListActions {
   getIsItemPassing(itemId: string): boolean;
@@ -20,27 +21,27 @@ export function UseListActions(): ListActions {
   const { query } = useContext(SearchContext);
   const { folders, curFolderId } = useContext(FolderContext);
 
-  function getIsInSearchQuery(itemId: string): boolean {
-    const { details } = vault[itemId];
-    const name = details.name.toLowerCase();
-
+  function isItemNameInSearchQuery(itemId: string): boolean {
+    const decryptedItemDetails = decryptObjectIfEncrypted(
+      vault[itemId].details
+    );
     if (query.trim().length > 0) {
-      return name.includes(query.toLowerCase());
+      return decryptedItemDetails.name.includes(query.toLowerCase());
     }
     return true;
   }
 
-  function getIsInCurFolder(itemId: string): boolean {
+  function isItemFolderEqualsCurFolder(itemId: string): boolean {
     return vault[itemId].folder === folders[curFolderId];
   }
 
   function getIsItemPassing(itemId: string): boolean {
     if (itemId === "0") return false;
 
-    const itemInSearchQuery: boolean = getIsInSearchQuery(itemId);
-    if (!itemInSearchQuery) return false;
+    if (!isItemNameInSearchQuery(itemId)) return false;
 
-    if (curFolderId !== NOT_FOLDER_TAB_ID) return getIsInCurFolder(itemId);
+    if (curFolderId > NOT_FOLDER_TAB_ID)
+      return isItemFolderEqualsCurFolder(itemId);
 
     const { favorite, inTrash } = vault[itemId];
 

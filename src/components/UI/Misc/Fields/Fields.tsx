@@ -1,6 +1,7 @@
-import useGlobalStore from "../../../../store/globalStore";
+import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import { ViewFields } from "./ViewFields";
 import { EditFields } from "./EditFields";
+import { decryptObjectIfEncrypted } from "../../../../utils/objectMethods";
 
 interface FieldsProps {
   isViewingItem: boolean;
@@ -8,12 +9,16 @@ interface FieldsProps {
 
 export function Fields(props: FieldsProps): React.ReactElement {
   // @ts-ignore
-  const [globalState, globalActions] = useGlobalStore();
+  const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId, isEditingItem } = globalState;
 
   const { isViewingItem } = props;
 
-  const fields: string[] = Object.keys(vault[curItemId].details);
+  const decryptedItemDetails = decryptObjectIfEncrypted(
+    vault[curItemId].details
+  );
+
+  const fields = Object.keys(decryptedItemDetails);
 
   return (
     <div className="fields">

@@ -3,51 +3,91 @@ import useGlobalStore, {
   State,
   Actions,
   LoginItem,
+  LoginItemDetails,
 } from "../../../../../store/globalStore";
-import { areObjectsEqual } from "../../../../../utils/objectMethods";
 import { EditingItemContext } from "../../../../../providers/EditingItemProvider";
+import {
+  areObjectsEqual,
+  decryptObjectIfEncrypted,
+  encryptObjectIfDecrypted,
+} from "../../../../../utils/objectMethods";
 
 interface ItemActions {
-  itemHasChanges(): boolean | undefined;
+  itemHasChanges(): boolean;
   isNameValid(): boolean;
-  addOrEditItem(): void;
+  addItemToVault(): void;
+  editItemInVault(): void;
 }
 
 export function useItemActions(): ItemActions {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
-  const { vault, curItemId, isAddingItem } = globalState;
+  const { vault, curItemId } = globalState;
   const { addItem, editItemById, setIsAddingItem, setIsEditingItem } =
     globalActions;
 
-  const { item, setItem } = useContext(EditingItemContext);
+  const { item } = useContext(EditingItemContext);
 
-  function itemHasChanges(): boolean | undefined {
+  function getInitialItemFromVault(itemId: string): LoginItem {
+    const initialDecryptedItemDetails = decryptObjectIfEncrypted(
+      vault[itemId].details as LoginItemDetails | string
+    );
+    return {
+      ...vault[itemId],
+      details: { ...initialDecryptedItemDetails },
+    };
+  }
+
+  function getCurrentItemFromContext(): LoginItem {
     if (item === null) throw new Error("Item is null");
 
-    if (!areObjectsEqual(item, vault[curItemId])) {
-      return true;
-    }
+    const currentDecryptedItemDetails = decryptObjectIfEncrypted(item.details);
+    return {
+      ...item,
+      details: { ...currentDecryptedItemDetails },
+    };
+  }
+
+  function itemHasChanges(): boolean {
+    const initialItem = getInitialItemFromVault(curItemId);
+    const currentItem = getCurrentItemFromContext();
+
     setIsEditingItem(false);
-    return false;
+    return !areObjectsEqual(initialItem, currentItem);
   }
 
   function isNameValid(): boolean {
-    return item !== undefined && item?.details?.name.trim() !== "";
-  }
-
-  function addOrEditItem(): void {
     if (item === null) throw new Error("Item is null");
 
-    if (isAddingItem) {
-      setItem({ ...item, createdAt: new Date(), updatedAt: new Date() });
-      addItem(item as LoginItem);
-      setIsEditingItem(false);
-    } else {
-      setItem({ ...item, updatedAt: new Date() });
-      editItemById(item as LoginItem, curItemId);
-      setIsAddingItem(false);
-    }
+    const itemDetails = decryptObjectIfEncrypted(item.details);
+    return (
+      typeof itemDetails === "object" &&
+      itemDetails !== null &&
+      itemDetails.name.trim() !== ""
+    );
   }
 
-  return { itemHasChanges, isNameValid, addOrEditItem };
+  function addItemToVault(): void {
+    if (item === null) throw new Error("Item is null");
+
+    addItem({
+      ...item,
+      details: encryptObjectIfDecrypted(item.details),
+    });
+    setIsEditingItem(false);
+  }
+
+  function editItemInVault(): void {
+    if (item === null) throw new Error("Item is null");
+
+    editItemById(
+      {
+        ...item,
+        details: encryptObjectIfDecrypted(item.details),
+      },
+      curItemId
+    );
+    setIsAddingItem(false);
+  }
+
+  return { itemHasChanges, isNameValid, addItemToVault, editItemInVault };
 }

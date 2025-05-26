@@ -13,7 +13,7 @@ export function ItemInfo(): React.ReactElement {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { curItemId, isEditingItem } = globalState;
 
-  const isValidCurItemId: boolean = curItemId !== "0";
+  const isValidCurItemId = curItemId !== "0";
 
   const isViewingItem = isValidCurItemId && !isEditingItem;
 

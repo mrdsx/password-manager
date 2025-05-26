@@ -1,24 +1,32 @@
+import { encrypt, decrypt } from "./cryptoMethods";
+
 export function areObjectsEqual<T extends Record<string, any>>(
   obj1: T,
   obj2: T
 ): boolean {
-  if (typeof obj1 !== "object" || typeof obj2 !== "object") return false;
+  const objKeys1 = Object.keys(obj1);
+  const objKeys2 = Object.entries(obj2);
 
-  const entries1 = Object.entries(obj1);
-  const entries2 = Object.entries(obj2);
+  if (objKeys1.length !== objKeys2.length) return false;
 
-  if (entries1.length !== entries2.length) {
-    return false;
-  }
+  for (let key of objKeys1) {
+    const value1 = obj1[key];
+    const value2 = obj2[key];
 
-  for (const [key, value] of entries1) {
-    const _key = key as keyof object;
-    if (!obj2.hasOwnProperty(_key) || obj2[_key] !== value) {
+    const isObjects = isObject(value1) && isObject(value2);
+
+    if (
+      (isObjects && !areObjectsEqual(value1, value2)) ||
+      (!isObjects && value1 !== value2)
+    ) {
       return false;
     }
   }
-
   return true;
+}
+
+function isObject<T extends Record<string, any>>(object: T): boolean {
+  return object != null && typeof object === "object";
 }
 
 export function setObjectValuesEmpty<T extends Record<string, any>>(obj: T): T {
@@ -31,4 +39,22 @@ export function setObjectValuesEmpty<T extends Record<string, any>>(obj: T): T {
   }
 
   return emptyItem;
+}
+
+export function decryptObjectIfEncrypted<T extends Record<string, any>>(
+  object: T | string
+): T {
+  if (typeof object === "string") {
+    return JSON.parse(decrypt(object));
+  }
+  return object;
+}
+
+export function encryptObjectIfDecrypted<T extends Record<string, any>>(
+  object: T | string
+): string {
+  if (typeof object !== "string") {
+    return encrypt(JSON.stringify(object));
+  }
+  return object;
 }

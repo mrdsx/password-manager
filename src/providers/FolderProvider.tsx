@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { FolderModalsProvider } from "./FolderModalsProvider";
 
 interface IFolderContext {
@@ -27,8 +27,18 @@ export function FolderProvider({
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  const [folders, setFolders] = useState<string[]>(["No folder"]);
+  let localStorageFolders = JSON.parse(localStorage.getItem("folders") || "[]");
+  if (!localStorageFolders.includes("No folder")) {
+    localStorageFolders = ["No folder", ...localStorageFolders];
+  }
+
+  const initialFolders = localStorageFolders || ["No folder"];
+  const [folders, setFolders] = useState<string[]>(initialFolders);
   const [curFolderId, setCurFolderId] = useState<number>(NOT_FOLDER_TAB_ID);
+
+  useEffect(() => {
+    localStorage.setItem("folders", JSON.stringify(folders));
+  }, [folders]);
 
   const folderValue = {
     folders,
@@ -43,5 +53,3 @@ export function FolderProvider({
     </FolderContext.Provider>
   );
 }
-
-// TODO: wrap modal providers in one element

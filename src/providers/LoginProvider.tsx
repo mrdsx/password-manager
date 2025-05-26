@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface ILoginContext {
   isLoggedIn: boolean;
@@ -7,6 +7,7 @@ interface ILoginContext {
   setIsRegistered(isRegistered: boolean): void;
 }
 
+// TODO: set isLoggedIn false
 const initialValue: ILoginContext = {
   isLoggedIn: false,
   setIsLoggedIn() {},
@@ -19,6 +20,10 @@ export const LoginContext = createContext(initialValue);
 export function LoginProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(initialValue.isLoggedIn);
   const [isRegistered, setIsRegistered] = useState(initialValue.isRegistered);
+
+  useEffect(() => {
+    localStorage.setItem("isRegistered", JSON.stringify(isRegistered));
+  }, [isRegistered]);
 
   const value = {
     isLoggedIn,

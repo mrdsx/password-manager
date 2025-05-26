@@ -1,4 +1,5 @@
 import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
+import { decryptObjectIfEncrypted } from "../../../../utils/objectMethods";
 import { VaultItemBtn } from "../../Buttons/VaultItemBtn/VaultItemBtn";
 import { UseListActions } from "./UseListActions";
 import "./scrollable-items-list.modules.css";
@@ -14,11 +15,14 @@ export function ScrollableItemsList(): React.ReactElement {
     <div className="item-list">
       {Object.keys(vault).map((itemId, index) => {
         const itemPassing = getIsItemPassing(itemId);
+        const decryptedItemDetails = decryptObjectIfEncrypted(
+          vault[itemId].details
+        );
 
         if (itemId !== "0" && itemPassing) {
           return (
             <VaultItemBtn
-              itemDetails={vault[itemId].details}
+              itemDetails={decryptedItemDetails}
               itemId={itemId}
               key={index}
             />

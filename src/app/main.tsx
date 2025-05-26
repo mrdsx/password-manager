@@ -11,3 +11,6 @@ createRoot(document.getElementById("root")!).render(
     </LoginProvider>
   </StrictMode>
 );
+
+// TODO: add routing (/register, /login, etc.)
+// TODO: add editing password

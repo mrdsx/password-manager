@@ -3,6 +3,7 @@ import { UseFieldsActions } from "./UseFieldsActions";
 import { capitalizeFirstLetter } from "../../../../utils/stringMethods";
 import { ItemDetail } from "./../ItemDetail/ItemDetail";
 import { ItemInfoProps } from "./../ItemInfo/ItemInfo";
+import { decryptObjectIfEncrypted } from "../../../../utils/objectMethods";
 
 export function EditFields({ fields }: ItemInfoProps): React.ReactElement {
   // @ts-ignore
@@ -14,9 +15,14 @@ export function EditFields({ fields }: ItemInfoProps): React.ReactElement {
 
   return (
     <>
-      {fields.map((field: string, index: number) => {
+      {fields.map((field, index) => {
+        const decryptedItemDetails = decryptObjectIfEncrypted(
+          vault[curItemId].details
+        );
+
         const type = field === "password" ? "password" : "text";
-        const title = vault[curItemId].details[field as keyof object];
+        const title =
+          decryptedItemDetails[field as keyof typeof decryptedItemDetails];
 
         return (
           <ItemDetail
@@ -49,3 +55,5 @@ export function EditFields({ fields }: ItemInfoProps): React.ReactElement {
     </>
   );
 }
+
+// TODO: optimize it (somehow)

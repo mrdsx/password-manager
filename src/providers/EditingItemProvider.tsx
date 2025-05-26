@@ -1,9 +1,4 @@
-// prettier-ignore
-import {
-  useState,
-  useRef,
-  createContext,
-} from "react";
+import { useState, useRef, createContext } from "react";
 import useGlobalStore, {
   LoginItem,
   State,

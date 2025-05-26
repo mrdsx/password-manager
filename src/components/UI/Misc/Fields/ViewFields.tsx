@@ -1,4 +1,5 @@
 import useGlobalStore, { Actions, State } from "../../../../store/globalStore";
+import { decryptObjectIfEncrypted } from "../../../../utils/objectMethods";
 import { capitalizeFirstLetter } from "../../../../utils/stringMethods";
 import { ItemDetail } from "./../ItemDetail/ItemDetail";
 import { ItemInfoProps } from "./../ItemInfo/ItemInfo";
@@ -11,9 +12,14 @@ export function ViewFields({ fields }: ItemInfoProps): React.ReactElement {
   return (
     <>
       {fields.map((field: string, index: number) => {
-        const type: string = field === "password" ? "password" : "text";
-        const value: string = vault[curItemId].details[field as keyof object];
-        const hasCopyBtn: boolean = field !== "name";
+        const decryptedItemDetails = decryptObjectIfEncrypted(
+          vault[curItemId].details
+        );
+
+        const type = field === "password" ? "password" : "text";
+        const value =
+          decryptedItemDetails[field as keyof typeof decryptedItemDetails];
+        const hasCopyBtn = field !== "name";
 
         if (field !== "id" && value) {
           return (

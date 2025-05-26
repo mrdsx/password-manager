@@ -44,6 +44,7 @@ export function DetailField(props: ItemDetailProps): React.ReactElement {
           onChange={handleFieldChange}
           // @ts-ignore
           onKeyDown={handleKeyDown}
+          autoComplete="off"
         />
       )}
     </div>

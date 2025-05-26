@@ -1,21 +1,33 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { EditingItemContext } from "../../../../../providers/EditingItemProvider";
 import { useItemActions } from "./useItemActions";
 import { SaveBtn } from "../../SaveBtn/SaveBtn";
+import useGlobalStore, {
+  Actions,
+  State,
+} from "../../../../../store/globalStore";
 
 export function SaveItemBtn(): React.ReactElement {
-  const { itemHasChanges, isNameValid, addOrEditItem } = useItemActions();
+  const [isAddingItem] = useGlobalStore(
+    (state: State) => state.isAddingItem,
+    (_actions: Actions) => undefined
+  );
+
+  const { itemHasChanges, isNameValid, addItemToVault, editItemInVault } =
+    useItemActions();
 
   const { item, saveItemBtnRef } = useContext(EditingItemContext);
 
-  // useEffect(() => {
-  //   console.log(item);
-  // }, [item]);
-
   function handleClick(): void {
-    const actionAllowed = isNameValid() && itemHasChanges();
+    if (item === null) throw new Error("Item is null");
 
-    if (actionAllowed) addOrEditItem();
+    if (!itemHasChanges() && !isNameValid()) return;
+
+    if (isAddingItem) {
+      addItemToVault();
+    } else {
+      editItemInVault();
+    }
   }
 
   return <SaveBtn onClick={handleClick} ref={saveItemBtnRef} />;
