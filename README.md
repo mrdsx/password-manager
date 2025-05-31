@@ -1,14 +1,15 @@
 # Password Manager
 
-This is my Password Manager App. I'm currently developing it as the side project. The features are:
+This is my Password Manager App that is designed to securely storage your passwords.
+
+# Features
 
 - creating/editing/deleting logins
 - search passwords by login
-- creating/editing/deleting folders (SOON)
+- creating/editing/deleting folders
 
-## Tech Stack
+## Tech stack
 
-The tech stack I'm using for this project is:
 <br>
 <br>
 <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" alt="HTML" width="32" height="32">
