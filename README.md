@@ -2,7 +2,9 @@
 
 This is my Password Manager App that is designed to securely storage your passwords.
 
-# Features
+![Password Manager UI](/src/assets/password-manager-ui.png)
+
+## Features
 
 - creating/editing/deleting logins
 - search passwords by login
