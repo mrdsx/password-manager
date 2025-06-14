@@ -35,16 +35,14 @@ Create a `.env` file in the root directory and add following keys:
 VITE_CRYPTO_KEY=your_crypto_key
 ```
 
-_(Replace with your actual values)_
+_(Replace with your actual key for encrypting and decrypting)_
 
-### 4. Install Dependencies and run the Dev Server
+### 3. Install Dependencies and run the Dev Server
 
 ```bash
 npm install
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000/) in your browser.
 
 ## Tech stack
 
