@@ -1,16 +1,14 @@
-import { AppTitle } from "../../UI/Icons/AppIcon";
+import { AppTitle } from "../../UI/Icons/AppTitle";
 import { SearchBar } from "../../UI/Misc/SearchBar/SearchBar";
 import { ToggleHeaderMenuBtn } from "../../UI/Buttons/ToggleHeaderMenuBtn/ToggleHeaderMenuBtn";
 import { HeaderMenu } from "../../UI/Misc/HeaderMenu/HeaderMenu";
 import { HeaderMenuProvider } from "./HeaderMenuState/HeaderMenuProvider";
 import "./header.modules.css";
 
-const ICON_SIZE = 32;
-
 export function Header(): React.ReactElement {
   return (
     <header>
-      <AppTitle width={ICON_SIZE} />
+      <AppTitle />
       <SearchBar />
       <HeaderMenuProvider>
         <ToggleHeaderMenuBtn />

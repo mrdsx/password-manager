@@ -1,4 +1,4 @@
-export function AppTitle({ width }: { width: number }): React.ReactElement {
+export function AppTitle(): React.ReactElement {
   return (
     <div className="logo">
       <span>Password Manager</span>
