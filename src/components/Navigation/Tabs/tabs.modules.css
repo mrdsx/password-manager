@@ -1,5 +1,4 @@
 .categories,
-.types,
 .folders {
   display: flex;
   flex-direction: column;

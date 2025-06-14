@@ -11,7 +11,7 @@ export function ViewFields({ fields }: ItemInfoProps): React.ReactElement {
 
   return (
     <>
-      {fields.map((field: string, index: number) => {
+      {fields.map((field, index) => {
         const decryptedItemDetails = decryptObjectIfEncrypted(
           vault[curItemId].details
         );

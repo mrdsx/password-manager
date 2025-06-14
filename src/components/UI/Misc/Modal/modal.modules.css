@@ -1,9 +1,11 @@
 .modal {
-  --modal-border: 1.5px solid black;
+  --modal-border: 1px solid black;
   border-radius: 0.4rem;
   background: var(--background);
   filter: brightness(110%);
   border: var(--modal-border);
+  z-index: 1000;
+  width: 25vw;
 }
 .modal.active {
   animation: 0.2s ease-out 0s 1 slideIn;
@@ -27,7 +29,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 250px;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 }
 .modal-field:hover,
@@ -39,6 +40,29 @@
   padding: var(--padding);
   display: flex;
   gap: 0.5rem;
+}
+
+.modal-actions #delete-btn {
+  margin-left: auto;
+}
+
+.modal-field label {
+  filter: brightness(80%);
+}
+.modal-actions button {
+  border: 1px solid black;
+  padding: 0.3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  backdrop-filter: brightness(90%);
+}
+.modal-actions button:hover,
+.modal-actions button:focus-visible {
+  backdrop-filter: brightness(120%);
+}
+
+#delete-btn {
+  margin-left: auto;
 }
 
 @keyframes slideIn {

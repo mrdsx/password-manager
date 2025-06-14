@@ -43,7 +43,6 @@ const initialVault = {
   },
 };
 
-// TODO: add item with id 0 if it doesn't exist
 const initialState: State = {
   curItemId: "0",
   isEditingItem: false,
@@ -126,6 +125,7 @@ function deleteVault(store: Store<State, Actions>): void {
 
   store.setState({ vault: nextVault });
   localStorage.setItem("vault", JSON.stringify(nextVault));
+  localStorage.setItem("folders", JSON.stringify(["No folder"]));
 }
 
 const actions = {

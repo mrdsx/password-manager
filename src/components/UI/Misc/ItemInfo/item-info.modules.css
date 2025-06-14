@@ -8,20 +8,3 @@
   flex-grow: 1;
   position: relative;
 }
-
-.fields,
-.time-info {
-  width: 80%;
-}
-
-.time-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-}
-
-.update-time,
-.creation-time {
-  filter: opacity(60%);
-}

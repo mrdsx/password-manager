@@ -55,5 +55,3 @@ export function EditFields({ fields }: ItemInfoProps): React.ReactElement {
     </>
   );
 }
-
-// TODO: optimize it (somehow)

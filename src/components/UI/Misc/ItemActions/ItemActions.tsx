@@ -1,6 +1,6 @@
 import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
-import { LeftSide } from "./Sides/LeftSide";
-import { RightSide } from "./Sides/RightSide";
+import { LeftSide } from "./LeftSide";
+import { RightSide } from "./RightSide";
 import "./item-actions.modules.css";
 
 export function ItemActions(): React.ReactElement {

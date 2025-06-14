@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 
 interface IAddFolderModalContext {
   isAddFolderModalOpen: boolean;
@@ -10,25 +10,29 @@ const initialValue: IAddFolderModalContext = {
   setIsAddFolderModalOpen() {},
 };
 
-export const AddFolderModalContext =
+const AddFolderModalContext =
   createContext<IAddFolderModalContext>(initialValue);
 
 export function AddFolderModalProvider({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): React.ReactElement {
   const [isAddFolderModalOpen, setIsAddFolderModalOpen] =
     useState<boolean>(false);
 
-  const folderModalValue = {
+  const contextValue = {
     isAddFolderModalOpen,
     setIsAddFolderModalOpen,
   };
 
   return (
-    <AddFolderModalContext.Provider value={folderModalValue}>
+    <AddFolderModalContext.Provider value={contextValue}>
       {children}
     </AddFolderModalContext.Provider>
   );
+}
+
+export function useAddFolderModalContext() {
+  return useContext(AddFolderModalContext);
 }

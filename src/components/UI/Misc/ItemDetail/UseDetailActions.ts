@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ItemDetailProps } from "./ItemDetail";
-import { EditingItemContext } from "../../../../providers/EditingItemProvider";
+import { useItemDetailsContext } from "../ItemInfo/ItemInfoProvider";
 
 interface DetailActions {
   inputVal: string;
@@ -28,7 +28,7 @@ export function UseDetailActions(props: ItemDetailProps): DetailActions {
     type === "password" && readOnly && value.length > 0 ? PASS_MASK : value;
   const [inputVal, setInputVal] = useState<string>(val);
 
-  const { saveItemBtnRef } = useContext(EditingItemContext);
+  const { saveItemBtnRef } = useItemDetailsContext();
 
   const inputId = fieldName?.toLowerCase() || "input";
 

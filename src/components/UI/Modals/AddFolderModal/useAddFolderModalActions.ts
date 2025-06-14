@@ -1,26 +1,26 @@
-import { useState, useContext, ChangeEvent } from "react";
-import { FolderContext } from "../../../../providers/FolderProvider";
-import { AddFolderModalContext } from "../../../../providers/AddFolderModalProvider";
+import { useState } from "react";
+import { useFolderContext } from "../../../../providers/FolderProvider";
+import { useAddFolderModalContext } from "./AddFolderModalProvider";
 
-interface ModalProps {
+interface ModalActionsProps {
   saveBtnRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 interface Actions {
-  handleInputChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void;
   handleKeyDown(e: KeyboardEvent): void;
   handleSaveBtnClick(): void;
   handleCancelBtnClick(): void;
 }
 
-export function UseModalActions(props: ModalProps): Actions {
-  const { folders, setFolders } = useContext(FolderContext);
-  const { setIsAddFolderModalOpen } = useContext(AddFolderModalContext);
+export function useAddFolderModalActions(props: ModalActionsProps): Actions {
+  const { folders, setFolders } = useFolderContext();
+  const { setIsAddFolderModalOpen } = useAddFolderModalContext();
 
   //? folder will be added to folders list with specific name
   const [folderName, setFolderName] = useState<string>("");
 
-  function handleInputChange(e: ChangeEvent<HTMLInputElement>): void {
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setFolderName(e.target.value);
   }
 

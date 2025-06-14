@@ -1,34 +1,38 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 
-interface IAddFolderModalContext {
+interface IEditFolderModalContext {
   isEditFolderModalOpen: boolean;
   setIsEditFolderModalOpen(isOpen: boolean): void;
 }
 
-const initialValue: IAddFolderModalContext = {
+const initialValue: IEditFolderModalContext = {
   isEditFolderModalOpen: false,
   setIsEditFolderModalOpen() {},
 };
 
-export const EditFolderModalContext =
-  createContext<IAddFolderModalContext>(initialValue);
+const EditFolderModalContext =
+  createContext<IEditFolderModalContext>(initialValue);
 
 export function EditFolderModalProvider({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): React.ReactElement {
   const [isEditFolderModalOpen, setIsEditFolderModalOpen] =
     useState<boolean>(false);
 
-  const folderModalValue = {
+  const contextValue = {
     isEditFolderModalOpen,
     setIsEditFolderModalOpen,
   };
 
   return (
-    <EditFolderModalContext value={folderModalValue}>
+    <EditFolderModalContext value={contextValue}>
       {children}
     </EditFolderModalContext>
   );
+}
+
+export function useEditFolderModalContext() {
+  return useContext(EditFolderModalContext);
 }

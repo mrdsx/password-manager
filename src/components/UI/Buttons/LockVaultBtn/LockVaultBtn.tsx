@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import { LoginContext } from "../../../../providers/LoginProvider";
+import useAuthStore, { State, Actions } from "../../../../store/authStore";
 import "./lock-vault-btn.modules.css";
 
 export function LockVaultBtn(): React.ReactElement {
-  const { setIsLoggedIn } = useContext(LoginContext);
+  const [_AuthState, AuthActions]: [State, Actions] = useAuthStore();
 
   function handleClick(): void {
-    setIsLoggedIn(false);
+    AuthActions.setIsLoggedIn(false);
   }
 
   return (

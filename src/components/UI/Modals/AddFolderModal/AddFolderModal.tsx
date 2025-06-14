@@ -1,33 +1,32 @@
-import { useContext, useRef } from "react";
-import { AddFolderModalContext } from "../../../../providers/AddFolderModalProvider";
-import { UseModalActions } from "./UseModalActions";
+import { useRef } from "react";
+import { useAddFolderModalContext } from "./AddFolderModalProvider";
+import { useAddFolderModalActions } from "./useAddFolderModalActions";
 import { SaveBtn } from "../../Buttons/SaveBtn/SaveBtn";
 import { CancelBtn } from "../../Buttons/CancelBtn";
-import { Modal } from "../../Misc/Modal/Modal";
-import { ModalBody } from "../../Misc/Modal/ModalBody";
-import { ModalField } from "../../Misc/Modal/ModalField";
-import { ModalActions } from "../../Misc/Modal/ModalActions";
-import "./add-folder-modal.modules.css";
+import {
+  Modal,
+  ModalBody,
+  ModalField,
+  ModalActions,
+} from "../../Misc/Modal/index";
 
 export function AddFolderModal(): React.ReactElement {
-  const { isAddFolderModalOpen } = useContext(AddFolderModalContext);
+  const { isAddFolderModalOpen } = useAddFolderModalContext();
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const saveBtnRef = useRef<HTMLButtonElement | null>(null);
 
-  const modalClassName = isAddFolderModalOpen
-    ? "add-folder-modal active"
-    : "add-folder-modal";
+  const isActive = isAddFolderModalOpen ? "active" : "";
 
   const {
     handleInputChange,
     handleKeyDown,
     handleSaveBtnClick,
     handleCancelBtnClick,
-  } = UseModalActions({ saveBtnRef });
+  } = useAddFolderModalActions({ saveBtnRef });
 
   return (
-    <Modal extraClassName={modalClassName}>
+    <Modal extraClassName={`add-folder-modal ${isActive}`}>
       <ModalBody>
         <span className="heading">ADD FOLDER</span>
         <ModalField inputRef={inputRef}>

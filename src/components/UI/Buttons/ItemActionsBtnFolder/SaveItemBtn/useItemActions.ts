@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import useGlobalStore, {
   State,
   Actions,
   LoginItem,
   LoginItemDetails,
 } from "../../../../../store/globalStore";
-import { EditingItemContext } from "../../../../../providers/EditingItemProvider";
+import { useItemDetailsContext } from "../../../Misc/ItemInfo/ItemInfoProvider";
 import {
   areObjectsEqual,
   decryptObjectIfEncrypted,
@@ -25,7 +24,7 @@ export function useItemActions(): ItemActions {
   const { addItem, editItemById, setIsAddingItem, setIsEditingItem } =
     globalActions;
 
-  const { item } = useContext(EditingItemContext);
+  const { item } = useItemDetailsContext();
 
   function getInitialItemFromVault(itemId: string): LoginItem {
     const initialDecryptedItemDetails = decryptObjectIfEncrypted(

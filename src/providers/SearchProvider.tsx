@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface ISearchContext {
   query: string;
@@ -10,7 +10,7 @@ const initialValue: ISearchContext = {
   setQuery() {},
 };
 
-export const SearchContext = createContext<ISearchContext>(initialValue);
+const SearchContext = createContext<ISearchContext>(initialValue);
 
 export function SearchProvider({
   children,
@@ -24,4 +24,8 @@ export function SearchProvider({
       {children}
     </SearchContext.Provider>
   );
+}
+
+export function useSearchContext() {
+  return useContext(SearchContext);
 }

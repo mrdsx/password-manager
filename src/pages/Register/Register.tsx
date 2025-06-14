@@ -1,13 +1,17 @@
-import { useContext, useState } from "react";
-import { LoginContext } from "../../providers/LoginProvider";
-import { isPasswordStrong } from "../../utils/validationMethods";
+import { useState } from "react";
+import useAuthStore, { Actions, State } from "../../store/authStore";
+import { isPasswordStrong } from "../../utils/passwordMethods";
 import { hashString } from "../../utils/stringMethods";
+import { setLocalStoragePassword } from "../../utils/storage";
 import "./register.modules.css";
 
 export function Register(): React.ReactElement {
-  const { setIsRegistered } = useContext(LoginContext);
+  const [_isRegistered, setIsRegistered] = useAuthStore(
+    (state: State) => state.isRegistered,
+    (actions: Actions) => actions.setIsRegistered
+  );
 
-  const [errorSpanText, setErrorSpanText] = useState<string>("");
+  const [errorText, setErrorText] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,12 +20,12 @@ export function Register(): React.ReactElement {
 
     if (password.trim().length > 0 && isPasswordStrong(password)) {
       const hashedPassword = await hashString(password);
-      localStorage.setItem("password", hashedPassword);
+      setLocalStoragePassword(hashedPassword);
 
-      setErrorSpanText("");
+      setErrorText("");
       setIsRegistered(true);
     } else {
-      setErrorSpanText("Password must be at least 8 characters long");
+      setErrorText("Password must be at least 8 characters long");
     }
   }
 
@@ -42,7 +46,7 @@ export function Register(): React.ReactElement {
           <span className="submit-btn__span">Register</span>
         </button>
       </form>
-      <span className="register__error">{errorSpanText}</span>
+      <span className="register__error">{errorText}</span>
     </div>
   );
 }

@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { TabContext } from "../../../../providers/TabProvider";
-import { SearchContext } from "../../../../providers/SearchProvider";
+import { useTabContext } from "../Main/TabProvider";
+import { useSearchContext } from "../../../../providers/SearchProvider";
 import useGlobalStore, { State, Actions } from "../../../../store/globalStore";
 import {
-  FolderContext,
+  useFolderContext,
   NOT_FOLDER_TAB_ID,
 } from "../../../../providers/FolderProvider";
 import { decryptObjectIfEncrypted } from "../../../../utils/objectMethods";
@@ -17,9 +16,9 @@ export function UseListActions(): ListActions {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault } = globalState;
 
-  const { curTab } = useContext(TabContext);
-  const { query } = useContext(SearchContext);
-  const { folders, curFolderId } = useContext(FolderContext);
+  const { curTab } = useTabContext();
+  const { query } = useSearchContext();
+  const { folders, curFolderId } = useFolderContext();
 
   function isItemNameInSearchQuery(itemId: string): boolean {
     const decryptedItemDetails = decryptObjectIfEncrypted(

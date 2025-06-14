@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
-import { LoginContext } from "../../providers/LoginProvider";
-import "./login.modules.css";
+import { useState } from "react";
 import { hashString } from "../../utils/stringMethods";
+import useAuthStore, { Actions, State } from "../../store/authStore";
+import { getLocalStoragePassword } from "../../utils/storage";
+import "./login.modules.css";
 
 interface IPasswords {
   inputPassword: string;
@@ -9,7 +10,10 @@ interface IPasswords {
 }
 
 export function Login(): React.ReactElement {
-  const { setIsLoggedIn } = useContext(LoginContext);
+  const [_isLoggedIn, setIsLoggedIn] = useAuthStore(
+    (state: State) => state.isLoggedIn,
+    (actions: Actions) => actions.setIsLoggedIn
+  );
 
   const [errorSpanText, setErrorSpanText] = useState<string>("");
 
@@ -17,7 +21,7 @@ export function Login(): React.ReactElement {
     e: React.FormEvent<HTMLFormElement>
   ): IPasswords {
     const inputPassword = (e.currentTarget[0] as HTMLInputElement).value;
-    const localStoragePassword = localStorage.getItem("password");
+    const localStoragePassword = getLocalStoragePassword();
 
     return { inputPassword, localStoragePassword };
   }

@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login/Login";
 import { Register } from "../pages/Register/Register";
-import { LoginContext } from "../providers/LoginProvider";
+import useAuthStore, { State, Actions } from "../store/authStore";
 
-export default function App(): React.ReactElement | undefined {
-  const { isLoggedIn, isRegistered } = useContext(LoginContext);
+export default function App(): React.ReactElement {
+  const [authState, _authActions]: [State, Actions] = useAuthStore();
 
-  if (!isRegistered) return <Register />;
-  if (!isLoggedIn) return <Login />;
+  if (!authState.isRegistered) return <Register />;
+  if (!authState.isLoggedIn) return <Login />;
   return <Home />;
 }

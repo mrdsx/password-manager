@@ -1,5 +1,7 @@
 import { encrypt, decrypt } from "./cryptoMethods";
 
+const encryptedObjectType = "string";
+
 export function areObjectsEqual<T extends Record<string, any>>(
   obj1: T,
   obj2: T
@@ -44,17 +46,17 @@ export function setObjectValuesEmpty<T extends Record<string, any>>(obj: T): T {
 export function decryptObjectIfEncrypted<T extends Record<string, any>>(
   object: T | string
 ): T {
-  if (typeof object === "string") {
-    return JSON.parse(decrypt(object));
+  if (typeof object === encryptedObjectType) {
+    return JSON.parse(decrypt(object as string));
   }
-  return object;
+  return object as T;
 }
 
 export function encryptObjectIfDecrypted<T extends Record<string, any>>(
   object: T | string
 ): string {
-  if (typeof object !== "string") {
+  if (typeof object !== encryptedObjectType) {
     return encrypt(JSON.stringify(object));
   }
-  return object;
+  return object as string;
 }

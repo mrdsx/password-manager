@@ -1,12 +1,12 @@
-import { useRef, useContext } from "react";
+import { useRef } from "react";
 import { SearchIcon } from "../../Icons/SearchIcon";
-import { SearchContext } from "../../../../providers/SearchProvider";
+import { useSearchContext } from "../../../../providers/SearchProvider";
 import "./search-bar.modules.css";
 
 const ICON_SIZE = 16;
 
 export function SearchBar(): React.ReactElement {
-  const { setQuery } = useContext(SearchContext);
+  const { setQuery } = useSearchContext();
 
   const searchFieldRef: React.RefObject<HTMLInputElement | null> = useRef(null);
 

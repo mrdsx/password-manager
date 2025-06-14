@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface ITabContext {
   curTab: string;
@@ -10,7 +10,7 @@ const initialValue: ITabContext = {
   setCurTab() {},
 };
 
-export const TabContext = createContext<ITabContext>(initialValue);
+const TabContext = createContext<ITabContext>(initialValue);
 
 export function TabProvider({
   children,
@@ -24,4 +24,8 @@ export function TabProvider({
       {children}
     </TabContext.Provider>
   );
+}
+
+export function useTabContext() {
+  return useContext(TabContext);
 }

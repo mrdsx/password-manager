@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import {
-  FolderContext,
+  useFolderContext,
   NOT_FOLDER_TAB_ID,
 } from "../../../../providers/FolderProvider";
 import { defaultTabs } from "../../../Navigation/Sidebar/Sidebar";
@@ -8,7 +7,7 @@ import { GridIcon } from "../../Icons/GridIcon";
 import { StarIcon } from "../../Icons/StarIcon";
 import { TrashIcon } from "../../Icons/TrashIcon";
 import { FolderIcon } from "../../Icons/FolderIcon";
-import { TabContext } from "../../../../providers/TabProvider";
+import { useTabContext } from "../../Misc/Main/TabProvider";
 
 interface ActionProps {
   tab: string;
@@ -26,8 +25,8 @@ const ICON_SIZE: number = 16;
 export function UseTabBtnActions(props: ActionProps): TabBtnActions {
   const { tab: tabName, folderId = NOT_FOLDER_TAB_ID } = props;
 
-  const { folders, curFolderId, setCurFolderId } = useContext(FolderContext);
-  const { curTab, setCurTab } = useContext(TabContext);
+  const { folders, curFolderId, setCurFolderId } = useFolderContext();
+  const { curTab, setCurTab } = useTabContext();
 
   const { allItems, favorite, trash } = defaultTabs;
 

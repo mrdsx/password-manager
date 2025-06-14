@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import useGlobalStore, {
   State,
   Actions,
 } from "../../../../../../store/globalStore";
-import { FolderContext } from "../../../../../../providers/FolderProvider";
+import { useFolderContext } from "../../../../../../providers/FolderProvider";
 
 interface SelectProps {
   onSelectChangeFn(e: React.ChangeEvent<HTMLSelectElement>): void;
@@ -14,7 +13,7 @@ export function DetailFieldSelect(props: SelectProps): React.ReactElement {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, curItemId } = globalState;
 
-  const { folders } = useContext(FolderContext);
+  const { folders } = useFolderContext();
 
   const { onSelectChangeFn } = props;
 

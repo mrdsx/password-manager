@@ -13,6 +13,7 @@
   font-size: 1.5rem;
   cursor: pointer;
 }
-.add-item-btn button:hover {
+.add-item-btn button:hover,
+.add-item-btn button:focus-visible {
   backdrop-filter: brightness(120%);
 }

@@ -1,5 +1,4 @@
-import { createContext, useEffect, useState } from "react";
-import { FolderModalsProvider } from "./FolderModalsProvider";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface IFolderContext {
   folders: string[];
@@ -15,12 +14,12 @@ const initialValue: IFolderContext = {
   setCurFolderId() {},
 };
 
-export const FolderContext = createContext<IFolderContext>(initialValue);
+const FolderContext = createContext<IFolderContext>(initialValue);
 
-//! MUST BE NEGATIVE
-export const NOT_FOLDER_TAB_ID: -1 = -1;
-//! MUST BE ZERO
-export const DEFAULT_FOLDER_TAB_ID: 0 = 0;
+//! NOT_FOLDER_TAB_ID always must be NEGATIVE
+//! DEFAULT_FOLDER_TAB_ID always must be ZERO
+export const NOT_FOLDER_TAB_ID = -1;
+export const DEFAULT_FOLDER_TAB_ID = 0;
 
 export function FolderProvider({
   children,
@@ -40,7 +39,7 @@ export function FolderProvider({
     localStorage.setItem("folders", JSON.stringify(folders));
   }, [folders]);
 
-  const folderValue = {
+  const contextValue = {
     folders,
     setFolders,
     curFolderId,
@@ -48,8 +47,12 @@ export function FolderProvider({
   };
 
   return (
-    <FolderContext.Provider value={folderValue}>
-      <FolderModalsProvider>{children}</FolderModalsProvider>
+    <FolderContext.Provider value={contextValue}>
+      {children}
     </FolderContext.Provider>
   );
+}
+
+export function useFolderContext() {
+  return useContext(FolderContext);
 }

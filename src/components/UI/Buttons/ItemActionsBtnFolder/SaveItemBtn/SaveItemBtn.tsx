@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { EditingItemContext } from "../../../../../providers/EditingItemProvider";
 import { useItemActions } from "./useItemActions";
 import { SaveBtn } from "../../SaveBtn/SaveBtn";
 import useGlobalStore, {
   Actions,
   State,
 } from "../../../../../store/globalStore";
+import { useItemDetailsContext } from "../../../Misc/ItemInfo/ItemInfoProvider";
 
 export function SaveItemBtn(): React.ReactElement {
   const [isAddingItem] = useGlobalStore(
@@ -16,7 +15,7 @@ export function SaveItemBtn(): React.ReactElement {
   const { itemHasChanges, isNameValid, addItemToVault, editItemInVault } =
     useItemActions();
 
-  const { item, saveItemBtnRef } = useContext(EditingItemContext);
+  const { item, saveItemBtnRef } = useItemDetailsContext();
 
   function handleClick(): void {
     if (item === null) throw new Error("Item is null");
@@ -30,5 +29,5 @@ export function SaveItemBtn(): React.ReactElement {
     }
   }
 
-  return <SaveBtn onClick={handleClick} ref={saveItemBtnRef} />;
+  return <SaveBtn onClick={handleClick} ref={saveItemBtnRef!} />;
 }

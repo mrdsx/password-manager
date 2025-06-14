@@ -1,0 +1,12 @@
+.header__toggle-menu {
+  padding: 0.25rem;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+}
+
+.header__toggle-menu:hover,
+.header__toggle-menu:focus-visible {
+  backdrop-filter: brightness(160%);
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+}

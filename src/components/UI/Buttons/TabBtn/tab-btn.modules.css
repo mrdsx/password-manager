@@ -11,6 +11,9 @@
   align-items: center;
   gap: 0.5rem;
 }
+.tab-left-side:focus-visible {
+  outline: 1px solid white;
+}
 .tab-left-side span {
   width: 12vw;
   text-align: start;
@@ -23,9 +26,10 @@
   color: var(--active-color);
   fill: var(--active-color);
 }
-
-.tab:focus-visible {
-  outline: 2px solid #515194;
+.tab-left-side:focus-visible span,
+.tab-left-side:focus-visible svg {
+  color: var(--active-color);
+  fill: var(--active-color);
 }
 
 .tab.active span,
@@ -43,4 +47,9 @@
 
 .edit-folder-btn:hover {
   filter: opacity(100%);
+}
+
+.edit-folder-btn:focus-visible {
+  filter: opacity(100%);
+  outline: 1.5px solid white;
 }

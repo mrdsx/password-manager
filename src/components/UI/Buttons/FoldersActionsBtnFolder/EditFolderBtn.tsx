@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import { PencilIcon } from "../../Icons/PencilIcon";
-import { EditFolderModalContext } from "../../../../providers/EditFolderModalProvider";
-import { FolderContext } from "../../../../providers/FolderProvider";
+import { useEditFolderModalContext } from "../../Modals/EditFolderModal/EditFolderModalProvider";
+import { useFolderContext } from "../../../../providers/FolderProvider";
 
 const ICON_SIZE: number = 16;
 
@@ -10,10 +9,9 @@ interface EditFolderBtnProps {
 }
 
 export function EditFolderBtn(props: EditFolderBtnProps): React.ReactElement {
-  const { setCurFolderId } = useContext(FolderContext);
-  const { isEditFolderModalOpen, setIsEditFolderModalOpen } = useContext(
-    EditFolderModalContext
-  );
+  const { setCurFolderId } = useFolderContext();
+  const { isEditFolderModalOpen, setIsEditFolderModalOpen } =
+    useEditFolderModalContext();
 
   function handleClick(): void {
     setIsEditFolderModalOpen(!isEditFolderModalOpen);

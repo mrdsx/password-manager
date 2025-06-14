@@ -1,7 +1,7 @@
 // force-semicolon: ignore-all
 import { TabBtn } from "../../UI/Buttons/TabBtn/TabBtn";
 import { Tabs } from "../Tabs/Tabs";
-import { Folders } from "../../UI/Misc/TabGroups/Folders";
+import { Folders } from "../../UI/Misc/TabGroupFolders/Folders";
 import "./sidebar.modules.css";
 
 export enum defaultTabs {

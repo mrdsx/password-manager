@@ -1,10 +1,10 @@
-import { useContext, ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import useGlobalStore, {
   Actions,
   State,
   LoginItem,
 } from "../../../../store/globalStore";
-import { EditingItemContext } from "../../../../providers/EditingItemProvider";
+import { useItemDetailsContext } from "../ItemInfo/ItemInfoProvider";
 import {
   decryptObjectIfEncrypted,
   setObjectValuesEmpty,
@@ -22,7 +22,7 @@ export function UseFieldsActions(): FieldsActions {
   const [globalState, globalActions]: [State, Actions] = useGlobalStore();
   const { vault, isAddingItem } = globalState;
 
-  const { item, setItem } = useContext(EditingItemContext);
+  const { item, setItem } = useItemDetailsContext();
 
   useEffect(() => {
     if (isAddingItem) setEmptyItem();
